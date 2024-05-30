@@ -7,6 +7,8 @@ import morgan from 'morgan';
 
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
+import {dbConnection} from './mongo.js'
+
 class Server {
 
     constructor() {
@@ -15,6 +17,7 @@ class Server {
         this.port = process.env.PORT
 
         this.middlewares()
+        this.connectDB();
 
     }
 
@@ -25,6 +28,12 @@ class Server {
         this.app.use(express.json())
         this.app.use(helmet())
         this.app.use(morgan('dev'))
+    }
+
+    async connectDB() {
+        
+        await dbConnection();
+
     }
 
     listen() {
