@@ -5,10 +5,12 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
-class Server{
+import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
+
+class Server {
 
     constructor() {
-        
+
         this.app = express()
         this.port = process.env.PORT
 
@@ -18,6 +20,7 @@ class Server{
 
     middlewares() {
         this.app.use(express.urlencoded({ extended: false }))
+        this.app.use(apiLimiter)
         this.app.use(cors())
         this.app.use(express.json())
         this.app.use(helmet())
@@ -25,11 +28,11 @@ class Server{
     }
 
     listen() {
-        
+
         this.app.listen(this.port, () => {
             console.log('Server is running on port: ', this.port)
         })
-        
+
     }
 
 }
