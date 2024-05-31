@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { postAccount } from './account.controller.js';
+import { postAccount,getAccount } from './account.controller.js';
 import { validateFields } from '../middlewares/validate-fields.js';
 import { validateJWT } from '../middlewares/validate-jwt.js';
 import { DPICharactersLimit, existsUserDPI, miniumMonthyIncome } from '../helpers/data-validator.js';
@@ -19,9 +19,10 @@ router.post('/', [validateJWT,
     validateFields
 ], postAccount);
 
+router.get('/',[validateJWT,haveRol('ADMIN_ROLE')],getAccount);
+
 // router.put('/',[],);
 // router.delete('/',[],);
-// router.get('/',[],);
 // router.get('/',[],);
 
 export default router;

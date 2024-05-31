@@ -8,12 +8,16 @@ export const postAccount= async(req,res)=>{
 }
 
 export const getAccount= async(req,res)=>{
+    const listAccounts = await Account.find({status:true});
+    res.status(200).json(listAccounts);
+}
+
+export const getAccountById= async(req,res)=>{
     
 }
 
 export const putAccount= async(req,res)=>{
     
-
 }
 
 export const deleteAccount= async(req,res)=>{
