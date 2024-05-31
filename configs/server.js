@@ -8,6 +8,7 @@ import morgan from 'morgan';
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
 import productsRoutes from '../src/products/product.routes.js';
+import categoryProductsRoutes from '../src/categoryProduct/categoryProduct.routes.js';
 
 import {dbConnection} from './mongo.js'
 
@@ -16,6 +17,7 @@ class Server {
         this.app = express()
         this.port = process.env.PORT
         this.productsPath = '/bankafee/v1/products';
+        this.categoryProductsPath = '/bankafee/v1/categoryProduct';
 
         this.middlewares();
         this.connectDB();
@@ -37,6 +39,7 @@ class Server {
 
     routes() {
         this.app.use(this.productsPath, productsRoutes);
+        this.app.use(this.categoryProductsPath, categoryProductsRoutes);
     };
 
     listen() {
