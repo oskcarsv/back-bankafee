@@ -89,12 +89,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MmQ2MWE1YjE3MzQ1NWRmODU0MjgiLCJpYXQiOjE3MTcxMzE0OTYsImV4cCI6MTcxNzE0MjI5Nn0.EmqpkZOeV3D7Yt2D4ZFsQfAKwbfGncN-_K1wMEhLrtU"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjIxMTUsImV4cCI6MTcxNzE3MjkxNX0.FKExyrYlBkacVwGWx3Zqd9GJOp8UZHmiWJAg2AtCoJE"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Jorge Revolorio\",\r\n    \"username\": \"jrevolorio\",\r\n    \"DPI\": 3603527070101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"jorge@gmail.com\",\r\n    \"phoneNumber\": \"+502 49483571\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 101\r\n}",
+							"raw": "{\r\n    \"name\": \"Mario\",\r\n    \"username\": \"marito\",\r\n    \"DPI\": 9687542160101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1002\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +168,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MmQ2MWE1YjE3MzQ1NWRmODU0MjgiLCJpYXQiOjE3MTcxMzYwNzAsImV4cCI6MTcxNzE0Njg3MH0.6NSiE4yxVZG9DPgmZrt-VbG5n6GBSOyGnhN0wXQf7Is"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNzI5NzgsImV4cCI6MTcxNzE4Mzc3OH0.SPl1kzKg9GhNdCuuFRe0GxE0ahnGw_mfwnk44OtMTdM"
 							}
 						],
 						"body": {
@@ -210,6 +210,45 @@
 								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MmQ2MWE1YjE3MzQ1NWRmODU0MjgiLCJpYXQiOjE3MTcxMzY4NzQsImV4cCI6MTcxNzE0NzY3NH0.H122xJ5i_5Plj8s8ft7pHWCfpAgkVePTRSz0vdWndnQ"
 							}
 						],
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjY0MzksImV4cCI6MTcxNzE3NzIzOX0.FNlO7DgngjixqFDIRtYUVJVG5VhgUl2_aNFU4BEoVy4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"userDPI\": 9687542160101,\r\n    \"name\": \"Jorge\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://127.0.0.1:3004/bankafee/v1/user",
 							"protocol": "http",
