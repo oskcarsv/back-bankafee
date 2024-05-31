@@ -1,21 +1,22 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model} from 'mongoose';
 
 const AccountSchema = Schema({
     type:{
         type: String,
-        required: true
+        enum:[ 'SAVINGS', 'CURRENT', 'CREDIT'],
+        required: [true, 'Type of account is required'],
     },
     DPI_Owner: {
         type: Number,
-        required: true
+        required: [true, 'DPI of the owner is required']
     },
     alias:{ 
         type: String,
-        required: true
+        required: [true, 'Alias of the account is required']
     },
     amount:{
         type: Number,
-        required: true
+        required: [true, 'Amount of the account is required']
     },
     status:{
         type: Boolean,
@@ -23,10 +24,4 @@ const AccountSchema = Schema({
     }
 });
 
-AccountSchema.methods.toJSON=function(){
-    const { __v, _id, ...account } = this.toObject();
-    this.id = _id;
-    return account;
-}
-
-export default model('Account', AccountSchema, 'accounts');
+export default model('Account', AccountSchema)

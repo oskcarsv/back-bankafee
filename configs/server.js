@@ -16,7 +16,7 @@ import Status from '../src/status/status.model.js'
 
 import authRoutes from '../src/auth/auth.routes.js'
 import userRoutes from '../src/user/user.routes.js'
-
+import accountRoutes from '../src/account/account.routes.js'
 class Server {
 
     constructor() {
@@ -26,6 +26,7 @@ class Server {
 
         this.authPath = '/bankafee/v1/auth'
         this.userPath = '/bankafee/v1/user'
+        this.accountPath = '/bankafee/v1/account'
 
         this.middlewares()
         this.connectDB();
@@ -173,7 +174,7 @@ class Server {
     routes(){
 
         this.app.use(this.authPath, authRoutes)
-
+        this.app.use(this.accountPath,accountRoutes)
         this.app.use(this.userPath, userRoutes)
 
     }

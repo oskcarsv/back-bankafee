@@ -1,3 +1,5 @@
+import User from "../user/user.model.js";
+
 export const usernameCharactersLimit = async (username = '') => {
     
     const length = username.length;
@@ -66,4 +68,12 @@ export const miniumMonthyIncome = async (monthlyIncome = '') => {
 
     }
 
+}
+
+export const existsUserDPI = async (DPI = '') => {
+    //find the user with the DPI and check if it exists
+    const user = await User.findOne({DPI});
+    if (user.DPI!=DPI) {
+        throw new Error(`The DPI ${DPI} does not exist`)
+    }
 }
