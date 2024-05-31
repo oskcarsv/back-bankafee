@@ -14,6 +14,8 @@ import User from '../src/user/user.model.js'
 import Roles from '../src/roles/roles.model.js'
 import Status from '../src/status/status.model.js'
 
+import authRoutes from '../src/auth/auth.routes.js'
+
 class Server {
 
     constructor() {
@@ -21,9 +23,12 @@ class Server {
         this.app = express()
         this.port = process.env.PORT
 
+        this.authPath = '/bankafee/v1/auth'
+
         this.middlewares()
         this.connectDB();
         this.defaultCredentials();
+        this.routes();
 
     }
 
@@ -136,6 +141,12 @@ class Server {
         this.app.listen(this.port, () => {
             console.log('Server is running on port: ', this.port)
         })
+
+    }
+
+    routes(){
+
+        this.app.use(this.authPath, authRoutes)
 
     }
 
