@@ -15,7 +15,7 @@ import {
 const router = Router();
 
 router.post(
-    '/addCategory',
+    '/createCategory',
     [
         check('Name', 'Name is required').not().isEmpty(),
         check('Name').custom(existsCategoryName),
@@ -44,9 +44,7 @@ router.put(
     [
         check('id').custom(nonExistentCategoryService),
         check('id').custom(nonExistentCategoryServiceStatus),
-        // check('Name', 'Name is required').not().isEmpty(),
         check('Name').custom(existsCategoryName),
-        // check('Description', 'Description is required').not().isEmpty(),
         validateFields,
     ], updateCategoryService
 );

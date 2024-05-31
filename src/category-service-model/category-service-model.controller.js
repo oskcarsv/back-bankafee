@@ -1,47 +1,47 @@
 import { request, response } from 'express';
-import Category_Service from './category-service-model.model.js';
+import categoryService from './category-service-model.model.js';
 
 export const createCategoryService = async (req, res) => {
     try {
         const { Name, Description } = req.body;
-        const newCategoryService = new Category_Service({ Name, Description });
+        const newCategoryService = new categoryService({ Name, Description });
 
-        const categoryService = await newCategoryService.save();
+        const cService = await newCategoryService.save();
 
         res.status(201).json({
-            msg: 'Category Service created successfully',
-            categoryService,
+            msg: 'Category service created successfully',
+            cService,
         });
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: Error('Category Service not created', error),
+            error: Error('Category service not created', error),
         });
     }
 };
 
 export const getCategoryService = async (req, res) => {
     try {
-        const categoryService = await Category_Service.find({ Status: true });
-        const totalCategoryService = categoryService.length;
+        const cService = await categoryService.find({ Status: true });
+        const totalCategoryService = cService.length;
 
         if (totalCategoryService === 0) {
             return res.status(404).json({
-                msg: 'There are no Category Services',
+                msg: 'There are no category services',
             });
         };
 
         res.status(200).json({
             totalCategoryService,
-            msg: 'Category Service listed successfully',
-            categoryService,
+            msg: 'Category service listed successfully',
+            cService,
         });
 
 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: Error('Category Service not listed', error),
+            error: Error('Category service not listed', error),
         });
     }
 };
@@ -49,16 +49,16 @@ export const getCategoryService = async (req, res) => {
 export const getCategoryServiceById = async (req, res) => {
     try {
         const { id } = req.params;
-        const categoryService = await Category_Service.findById(id);
+        const cService = await categoryService.findById(id);
 
         res.status(200).json({
-            msg: 'Category Service listed successfully',
-            categoryService,
+            msg: 'Category service listed successfully',
+            cService,
         });
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: Error('Category Service not listed', error),
+            error: Error('Category service not listed', error),
         });
     }
 };
@@ -68,9 +68,9 @@ export const updateCategoryService = async (req, res) => {
         const { id } = req.params;
         const { Name, Description } = req.body;
 
-        const categoryService = await Category_Service.findById(id);
+        const cService = await categoryService.findById(id);
 
-        if (categoryService.Name === 'Default') {
+        if (cService.Name === 'Default') {
             return res.status(400).json({
                 msg: 'You cannot update the default category',
             });
@@ -81,17 +81,17 @@ export const updateCategoryService = async (req, res) => {
             Description,
         };
 
-        const categoryServiceUpdated = await Category_Service.findByIdAndUpdate(id, newCategoryService, { new: true });
+        const categoryServiceUpdated = await categoryService.findByIdAndUpdate(id, newCategoryService, { new: true });
 
         res.status(200).json({
-            msg: 'Category Service updated successfully',
+            msg: 'Category service updated successfully',
             categoryServiceUpdated,
         });
 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: Error('Category Service not updated', error),
+            error: Error('Category service not updated', error),
         });
     }
 };
@@ -100,25 +100,25 @@ export const deleteCategoryService = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const categoryService = await Category_Service.findById(id);
+        const cService = await categoryService.findById(id);
 
-        if (categoryService.Name === 'Default') {
+        if (cService.Name === 'Default') {
             return res.status(400).json({
                 msg: 'You cannot delete the default category',
             });
         };
 
-        const categoryServiceDeleted = await Category_Service.findByIdAndUpdate(id, { Status: false }, { new: true });
+        const categoryServiceDeleted = await categoryService.findByIdAndUpdate(id, { Status: false }, { new: true });
 
         res.status(200).json({
-            msg: 'Category Service deleted successfully',
+            msg: 'Category service deleted successfully',
             categoryServiceDeleted,
         });
 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: Error('Category Service not deleted', error),
+            error: Error('Category service not deleted', error),
         });
     }
 };

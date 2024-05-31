@@ -15,4 +15,4 @@ const CategoryServiceModelSchema = new Schema({
     },
 });
 
-export default mongoose.model('Category_Service', CategoryServiceModelSchema);
+export default mongoose.model('categoryService', CategoryServiceModelSchema);
