@@ -148,3 +148,23 @@ export const listUser = async (req, res = response) =>{
     });
 
 }
+
+export const listOwnUser = async (req, res = response) =>{
+
+    const { limit, from } = req.query;
+
+    const query = {DPI: req.user.DPI}
+
+    const [total, user] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query)
+            .skip(Number(from))
+            .limit(Number(limit))
+    ]);
+
+    res.status(200).json({
+        msg: `${req.user.username} your profile are:`,
+        user
+    });
+
+}

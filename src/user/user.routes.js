@@ -8,7 +8,7 @@ import { existentUsername_User,  existentEmail_User, existentDPI, existentUserSt
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
-import {addUser, deleteUser, listUser} from "./user.controller.js";
+import {addUser, deleteUser, listUser, listOwnUser} from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -87,7 +87,7 @@ router.delete(
 
 router.get(
 
-    "/",
+    "/admin",
 
     [
 
@@ -98,6 +98,20 @@ router.get(
         check("status").custom(existentUserStatus),
 
     ], listUser
+
+)
+
+router.get(
+
+    "/",
+
+    [
+
+        validateJWT,
+        
+        haveRol('ADMIN_ROLE', "USER_ROLE"),
+
+    ], listOwnUser
 
 )
 
