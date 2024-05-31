@@ -4,15 +4,15 @@ import bcryptjs from 'bcryptjs';
 
 import ClientPetition from "../clientPetition/clientPetition.model.js";
 
-export const addUser = async (req, res) =>{
+export const addUser = async (req, res) => {
 
-    const {name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome} = req.body;
+    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome } = req.body;
 
     let notExistNo_Account = false;
 
     let randomNumberNo_Account = Math.floor(Math.random() * (1e16 - 1e15 + 1)) + 1e15;
 
-    while(!notExistNo_Account){
+    while (!notExistNo_Account) {
 
         const existNo_Petition = await User.findOne({ no_Account: randomNumberNo_Account });
 
@@ -20,7 +20,7 @@ export const addUser = async (req, res) =>{
 
             randomNumberNo_Account = Math.floor(Math.random() * (1e16 - 1e15 + 1)) + 1e15;
 
-        }else{
+        } else {
 
             notExistNo_Account = true;
 
@@ -34,7 +34,7 @@ export const addUser = async (req, res) =>{
 
     let limit = 8;
 
-    for(let i = 0; i <= limit; i++){
+    for (let i = 0; i <= limit; i++) {
 
         let randomIndex = Math.floor(Math.random() * arrayOptions.length);
 
@@ -50,7 +50,7 @@ export const addUser = async (req, res) =>{
 
     let limit2 = 10;
 
-    for(let i = 0; i <= limit2; i++){
+    for (let i = 0; i <= limit2; i++) {
 
         let randomIndex = Math.floor(Math.random() * arrayOptions.length);
 
@@ -82,35 +82,30 @@ export const addUser = async (req, res) =>{
 
     console.log(`Contraseña Usuario ${user.username} es: ${user.password}`);
 
+    const savePassword = user.password;
+
 
     const salt = bcryptjs.genSaltSync();
     user.password = bcryptjs.hashSync(user.password, salt);
 
-    const updatePetitionStatus = await ClientPetition.findOneAndUpdate({username: user.username}, {status: "APPROVED"});
-
-    if(!updatePetitionStatus){
-
-        return res.status(400).json({
-            msg: "The User doesn't exists in database"
-        });
-
-    }
+    const updatePetitionStatus = await ClientPetition.findOneAndUpdate({ username: user.username }, { status: "APPROVED" });
 
     await user.save();
 
     res.status(200).json({
 
-        msg: `${req.user.username} has been created the ${user.username} successfully`
+        msg: `${req.user.username} has been created the ${user.username} successfully`,
+        msg: `Admin the User that you created his username is: ${user.username} and his password is ${savePassword}`
 
     });
 
 }
 
-export const deleteUser = async (req, res) =>{
+export const deleteUser = async (req, res) => {
 
-    const { DPI, status} = req.body;
+    const { DPI, status } = req.body;
 
-    const user = await User.findOneAndUpdate({DPI: DPI}, {status: status});
+    const user = await User.findOneAndUpdate({ DPI: DPI }, { status: status });
 
     res.status(200).json({
 
@@ -120,19 +115,19 @@ export const deleteUser = async (req, res) =>{
 
 }
 
-export const listUser = async (req, res = response) =>{
+export const listUser = async (req, res = response) => {
 
     const { limit, from } = req.query;
 
     let { status } = req.body;
 
-    if(status == "" || status == undefined){
+    if (status == "" || status == undefined) {
 
         status = "ACTIVE";
 
     }
 
-    const query = {status: status};
+    const query = { status: status };
 
     const [total, user] = await Promise.all([
         User.countDocuments(query),
@@ -149,11 +144,11 @@ export const listUser = async (req, res = response) =>{
 
 }
 
-export const listOwnUser = async (req, res = response) =>{
+export const listOwnUser = async (req, res = response) => {
 
     const { limit, from } = req.query;
 
-    const query = {DPI: req.user.DPI}
+    const query = { DPI: req.user.DPI }
 
     const [total, user] = await Promise.all([
         User.countDocuments(query),
@@ -169,19 +164,19 @@ export const listOwnUser = async (req, res = response) =>{
 
 }
 
-export const listClientPetition = async (req, res = response) =>{
+export const listClientPetition = async (req, res = response) => {
 
     const { limit, from } = req.query;
 
     let { status } = req.body;
 
-    if(status == "" || status == undefined){
+    if (status == "" || status == undefined) {
 
         status = "APPROVED";
 
     }
 
-    const query = {status: status};
+    const query = { status: status };
 
     const [total, clientPetition] = await Promise.all([
         ClientPetition.countDocuments(query),
@@ -198,11 +193,11 @@ export const listClientPetition = async (req, res = response) =>{
 
 }
 
-export const deletePetition = async (req, res) =>{
+export const deletePetition = async (req, res) => {
 
-    const { no_Petition, status} = req.body;
+    const { no_Petition, status } = req.body;
 
-    const clientPetition = await ClientPetition.findOneAndUpdate({no_Petition: no_Petition}, {status: status});
+    const clientPetition = await ClientPetition.findOneAndUpdate({ no_Petition: no_Petition }, { status: status });
 
     res.status(200).json({
 
