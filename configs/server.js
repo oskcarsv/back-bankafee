@@ -7,18 +7,22 @@ import morgan from 'morgan';
 
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
-import {dbConnection} from './mongo.js'
+import categoryServiceRoutes from '../src/category-service-model/category-service-model.routes.js'
+
+import { dbConnection } from './mongo.js'
 
 class Server {
 
     constructor() {
 
-        this.app = express()
+        this.app = express();
         this.port = process.env.PORT
 
-        this.middlewares()
-        this.connectDB();
+        this.categoryServiceRoutesPath = '/bankafee/v1/category-service'
 
+        this.middlewares();
+        this.connectDB();
+        this.routes();
     }
 
     middlewares() {
@@ -31,10 +35,15 @@ class Server {
     }
 
     async connectDB() {
-        
+
         await dbConnection();
 
     }
+
+    routes() {
+        this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes)
+    }
+
 
     listen() {
 
