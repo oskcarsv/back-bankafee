@@ -4,11 +4,11 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus, existentClientPetitionStatus, existentno_Petition} from "../helpers/db-validator.js";
+import { existentClientPetitionStatus, existentDPI, existentEmail_User, existentUserStatus, existentUsername_User, existentno_Petition } from "../helpers/db-validator.js";
 
-import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
+import { DPICharactersLimit, miniumMonthyIncome, nameCharactersLimit, phoneNumberCharactersLimit, usernameCharactersLimit, workPlaceCharactersLimit } from "../helpers/data-validator.js";
 
-import {addUser, deleteUser, listUser, listOwnUser, listClientPetition, deletePetition} from "./user.controller.js";
+import { addUser, deletePetition, deleteUser, listClientPetition, listOwnUser, listUser, updateUser } from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -92,7 +92,7 @@ router.get(
     [
 
         validateJWT,
-        
+
         haveRol('ADMIN_ROLE'),
 
         check("status").custom(existentUserStatus),
@@ -108,7 +108,7 @@ router.get(
     [
 
         validateJWT,
-        
+
         haveRol('ADMIN_ROLE', "USER_ROLE"),
 
     ], listOwnUser
@@ -137,9 +137,9 @@ router.delete(
 
     [
 
-            
+
         validateJWT,
-        
+
         haveRol('ADMIN_ROLE'),
 
         check("no_Petition").not().isEmpty(),
@@ -154,6 +154,21 @@ router.delete(
 
     ], deletePetition
 
+
+)
+
+router.put(
+
+    "/",
+
+    [
+        validateJWT,
+
+        haveRol('ADMIN_ROLE', 'USER_ROLE'),
+
+        validateFields
+
+    ], updateUser
 
 )
 

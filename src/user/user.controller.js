@@ -207,3 +207,49 @@ export const deletePetition = async (req, res) => {
 
 }
 
+export const updateUser = async (req, res) => {
+
+    if (req.user.role == "USER_ROLE") {
+
+        const { _id, no_Account, DPI, role, keyword, status, ...rest } = req.body;
+
+        await User.findOneAndUpdate({ DPI: req.user.DPI }, rest);
+
+        const user = await User.findOne({ DPI: req.user.DPI });
+
+        if (rest.password != null) {
+
+            const salt = bcryptjs.genSaltSync();
+
+            user.password = bcryptjs.hashSync(password, salt);
+
+            await user.save();
+
+        }
+
+        res.status(200).json({
+
+            msg: `${req.user.username} you update your profile Successfully`
+
+        })
+
+    } else {
+
+        const { _id, no_Account, DPI, password, role, keyword, status, ...rest } = req.body;
+
+        const userDPI = req.body.userDPI;
+
+        await User.findOneAndUpdate({ DPI: userDPI }, rest);
+
+        const user = await User.findOne({ DPI: userDPI });
+
+        res.status(200).json({
+
+            msg: `${req.user.username} you update the profile of ${user.username} successfully`
+
+        })
+
+    }
+
+}
+
