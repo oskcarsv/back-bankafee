@@ -8,7 +8,9 @@ import bcryptjs from 'bcryptjs'
 
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
-import {dbConnection} from './mongo.js'
+import categoryServiceRoutes from '../src/category-service-model/category-service-model.routes.js'
+
+import { dbConnection } from './mongo.js'
 
 import User from '../src/user/user.model.js'
 import Roles from '../src/roles/roles.model.js'
@@ -21,9 +23,10 @@ class Server {
 
     constructor() {
 
-        this.app = express()
+        this.app = express();
         this.port = process.env.PORT
 
+        this.categoryServiceRoutesPath = '/bankafee/v1/category-service'
         this.authPath = '/bankafee/v1/auth'
         this.userPath = '/bankafee/v1/user'
 
@@ -32,6 +35,9 @@ class Server {
         this.defaultCredentials();
         this.routes();
 
+        this.middlewares();
+        this.connectDB();
+        this.routes();
     }
 
     middlewares() {
@@ -44,9 +50,13 @@ class Server {
     }
 
     async connectDB() {
-        
+
         await dbConnection();
 
+    }
+
+    routes() {
+        this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes)
     }
 
     async defaultCredentials(){
