@@ -4,11 +4,11 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus, existentClientPetitionStatus} from "../helpers/db-validator.js";
+import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus, existentClientPetitionStatus, existentno_Petition} from "../helpers/db-validator.js";
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
-import {addUser, deleteUser, listUser, listOwnUser, listClientPetition} from "./user.controller.js";
+import {addUser, deleteUser, listUser, listOwnUser, listClientPetition, deletePetition} from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -128,6 +128,32 @@ router.get(
         check("status").custom(existentClientPetitionStatus),
 
     ], listClientPetition
+
+)
+
+router.delete(
+
+    "/admin/clientPetition",
+
+    [
+
+            
+        validateJWT,
+        
+        haveRol('ADMIN_ROLE'),
+
+        check("no_Petition").not().isEmpty(),
+
+        check("no_Petition").custom(existentno_Petition),
+
+        check("status").not().isEmpty(),
+
+        check("status").custom(existentClientPetitionStatus),
+
+        validateFields
+
+    ], deletePetition
+
 
 )
 

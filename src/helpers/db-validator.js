@@ -67,3 +67,13 @@ export const existentClientPetitionStatus = async (status = '') => {
   }
   
 }
+
+export const existentno_Petition = async (no_Petition = '') => {
+  
+  const existno_Petition = await ClientPetition.findOne({ no_Petition })
+
+  if (!existno_Petition) {
+    throw new Error(`No. of Petition ${no_Petition} not found in the database`)
+  }
+  
+}

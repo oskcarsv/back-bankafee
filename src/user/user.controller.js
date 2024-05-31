@@ -198,3 +198,17 @@ export const listClientPetition = async (req, res = response) =>{
 
 }
 
+export const deletePetition = async (req, res) =>{
+
+    const { no_Petition, status} = req.body;
+
+    const clientPetition = await ClientPetition.findOneAndUpdate({no_Petition: no_Petition}, {status: status});
+
+    res.status(200).json({
+
+        msg: `${req.user.username} the petition is ${status}`
+
+    })
+
+}
+
