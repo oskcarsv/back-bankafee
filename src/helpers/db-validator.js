@@ -14,3 +14,18 @@ export const existsCategoryProductById = async (id) => {
         throw new Error(`The ID doesn't exist ${id}`);
     }
 };
+
+// export const existsProductByName = async () => {
+//     const {name} = req.body;
+//     const existsProduct = await Product.findOne({ name });
+//     if (existsProduct) {
+//         throw new Error(`The name ${name} already exists`);
+//     }
+// };
+
+export const existsCategoryProductByName = async (name) => {
+    const existsCategoryProduct = await CategoryProduct.findOne({ name });
+    if (existsCategoryProduct) {
+        throw new Error(`The name ${name} already exists`);
+    } 
+};

@@ -14,6 +14,8 @@ export const productImg = async (req, res) => {
         try {
             const { name, description, price, category, stock } = req.body;
 
+            // mira si el nombre del producto ya existe
+
             // mira si el stock es menor a 0
             if (stock < 0) {
                 return res.status(400).json({
