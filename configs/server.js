@@ -7,18 +7,19 @@ import morgan from 'morgan';
 
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
+import productsRoutes from '../src/products/product.routes.js';
+
 import {dbConnection} from './mongo.js'
 
 class Server {
-
     constructor() {
-
         this.app = express()
         this.port = process.env.PORT
+        this.productsPath = '/bankafee/v1/products';
 
-        this.middlewares()
+        this.middlewares();
         this.connectDB();
-
+        this.routes();
     }
 
     middlewares() {
@@ -31,19 +32,19 @@ class Server {
     }
 
     async connectDB() {
-        
         await dbConnection();
-
     }
+
+    routes() {
+        this.app.use(this.productsPath, productsRoutes);
+    };
 
     listen() {
 
         this.app.listen(this.port, () => {
             console.log('Server is running on port: ', this.port)
         })
-
     }
-
 }
 
 export default Server
