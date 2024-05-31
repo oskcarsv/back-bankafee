@@ -95,7 +95,7 @@ class Server {
             await USER_ROLE.save();
             await ADMIN_ROLE.save();
 
-            // Status
+            // User Status
 
             const ACTIVE = new Status({
 
@@ -125,6 +125,30 @@ class Server {
             await INACTIVE.save();
             await LOCKED.save();
             await SUSPENDED.save();
+
+            // Client Petition Status
+
+            const IN_PROCESS = new Status({
+
+                clientPetitionStatus: "IN-PROCESS"
+
+            })
+
+            const APPROVED = new Status({
+
+                clientPetitionStatus: "APPROVED"
+
+            })
+
+            const REJECTED = new Status({
+
+                clientPetitionStatus: "REJECTED"
+
+            })
+
+            await IN_PROCESS.save();
+            await APPROVED.save();
+            await REJECTED.save();
 
             console.log("Credentials created")
 

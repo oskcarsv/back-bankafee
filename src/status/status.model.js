@@ -7,6 +7,12 @@ const statusSchema = mongoose.Schema({
         type: String,
         enum: ['ACTIVE', 'INACTIVE', 'LOCKED', 'SUSPENDED']
         
+    },
+
+    clientPetitionStatus: {
+
+        type: String,
+        enum: ['IN-PROCESS', 'APPROVED', 'REJECTED']
     }
 
 });

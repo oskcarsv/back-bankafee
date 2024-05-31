@@ -4,6 +4,8 @@ import { generateJWT } from '../helpers/generate-jwt.js'
 
 import bcryptjs from 'bcryptjs'
 
+import ClientPetition from '../clientPetition/clientPetition.model.js'
+
 export const login = async (req, res) =>{
 
     const { username, password } = req.body;
@@ -48,6 +50,53 @@ export const login = async (req, res) =>{
         msg: 'Login Successful',
         user,
         token
+
+    });
+
+}
+
+export const clientPetition = async (req, res) => {
+
+    const {name, username, DPI, email, phoneNumber, workPlace, monthlyIncome} = req.body;
+
+    let notExist = false;
+
+    let randomNumber = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+
+    while(!notExist){
+
+        const existNo_Petition = await ClientPetition.findOne({ no_Petition: randomNumber });
+
+        if (existNo_Petition) {
+
+            randomNumber = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+
+        }else{
+
+            notExist = true;
+
+        }
+
+    }
+
+    const petition = new ClientPetition({
+
+        no_Petition: randomNumber,
+        name,
+        username,
+        DPI,
+        email,
+        phoneNumber,
+        workPlace,
+        monthlyIncome,
+        status: 'IN-PROCESS'
+    });
+
+    await petition.save();
+
+    res.status(200).json({
+
+        msg: `${petition.name} your petition has been created, await for a response of the administrator in your email`,
 
     });
 
