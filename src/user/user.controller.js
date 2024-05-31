@@ -168,3 +168,33 @@ export const listOwnUser = async (req, res = response) =>{
     });
 
 }
+
+export const listClientPetition = async (req, res = response) =>{
+
+    const { limit, from } = req.query;
+
+    let { status } = req.body;
+
+    if(status == "" || status == undefined){
+
+        status = "APPROVED";
+
+    }
+
+    const query = {status: status};
+
+    const [total, clientPetition] = await Promise.all([
+        ClientPetition.countDocuments(query),
+        ClientPetition.find(query)
+            .skip(Number(from))
+            .limit(Number(limit))
+    ]);
+
+    res.status(200).json({
+        total,
+        msg: `${req.user.username} the Petitions that have the status ${status} are:`,
+        clientPetition
+    });
+
+}
+

@@ -4,11 +4,11 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus } from "../helpers/db-validator.js";
+import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus, existentClientPetitionStatus} from "../helpers/db-validator.js";
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
-import {addUser, deleteUser, listUser, listOwnUser} from "./user.controller.js";
+import {addUser, deleteUser, listUser, listOwnUser, listClientPetition} from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -112,6 +112,22 @@ router.get(
         haveRol('ADMIN_ROLE', "USER_ROLE"),
 
     ], listOwnUser
+
+)
+
+router.get(
+
+    "/admin/clientPetition",
+
+    [
+
+        validateJWT,
+
+        haveRol('ADMIN_ROLE'),
+
+        check("status").custom(existentClientPetitionStatus),
+
+    ], listClientPetition
 
 )
 

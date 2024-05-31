@@ -57,3 +57,13 @@ export const existentUserStatus = async (status = '') => {
   }
   
 }
+
+export const existentClientPetitionStatus = async (status = '') => {
+  
+  const existClientPetitionStatus = await Status.findOne({ clientPetitionStatus: status })
+
+  if (!existClientPetitionStatus) {
+    throw new Error(`The Status ${status} not found in the database`)
+  }
+  
+}
