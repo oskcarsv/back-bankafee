@@ -4,10 +4,15 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import bcryptjs from 'bcryptjs'
 
 import apiLimiter from '../src/middlewares/validate-PetitionsLimit.js';
 
 import {dbConnection} from './mongo.js'
+
+import User from '../src/user/user.model.js'
+import Roles from '../src/roles/roles.model.js'
+import Status from '../src/status/status.model.js'
 
 class Server {
 
@@ -18,6 +23,7 @@ class Server {
 
         this.middlewares()
         this.connectDB();
+        this.defaultCredentials();
 
     }
 
@@ -33,6 +39,95 @@ class Server {
     async connectDB() {
         
         await dbConnection();
+
+    }
+
+    async defaultCredentials(){
+
+        const credentialsCreated = await User.findOne({username: 'ADMINB'});
+
+        if(!credentialsCreated){
+
+            // Admin User
+
+            const adminUser = new User({
+
+                name: "ADMINB",
+                username: "ADMINB",
+                no_Account: 8475293186501732,
+                DPI: 9785412580101,
+                adress: "Guatemala, Guatemala",
+                email: "adminb@gmail.com",
+                password: "ADMINB",
+                role: "ADMIN_ROLE",
+                phoneNumber: "+502 79658742",
+                workPlace: "Bankafee",
+                monthlyIncome: 10000,
+                keyword: "AB126CZF",
+                status: "ACTIVE"
+
+
+            })
+
+            const salt = bcryptjs.genSaltSync();
+            adminUser.password = bcryptjs.hashSync(adminUser.password, salt);
+            await adminUser.save();
+
+            //Roles
+
+            const USER_ROLE = new Roles({
+
+                rolesName: "USER_ROLE"
+
+            })
+
+            const ADMIN_ROLE = new Roles({
+
+                rolesName: "ADMIN_ROLE"
+
+            })
+
+            await USER_ROLE.save();
+            await ADMIN_ROLE.save();
+
+            // Status
+
+            const ACTIVE = new Status({
+
+                userStatus: "ACTIVE"
+
+            })
+
+            const INACTIVE = new Status({
+
+                userStatus: "INACTIVE"
+
+            })
+
+            const LOCKED = new Status({
+
+                userStatus: "LOCKED"
+
+            })
+
+            const SUSPENDED = new Status({
+
+                userStatus: "SUSPENDED"
+
+            })
+
+            await ACTIVE.save();
+            await INACTIVE.save();
+            await LOCKED.save();
+            await SUSPENDED.save();
+
+            console.log("Credentials created")
+
+        }else{
+
+            console.log("Credentials already created")
+
+        }
 
     }
 
