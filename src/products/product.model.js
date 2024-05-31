@@ -28,11 +28,11 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: [true, 'Stock is required']
     },
-    //img: 
-    //{
-    //    type: String,
-    //    required: [true, 'Image is required']
-    //},
+    img: 
+    {
+        type: String,
+        required: [true, 'Image is required']
+    },
     status:
     {
         type: Boolean,
