@@ -2,45 +2,35 @@ import { Router } from "express";
 
 import { check } from "express-validator";
 
-import { login, clientPetition } from "./auth.controller.js";
-
 import { validateFields } from "../middlewares/validate-fields.js";
 
 import { existentUsername_User, existentUsername_ClientPetition, existentEmail_User, existentEmail_ClientPetition } from "../helpers/db-validator.js";
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
+import {addUser} from "./user.controller.js";
+
+import { validateJWT } from "../middlewares/validate-jwt.js";
+
+import { haveRol } from "../middlewares/validate-role.js";
+
 const router = Router();
 
 router.post(
 
-    "/login",
+    "/",
 
     [
 
-        check("username", "Username is required").not().isEmpty(),
+        validateJWT,
 
-        check("password", "Password is required").not().isEmpty(),
-
-        validateFields
-
-    ], login
-
-);
-
-router.post(
-
-    "/clientPetition",
-
-    [
+        haveRol('ADMIN_ROLE'),
 
         check("name", "Name is required").not().isEmpty(),
 
         check("name").custom(nameCharactersLimit),
 
         check("username", "Username is required").not().isEmpty(),
-
-        check("username").custom(existentUsername_ClientPetition),
 
         check("username").custom(existentUsername_User),
 
@@ -53,8 +43,6 @@ router.post(
         check("adress", "Adress is required").not().isEmpty(),
 
         check("email", "This is not a valid email").isEmail(),
-
-        check("email").custom(existentEmail_ClientPetition),
 
         check("email").custom(existentEmail_User),
 
@@ -72,7 +60,7 @@ router.post(
 
         validateFields
 
-    ], clientPetition
+    ], addUser
 
 );
 

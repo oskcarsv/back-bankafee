@@ -1,3 +1,4 @@
+import { add } from "date-fns";
 import mongoose from "mongoose";
 
 const ClientPetitionSchema = mongoose.Schema({
@@ -30,6 +31,13 @@ const ClientPetitionSchema = mongoose.Schema({
         type: Number,
         required: [true, 'DPI is required'],
         unique: true
+
+    },
+
+    adress: {
+
+        type: String,
+        required: [true, 'Adress is required']
 
     },
 

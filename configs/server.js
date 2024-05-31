@@ -15,6 +15,7 @@ import Roles from '../src/roles/roles.model.js'
 import Status from '../src/status/status.model.js'
 
 import authRoutes from '../src/auth/auth.routes.js'
+import userRoutes from '../src/user/user.routes.js'
 
 class Server {
 
@@ -24,6 +25,7 @@ class Server {
         this.port = process.env.PORT
 
         this.authPath = '/bankafee/v1/auth'
+        this.userPath = '/bankafee/v1/user'
 
         this.middlewares()
         this.connectDB();
@@ -171,6 +173,8 @@ class Server {
     routes(){
 
         this.app.use(this.authPath, authRoutes)
+
+        this.app.use(this.userPath, userRoutes)
 
     }
 
