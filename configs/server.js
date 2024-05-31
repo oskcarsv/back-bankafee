@@ -67,7 +67,7 @@ class Server {
                 email: "adminb@gmail.com",
                 password: "ADMINB",
                 role: "ADMIN_ROLE",
-                phoneNumber: "+502 79658742",
+                phoneNumber: "+502 00000000",
                 workPlace: "Bankafee",
                 monthlyIncome: 10000,
                 keyword: "AB126CZF",

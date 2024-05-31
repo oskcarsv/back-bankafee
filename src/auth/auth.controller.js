@@ -6,7 +6,7 @@ import bcryptjs from 'bcryptjs'
 
 import ClientPetition from '../clientPetition/clientPetition.model.js'
 
-export const login = async (req, res) =>{
+export const login = async (req, res) => {
 
     const { username, password } = req.body;
 
@@ -44,10 +44,10 @@ export const login = async (req, res) =>{
         });
     }
 
-    const token = await generateJWT( user.id);
+    const token = await generateJWT(user.id);
 
-        res.status(200).json({
-        msg: 'Login Successful',
+    res.status(200).json({
+        msg: 'Login successful',
         user,
         token
 
@@ -57,13 +57,13 @@ export const login = async (req, res) =>{
 
 export const clientPetition = async (req, res) => {
 
-    const {name, username, DPI, adress,email, phoneNumber, workPlace, monthlyIncome} = req.body;
+    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome } = req.body;
 
     let notExist = false;
 
     let randomNumber = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
-    while(!notExist){
+    while (!notExist) {
 
         const existNo_Petition = await ClientPetition.findOne({ no_Petition: randomNumber });
 
@@ -71,7 +71,7 @@ export const clientPetition = async (req, res) => {
 
             randomNumber = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 
-        }else{
+        } else {
 
             notExist = true;
 

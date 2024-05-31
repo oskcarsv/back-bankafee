@@ -21,22 +21,33 @@ export const validateJWT = async (req, res, next) => {
             });
         }
 
-        if (user.state === 'INACTIVE') {
-            return res.status(401).json({
-                msg: 'Token is not valid - user with state: INACTIVE'
-            });
-        }
+        switch (user.status) {
 
-        if (user.state === 'LOCKED') {
-            return res.status(401).json({
-                msg: 'Token is not valid - user with state: LOCKED'
-            });
-        }
+            case 'INACTIVE':
 
-        if (user.state === 'SUSPENDED') {
-            return res.status(401).json({
-                msg: 'Token is not valid - user with state: SUSPENDED'
-            });
+                return res.status(401).json({
+                    msg: 'Token is not valid - user with state: INACTIVE'
+                });
+
+
+            case 'LOCKED':
+
+                return res.status(401).json({
+                    msg: 'Token is not valid - user with state: LOCKED'
+                });
+
+
+            case 'SUSPENDED':
+
+                return res.status(401).json({
+                    msg: 'Token is not valid - user with state: SUSPENDED'
+                });
+
+
+            default:
+
+                break;
+
         }
 
         req.user = user;

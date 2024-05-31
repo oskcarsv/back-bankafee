@@ -80,8 +80,6 @@ export const addUser = async (req, res) => {
 
     })
 
-    console.log(`Contraseña Usuario ${user.username} es: ${user.password}`);
-
     const savePassword = user.password;
 
 
