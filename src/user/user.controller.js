@@ -119,3 +119,32 @@ export const deleteUser = async (req, res) =>{
     })
 
 }
+
+export const listUser = async (req, res = response) =>{
+
+    const { limit, from } = req.query;
+
+    let { status } = req.body;
+
+    if(status == "" || status == undefined){
+
+        status = "ACTIVE";
+
+    }
+
+    const query = {status: status};
+
+    const [total, user] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query)
+            .skip(Number(from))
+            .limit(Number(limit))
+    ]);
+
+    res.status(200).json({
+        total,
+        msg: `${req.user.username} the users that have the status ${status} are:`,
+        user
+    });
+
+}
