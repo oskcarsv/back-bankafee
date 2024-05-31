@@ -105,3 +105,17 @@ export const addUser = async (req, res) =>{
     });
 
 }
+
+export const deleteUser = async (req, res) =>{
+
+    const { DPI, status} = req.body;
+
+    const user = await User.findOneAndUpdate({DPI: DPI}, {status: status});
+
+    res.status(200).json({
+
+        msg: `${req.user.username} you ${status} the profile successfully`
+
+    })
+
+}

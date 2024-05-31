@@ -2,6 +2,8 @@ import User from "../../src/user/user.model.js";
 
 import ClientPetition from "../clientPetition/clientPetition.model.js";
 
+import Status from "../status/status.model.js";
+
 export const existentUsername_User = async (username = '') => {
     const existUsername = await User.findOne({ username })
   
@@ -34,6 +36,24 @@ export const existentEmail_ClientPetition = async (email = '') => {
 
   if (existEmail) {
     throw new Error(`The Email ${email} is already in use`)
+  }
+  
+}
+
+export const existentDPI = async (DPI = '') => {
+  const existDPI = await User.findOne({ DPI })
+
+  if (!existDPI) {
+    throw new Error(`The DPI ${DPI} not found in the database`)
+  }
+  
+}
+
+export const existentUserStatus = async (status = '') => {
+  const existUserStatus = await Status.findOne({ userStatus: status })
+
+  if (!existUserStatus) {
+    throw new Error(`The Status ${status} not found in the database`)
   }
   
 }

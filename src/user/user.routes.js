@@ -4,11 +4,11 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentUsername_User, existentUsername_ClientPetition, existentEmail_User, existentEmail_ClientPetition } from "../helpers/db-validator.js";
+import { existentUsername_User,  existentEmail_User, existentDPI, existentUserStatus } from "../helpers/db-validator.js";
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
-import {addUser} from "./user.controller.js";
+import {addUser, deleteUser} from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -63,5 +63,26 @@ router.post(
     ], addUser
 
 );
+
+router.delete(
+
+    "/",
+
+    [
+
+        validateJWT,
+
+        haveRol('ADMIN_ROLE'),
+
+        check("DPI").custom(existentDPI),
+
+        check("status").custom(existentUserStatus),
+
+        validateFields
+
+
+    ], deleteUser
+
+)
 
 export default router;
