@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { postAccount,getAccount } from './account.controller.js';
+import { postAccount,getAccount, getAccountById } from './account.controller.js';
 import { validateFields } from '../middlewares/validate-fields.js';
 import { validateJWT } from '../middlewares/validate-jwt.js';
-import { DPICharactersLimit, existsUserDPI, miniumMonthyIncome } from '../helpers/data-validator.js';
+import { DPICharactersLimit, existsUserDPI, miniumMonthyIncome,existsAccount } from '../helpers/data-validator.js';
 import { haveRol } from '../middlewares/validate-role.js';
 const router = Router();
 
@@ -21,8 +21,13 @@ router.post('/', [validateJWT,
 
 router.get('/',[validateJWT,haveRol('ADMIN_ROLE')],getAccount);
 
+router.get('/getById',[validateJWT,
+    haveRol('ADMIN_ROLE'),
+    check('idAccount', 'The idAccount is required').not().isEmpty(),
+    check('idAccount').custom(existsAccount),
+    validateFields
+],getAccountById);
 // router.put('/',[],);
 // router.delete('/',[],);
-// router.get('/',[],);
 
 export default router;

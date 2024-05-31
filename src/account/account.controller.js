@@ -13,7 +13,9 @@ export const getAccount= async(req,res)=>{
 }
 
 export const getAccountById= async(req,res)=>{
-    
+    const {idAccount} =req.body;
+    const account = await Account.findById(idAccount);
+    res.status(200).json(account);
 }
 
 export const putAccount= async(req,res)=>{
