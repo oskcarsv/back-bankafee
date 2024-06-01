@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "18901273-2325-49c1-aab6-961752e36cd8",
+		"_postman_id": "4dfebea1-9113-424b-a8cb-f4a357c6500e",
 		"name": "Bankafee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32787267"
+		"_exporter_id": "32786726"
 	},
 	"item": [
 		{
@@ -236,8 +236,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjY0MzksImV4cCI6MTcxNzE3NzIzOX0.FNlO7DgngjixqFDIRtYUVJVG5VhgUl2_aNFU4BEoVy4",
-								"type": "text"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjY0MzksImV4cCI6MTcxNzE3NzIzOX0.FNlO7DgngjixqFDIRtYUVJVG5VhgUl2_aNFU4BEoVy4"
 							}
 						],
 						"body": {
@@ -350,6 +349,210 @@
 								"v1",
 								"auth",
 								"clientPetition"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "postAccont",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"DPI_Owner\":\"9785412580101\",\r\n    \"alias\":\"El ToritosssssssssssssssssssssToritos\",\r\n    \"amount\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccont",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccontById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account/getById",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								"getById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putAccount",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\",\r\n    \"alias\":\"El Primo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putAccount Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\",\r\n    \"alias\":\"El Primo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								""
 							]
 						}
 					},

@@ -20,7 +20,8 @@ const AccountSchema = Schema({
     },
     amount:{
         type: Number,
-        required: [true, 'Amount of the account is required']
+        default: 0
+
     },
     status:{
         type: Boolean,

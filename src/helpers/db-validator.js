@@ -4,6 +4,7 @@ import ClientPetition from "../clientPetition/clientPetition.model.js";
 
 import Status from "../status/status.model.js";
 
+import Account from "../account/account.model.js";
 import Product from '../products/product.model.js';
 
 import CategoryProduct from '../categoryProduct/categoryProduct.model.js';
@@ -82,6 +83,37 @@ export const existentno_Petition = async (no_Petition = '') => {
   
 }
 
+export const existsUserDPI = async (DPI = '') => {
+
+  const user = await User.findOne({DPI});
+
+  if (user.DPI!=DPI) {
+
+      throw new Error(`The DPI ${DPI} does not exist`)
+
+  }
+
+}
+
+export const existsUserDPI_Number = async (DPI = '') => {
+
+  const user = await User.findOne({DPI: DPI});
+
+  if (user) {
+
+      throw new Error(`The DPI ${DPI} exist in database`)
+
+  }
+  
+}
+
+export const existsAccount = async (idAccount = '') => {
+  //find the account with the idAccount and check if it exists
+  const account = await Account.findById(idAccount);
+  if (!account) {
+      throw new Error(`The Account ${idAccount} does not exist`)
+  }
+}
 
 export const existsProductById = async (id = '') => {
     const existsProduct = await Product.findById(id);
