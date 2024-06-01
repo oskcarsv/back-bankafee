@@ -1,3 +1,6 @@
+import Model from "../account/account.model.js";
+import User from "../user/user.model.js";
+
 export const usernameCharactersLimit = async (username = '') => {
     
     const length = username.length;
@@ -66,4 +69,20 @@ export const miniumMonthyIncome = async (monthlyIncome = '') => {
 
     }
 
+}
+
+export const existsUserDPI = async (DPI = '') => {
+    //find the user with the DPI and check if it exists
+    const user = await User.findOne({DPI});
+    if (user.DPI!=DPI) {
+        throw new Error(`The DPI ${DPI} does not exist`)
+    }
+}
+
+export const existsAccount = async (idAccount = '') => {
+    //find the account with the idAccount and check if it exists
+    const account = await Model.findById(idAccount);
+    if (!account) {
+        throw new Error(`The Account ${idAccount} does not exist`)
+    }
 }
