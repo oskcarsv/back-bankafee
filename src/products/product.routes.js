@@ -3,7 +3,6 @@ import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields.js";
 import { existsProductById } from "../helpers/db-validator.js";
 import { productGet, productImg, productPut, productDelete} from "./product.controller.js";
-import { existsProductByName } from "../middlewares/validate-product.js";
 const router = Router();
 
 router.get('/', productGet);
@@ -15,7 +14,6 @@ router.post('/create',
         // check('price', 'The price is required').not().isEmpty(),
         // check('category', 'The category is required').not().isEmpty(),
         // check('stock', 'The stock is required').not().isEmpty(),
-        existsProductByName,
         validateFields
     ],
     productImg

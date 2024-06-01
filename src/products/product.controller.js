@@ -1,4 +1,5 @@
 import { response, request } from "express";
+import { existsProductByName } from "../helpers/db-validator.js";
 import Product from "./product.model.js";
 import upload from "../middlewares/multerConfig.js";
 
@@ -14,7 +15,13 @@ export const productImg = async (req, res) => {
         try {
             const { name, description, price, category, stock } = req.body;
 
-            // mira si el nombre del producto ya existe
+            try {
+                await existsProductByName(name);
+            } catch (err) {
+                return res.status(400).json({
+                    msg: "A product with this name already exists"
+                });
+            }
 
             // mira si el stock es menor a 0
             if (stock < 0) {
@@ -22,6 +29,8 @@ export const productImg = async (req, res) => {
                     msg: "Stock cannot be less than zero"
                 });
             }
+
+            
 
             const newProduct = new Product({
                 name, 
