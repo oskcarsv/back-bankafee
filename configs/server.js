@@ -18,6 +18,7 @@ import Status from '../src/status/status.model.js'
 
 import authRoutes from '../src/auth/auth.routes.js'
 import userRoutes from '../src/user/user.routes.js'
+import serviceRoutes from '../src/service-model/service-model.routes.js'
 
 class Server {
 
@@ -27,6 +28,7 @@ class Server {
         this.port = process.env.PORT
 
         this.categoryServiceRoutesPath = '/bankafee/v1/category-service'
+        this.serviceRoutesPath = '/bankafee/v1/service'
         this.authPath = '/bankafee/v1/auth'
         this.userPath = '/bankafee/v1/user'
 
@@ -35,9 +37,6 @@ class Server {
         this.defaultCredentials();
         this.routes();
 
-        this.middlewares();
-        this.connectDB();
-        this.routes();
     }
 
     middlewares() {
@@ -53,10 +52,6 @@ class Server {
 
         await dbConnection();
 
-    }
-
-    routes() {
-        this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes)
     }
 
     async defaultCredentials(){
@@ -185,6 +180,10 @@ class Server {
         this.app.use(this.authPath, authRoutes)
 
         this.app.use(this.userPath, userRoutes)
+
+        this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes)
+
+        this.app.use(this.serviceRoutesPath, serviceRoutes)
 
     }
 
