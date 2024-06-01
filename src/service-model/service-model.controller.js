@@ -1,6 +1,6 @@
 import serviceModel from '../service-model/service-model.model.js';
 import upload from '../middlewares/multerConfig.js';
-import { tittleExists, serviceExists } from '../helpers/service-validators.js';
+import { tittleExists, serviceExists, serviceDeleted } from '../helpers/service-validators.js';
 
 export const createService = async (req, res) => {
     upload.single('img')(req, res, async (err) => {
@@ -112,6 +112,7 @@ export const getServiceById = async (req, res) => {
         const service = await serviceModel.findById(id);
 
         await serviceExists(id);
+        await serviceDeleted(id);
 
         res.status(200).json({
             service
@@ -135,7 +136,9 @@ export const updateService = async (req, res) => {
         try {
             const { id } = req.params;
             
+            await tittleExists(req.body.tittle);
             await serviceExists(id);
+            await serviceDeleted(id);
 
             const updatedService = {
                 ...req.body,
@@ -155,4 +158,25 @@ export const updateService = async (req, res) => {
             });
         }
     });
+};
+
+export const deleteService = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await serviceExists(id);
+        await serviceDeleted(id);
+
+        await serviceModel.findByIdAndUpdate(id, { status: false });
+
+        res.status(200).json({
+            msg: 'Service deleted successfully',
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            msg: 'Error deleting service',
+            errors: error.message
+        });
+    }
 };

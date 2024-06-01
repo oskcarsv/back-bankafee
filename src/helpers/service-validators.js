@@ -13,3 +13,10 @@ export const serviceExists = async (id) => {
         throw new Error(`The service with id '${id}' does not exist`);
     }
 };
+
+export const serviceDeleted = async (id) => {
+    const serviceDeleted = await serviceModel.findById(id);
+    if (serviceDeleted.status === false) {
+        throw new Error(`The service with id '${id}' is already deleted`);
+    }
+};

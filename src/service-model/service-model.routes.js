@@ -2,7 +2,7 @@ import { Router } from "express";
 import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
-import { createService, getServiceById, getServices, getServicesByCategory, getServicesByCompany, updateService } from "./service-model.controller.js";
+import { createService, deleteService, getServiceById, getServices, getServicesByCategory, getServicesByCompany, updateService } from "./service-model.controller.js";
 
 
 
@@ -42,6 +42,11 @@ router.put(
         validateFields,
     ],
     updateService
+);
+
+router.delete(
+    '/deleteService/:id',
+    deleteService
 );
 
 export default router;
