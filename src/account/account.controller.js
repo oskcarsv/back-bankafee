@@ -26,7 +26,7 @@ export const putAccount= async(req,res)=>{
     const {
         //type,
         alias,idAccount} = req.body;
-    await Account.findByIdAndUpdate(idAccount,{alias,status:true});
+    await Account.findByIdAndUpdate(idAccount,{alias});
     const account = await Account.findById(idAccount);
     res.status(200).json({
         msg:"Account has been updated successfully",

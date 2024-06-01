@@ -80,6 +80,7 @@ export const existsUserDPI = async (DPI = '') => {
 }
 
 export const existsAccount = async (idAccount = '') => {
+    //find the account with the idAccount and check if it exists
     const account = await Model.findById(idAccount);
     if (!account) {
         throw new Error(`The Account ${idAccount} does not exist`)
