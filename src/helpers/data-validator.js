@@ -1,69 +1,45 @@
-export const usernameCharactersLimit = async (username = '') => {
-    
-    const length = username.length;
+export const usernameCharactersLimit = async (username = "") => {
+  const length = username.length;
 
-    if (length < 3 || length > 13) {
+  if (length < 3 || length > 13) {
+    throw new Error("The Username must have between 4 and 12 characters");
+  }
+};
 
-        throw new Error(`The Username must have between 4 and 12 characters`)
+export const DPICharactersLimit = async (DPI = "") => {
+  const length = String(DPI).length;
 
-    }
-    
-}
+  if (length != 13) {
+    throw new Error("The DPI must have 13 characters");
+  }
+};
 
-export const DPICharactersLimit = async (DPI = '') => {
+export const phoneNumberCharactersLimit = async (phoneNumber = "") => {
+  const length = phoneNumber.length;
 
-    const length = String(DPI).length;
+  if (length < 7 || length > 14) {
+    throw new Error("The Phone number must have between 8 and 13 characters");
+  }
+};
 
-    if (length != 13) {
+export const workPlaceCharactersLimit = async (workPlace = "") => {
+  const length = workPlace.length;
 
-        throw new Error(`The DPI must have 13 characters`)
-        
-    }
+  if (length > 121) {
+    throw new Error("The Work Place must have less than 120 characters");
+  }
+};
 
-}
+export const nameCharactersLimit = async (name = "") => {
+  const length = name.length;
 
-export const phoneNumberCharactersLimit = async (phoneNumber = '') => {
+  if (length > 46) {
+    throw new Error("The Name must have less than 45 characters");
+  }
+};
 
-    const length = phoneNumber.length;
-
-    if (length < 7 || length > 14) {
-
-        throw new Error(`The Phone number must have between 8 and 13 characters`)
-        
-    }
-
-}
-
-export const workPlaceCharactersLimit = async (workPlace = '') => {
-
-    const length = workPlace.length;
-
-    if (length > 121) {
-        
-        throw new Error(`The Work Place must have less than 120 characters`)
-
-    }
-    
-}
-
-export const nameCharactersLimit = async (name = '') => {
-
-    const length = name.length;
-
-    if (length > 46) {
-
-        throw new Error(`The Name must have less than 45 characters`)
-
-    }
-    
-}
-
-export const miniumMonthyIncome = async (monthlyIncome = '') => {
-
-    if (monthlyIncome < 100) {
-
-        throw new Error(`The Monthly Income must be greater than 100`)
-
-    }
-
-}
+export const miniumMonthyIncome = async (monthlyIncome = "") => {
+  if (monthlyIncome < 100) {
+    throw new Error("The Monthly Income must be greater than 100");
+  }
+};
