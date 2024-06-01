@@ -14,8 +14,6 @@ import categoryProductsRoutes from '../src/categoryProduct/categoryProduct.route
 import {dbConnection} from './mongo.js'
 import categoryServiceRoutes from '../src/category-service-model/category-service-model.routes.js'
 
-import { dbConnection } from './mongo.js'
-
 import User from '../src/user/user.model.js'
 import Roles from '../src/roles/roles.model.js'
 import Status from '../src/status/status.model.js'
