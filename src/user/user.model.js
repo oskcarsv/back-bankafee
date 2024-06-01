@@ -19,7 +19,7 @@ const UserSchema = mongoose.Schema({
 
     no_Account: {
 
-        type: Number,
+        type: [String],
         required: [true, 'Account number is required'],
         unique: true
     },
