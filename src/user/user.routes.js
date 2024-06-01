@@ -4,11 +4,33 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentClientPetitionStatus, existentDPI, existentEmail_User, existentUserStatus, existentUsername_User, existentno_Petition } from "../helpers/db-validator.js";
+import {
+  existentClientPetitionStatus,
+  existentDPI,
+  existentEmail_User,
+  existentUserStatus,
+  existentUsername_User,
+  existentno_Petition,
+} from "../helpers/db-validator.js";
 
-import { DPICharactersLimit, miniumMonthyIncome, nameCharactersLimit, phoneNumberCharactersLimit, usernameCharactersLimit, workPlaceCharactersLimit } from "../helpers/data-validator.js";
+import {
+  DPICharactersLimit,
+  miniumMonthyIncome,
+  nameCharactersLimit,
+  phoneNumberCharactersLimit,
+  usernameCharactersLimit,
+  workPlaceCharactersLimit,
+} from "../helpers/data-validator.js";
 
-import { addUser, deletePetition, deleteUser, listClientPetition, listOwnUser, listUser, updateUser } from "./user.controller.js";
+import {
+  addUser,
+  deletePetition,
+  deleteUser,
+  listClientPetition,
+  listOwnUser,
+  listUser,
+  updateUser,
+} from "./user.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -17,159 +39,126 @@ import { haveRol } from "../middlewares/validate-role.js";
 const router = Router();
 
 router.post(
+  "/",
 
-    "/",
+  [
+    validateJWT,
 
-    [
+    haveRol("ADMIN_ROLE"),
 
-        validateJWT,
+    check("name", "Name is required").not().isEmpty(),
 
-        haveRol('ADMIN_ROLE'),
+    check("name").custom(nameCharactersLimit),
 
-        check("name", "Name is required").not().isEmpty(),
+    check("username", "Username is required").not().isEmpty(),
 
-        check("name").custom(nameCharactersLimit),
+    check("username").custom(existentUsername_User),
 
-        check("username", "Username is required").not().isEmpty(),
+    check("username").custom(usernameCharactersLimit),
 
-        check("username").custom(existentUsername_User),
+    check("DPI", "DPI is required").not().isEmpty(),
 
-        check("username").custom(usernameCharactersLimit),
+    check("DPI").custom(DPICharactersLimit),
 
-        check("DPI", "DPI is required").not().isEmpty(),
+    check("adress", "Adress is required").not().isEmpty(),
 
-        check("DPI").custom(DPICharactersLimit),
+    check("email", "This is not a valid email").isEmail(),
 
-        check("adress", "Adress is required").not().isEmpty(),
+    check("email").custom(existentEmail_User),
 
-        check("email", "This is not a valid email").isEmail(),
+    check("phoneNumber", "Phone number is required").not().isEmpty(),
 
-        check("email").custom(existentEmail_User),
+    check("phoneNumber").custom(phoneNumberCharactersLimit),
 
-        check("phoneNumber", "Phone number is required").not().isEmpty(),
+    check("workPlace", "Work place is required").not().isEmpty(),
 
-        check("phoneNumber").custom(phoneNumberCharactersLimit),
+    check("workPlace").custom(workPlaceCharactersLimit),
 
-        check("workPlace", "Work place is required").not().isEmpty(),
+    check("monthlyIncome", "Monthly income is required").not().isEmpty(),
 
-        check("workPlace").custom(workPlaceCharactersLimit),
+    check("monthlyIncome").custom(miniumMonthyIncome),
 
-        check("monthlyIncome", "Monthly income is required").not().isEmpty(),
-
-        check("monthlyIncome").custom(miniumMonthyIncome),
-
-        validateFields
-
-    ], addUser
-
+    validateFields,
+  ],
+  addUser,
 );
 
 router.delete(
+  "/",
 
-    "/",
+  [
+    validateJWT,
 
-    [
+    haveRol("ADMIN_ROLE"),
 
-        validateJWT,
+    check("DPI").custom(existentDPI),
 
-        haveRol('ADMIN_ROLE'),
+    check("status").custom(existentUserStatus),
 
-        check("DPI").custom(existentDPI),
-
-        check("status").custom(existentUserStatus),
-
-        validateFields
-
-
-    ], deleteUser
-
-)
+    validateFields,
+  ],
+  deleteUser,
+);
 
 router.get(
+  "/admin",
 
-    "/admin",
+  [
+    validateJWT,
 
-    [
+    haveRol("ADMIN_ROLE"),
 
-        validateJWT,
-
-        haveRol('ADMIN_ROLE'),
-
-        check("status").custom(existentUserStatus),
-
-    ], listUser
-
-)
+    check("status").custom(existentUserStatus),
+  ],
+  listUser,
+);
 
 router.get(
+  "/",
 
-    "/",
-
-    [
-
-        validateJWT,
-
-        haveRol('ADMIN_ROLE', "USER_ROLE"),
-
-    ], listOwnUser
-
-)
+  [validateJWT, haveRol("ADMIN_ROLE", "USER_ROLE")],
+  listOwnUser,
+);
 
 router.get(
+  "/admin/clientPetition",
 
-    "/admin/clientPetition",
+  [
+    validateJWT,
 
-    [
+    haveRol("ADMIN_ROLE"),
 
-        validateJWT,
-
-        haveRol('ADMIN_ROLE'),
-
-        check("status").custom(existentClientPetitionStatus),
-
-    ], listClientPetition
-
-)
+    check("status").custom(existentClientPetitionStatus),
+  ],
+  listClientPetition,
+);
 
 router.delete(
+  "/admin/clientPetition",
 
-    "/admin/clientPetition",
+  [
+    validateJWT,
 
-    [
+    haveRol("ADMIN_ROLE"),
 
+    check("no_Petition").not().isEmpty(),
 
-        validateJWT,
+    check("no_Petition").custom(existentno_Petition),
 
-        haveRol('ADMIN_ROLE'),
+    check("status").not().isEmpty(),
 
-        check("no_Petition").not().isEmpty(),
+    check("status").custom(existentClientPetitionStatus),
 
-        check("no_Petition").custom(existentno_Petition),
-
-        check("status").not().isEmpty(),
-
-        check("status").custom(existentClientPetitionStatus),
-
-        validateFields
-
-    ], deletePetition
-
-
-)
+    validateFields,
+  ],
+  deletePetition,
+);
 
 router.put(
+  "/",
 
-    "/",
-
-    [
-        validateJWT,
-
-        haveRol('ADMIN_ROLE', 'USER_ROLE'),
-
-        validateFields
-
-    ], updateUser
-
-)
+  [validateJWT, haveRol("ADMIN_ROLE", "USER_ROLE"), validateFields],
+  updateUser,
+);
 
 export default router;

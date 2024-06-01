@@ -1,9 +1,9 @@
-import { config } from 'dotenv'
+import { config } from "dotenv";
 
-import Server from './configs/server.js'
+import Server from "./configs/server.js";
 
-config()
+config();
 
-const server = new Server()
+const server = new Server();
 
-server.listen()
+server.listen();
