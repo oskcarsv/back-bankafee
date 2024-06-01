@@ -96,9 +96,9 @@ export const existsUserDPI_Number = async (DPI = '') => {
 
   const user = await User.findOne({DPI: DPI});
 
-  if (user.DPI!=DPI) {
+  if (user) {
 
-      throw new Error(`The DPI ${DPI} does not exist`)
+      throw new Error(`The DPI ${DPI} exist in database`)
 
   }
   
