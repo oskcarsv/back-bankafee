@@ -1,6 +1,7 @@
 import multer from 'multer';
 
 const storage = multer.diskStorage({
+
     destination: (req, file, cb) => {
         cb(null, './public/uploads/');
     },
@@ -11,6 +12,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
+
     if (
         file.mimetype === 'image/jpeg' ||
         file.mimetype === 'image/png' ||
@@ -18,6 +20,7 @@ const fileFilter = (req, file, cb) => {
         file.mimetype === 'image/svg' ||
         file.mimetype === 'image/gift'
     ) {
+
         cb(null, true);
     } else {
         cb(null, false);

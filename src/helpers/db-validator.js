@@ -4,6 +4,10 @@ import ClientPetition from "../clientPetition/clientPetition.model.js";
 
 import Status from "../status/status.model.js";
 
+import Product from '../products/product.model.js';
+
+import CategoryProduct from '../categoryProduct/categoryProduct.model.js';
+
 export const existentUsername_User = async (username = '') => {
     const existUsername = await User.findOne({ username })
   
@@ -77,3 +81,33 @@ export const existentno_Petition = async (no_Petition = '') => {
   }
   
 }
+
+
+export const existsProductById = async (id = '') => {
+    const existsProduct = await Product.findById(id);
+    if (!existsProduct) {
+        throw new Error(`The product with id ${id} does not exist`);
+    }
+};
+
+export const existsCategoryProductById = async (id) => {
+    const existsCategoryProduct = await CategoryProduct.findById(id);
+    if (!existsCategoryProduct) {
+        throw new Error(`The ID doesn't exist ${id}`);
+    }
+};
+
+
+export const existsProductByName = async (name) => {
+    const existsProduct = await Product.findOne({ name  });
+    if (existsProduct) {
+        throw new Error(`The name ${name} already exists`);
+    }
+};
+
+export const existsCategoryProductByName = async (name) => {
+    const existsCategoryProduct = await CategoryProduct.findOne({ name });
+    if (existsCategoryProduct) {
+        throw new Error(`The name ${name} already exists`);
+    }
+};
