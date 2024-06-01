@@ -13,7 +13,7 @@ export const createService = async (req, res) => {
         try {
             const { tittle, description, company, discount, category } = req.body;
 
-            const discountCode = Math.random().toString(36).substring(2, 12);
+            const discountCode = Math.random().toString(36).substring(2, 12).toUpperCase();
 
             await tittleExists(tittle);
 

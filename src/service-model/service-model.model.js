@@ -24,7 +24,6 @@ const ServiceModelSchema = new Schema({
     },
     discountCode: {
         type: String,
-        // required: true,
     },
     img: {
         type: String,
