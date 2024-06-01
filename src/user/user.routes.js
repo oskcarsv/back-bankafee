@@ -66,8 +66,6 @@ router.post(
 
         check('alias', 'Alias of the account is required and maximum 50 characters').isLength({ max: 50 }),
 
-        check('amount', 'Amount is required').not().isEmpty(),
-
         validateFields
 
     ], addUser

@@ -10,7 +10,7 @@ import Account from "../account/account.model.js";
 
 export const addUser = async (req, res) => {
 
-    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome, type, alias, amount } = req.body;
+    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome, type, alias } = req.body;
 
     const no_Account = createNoAccount();
 
@@ -60,7 +60,6 @@ export const addUser = async (req, res) => {
         noAccount: no_Account,
         alias,
         type,
-        amount,
         DPI_Owner: DPI
 
     })
