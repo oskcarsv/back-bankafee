@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { postAccount,getAccount, getAccountById } from './account.controller.js';
+import { postAccount,getAccount, getAccountById, putAccount } from './account.controller.js';
 import { validateFields } from '../middlewares/validate-fields.js';
 import { validateJWT } from '../middlewares/validate-jwt.js';
 import { DPICharactersLimit, existsUserDPI, miniumMonthyIncome,existsAccount } from '../helpers/data-validator.js';
@@ -27,7 +27,11 @@ router.get('/getById',[validateJWT,
     check('idAccount').custom(existsAccount),
     validateFields
 ],getAccountById);
-// router.put('/',[],);
+router.put('/',[validateJWT,
+    haveRol('ADMIN_ROLE','CLIENT_ROLE'),
+    check('alias', 'Alias of the account is required and maximum 50 characters').isLength({ max: 50 }),
+],putAccount);
+
 // router.delete('/',[],);
 
 export default router;

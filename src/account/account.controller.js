@@ -19,7 +19,12 @@ export const getAccountById= async(req,res)=>{
 }
 
 export const putAccount= async(req,res)=>{
-    
+    const {
+        //type,
+        alias,idAccount} = req.body;
+    await Account.findByIdAndUpdate(idAccount,{alias,status:true});
+    const account = await Account.findById(idAccount);
+    res.status(200).json(account);
 }
 
 export const deleteAccount= async(req,res)=>{
