@@ -1,6 +1,6 @@
 import Account from './account.model.js';
 //Method to create a random account number
-const createNoAccount = () => {
+export const createNoAccount = () => {
     const codeCountry = 'GT';
     const checkDigit = '16';
     const codeBank = 'BAAF';

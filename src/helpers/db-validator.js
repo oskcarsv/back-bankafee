@@ -4,6 +4,8 @@ import ClientPetition from "../clientPetition/clientPetition.model.js";
 
 import Status from "../status/status.model.js";
 
+import Account from "../account/account.model.js";
+
 export const existentUsername_User = async (username = '') => {
     const existUsername = await User.findOne({ username })
   
@@ -76,4 +78,36 @@ export const existentno_Petition = async (no_Petition = '') => {
     throw new Error(`No. of Petition ${no_Petition} not found in the database`)
   }
   
+}
+
+export const existsUserDPI = async (DPI = '') => {
+
+  const user = await User.findOne({DPI});
+
+  if (user.DPI!=DPI) {
+
+      throw new Error(`The DPI ${DPI} does not exist`)
+
+  }
+
+}
+
+export const existsUserDPI_Number = async (DPI = '') => {
+
+  const user = await User.findOne({DPI: DPI});
+
+  if (user.DPI!=DPI) {
+
+      throw new Error(`The DPI ${DPI} does not exist`)
+
+  }
+  
+}
+
+export const existsAccount = async (idAccount = '') => {
+  //find the account with the idAccount and check if it exists
+  const account = await Account.findById(idAccount);
+  if (!account) {
+      throw new Error(`The Account ${idAccount} does not exist`)
+  }
 }

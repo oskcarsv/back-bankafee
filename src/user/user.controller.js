@@ -4,28 +4,21 @@ import bcryptjs from 'bcryptjs';
 
 import ClientPetition from "../clientPetition/clientPetition.model.js";
 
+import {createNoAccount} from "../account/account.controller.js";
+
+import Account from "../account/account.model.js";
+
 export const addUser = async (req, res) => {
 
-    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome } = req.body;
+    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome, type, alias, amount } = req.body;
 
-    let notExistNo_Account = false;
+    const no_Account = createNoAccount();
 
-    let randomNumberNo_Account = Math.floor(Math.random() * (1e16 - 1e15 + 1)) + 1e15;
+    const searchAccount = await Account.findOne({ noAccount: no_Account });
 
-    while (!notExistNo_Account) {
-
-        const existNo_Petition = await User.findOne({ no_Account: randomNumberNo_Account });
-
-        if (existNo_Petition) {
-
-            randomNumberNo_Account = Math.floor(Math.random() * (1e16 - 1e15 + 1)) + 1e15;
-
-        } else {
-
-            notExistNo_Account = true;
-
-        }
-
+    while(searchAccount){
+        no_Account = createNoAccount();
+        searchAccount = await Account.findOne({ noAccount: no_Account });
     }
 
     var arrayOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '$', '#', '%'];
@@ -62,11 +55,21 @@ export const addUser = async (req, res) => {
 
     let keywordUnified = arrayKeyword.join('');
 
+    const account = new Account({
+
+        noAccount: no_Account,
+        alias,
+        type,
+        amount,
+        DPI_Owner: DPI
+
+    })
+
     const user = new User({
 
         name,
         username,
-        no_Account: randomNumberNo_Account,
+        no_Account: no_Account,
         DPI,
         adress,
         email,
@@ -90,10 +93,11 @@ export const addUser = async (req, res) => {
 
     await user.save();
 
+    await account.save();
+
     res.status(200).json({
 
-        msg: `${req.user.username} has been created the ${user.username} successfully`,
-        msg: `Admin the User that you created his username is: ${user.username} and his password is ${savePassword}`
+        msg: `${req.user.username} has been created the ${user.username} successfully, the User that you created his username is: ${user.username} and his password is ${savePassword}`,
 
     });
 

@@ -4,7 +4,7 @@ import { check } from "express-validator";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentClientPetitionStatus, existentDPI, existentEmail_User, existentUserStatus, existentUsername_User, existentno_Petition } from "../helpers/db-validator.js";
+import { existentClientPetitionStatus, existentDPI, existentEmail_User, existentUserStatus, existentUsername_User, existentno_Petition, existsUserDPI_Number} from "../helpers/db-validator.js";
 
 import { DPICharactersLimit, miniumMonthyIncome, nameCharactersLimit, phoneNumberCharactersLimit, usernameCharactersLimit, workPlaceCharactersLimit } from "../helpers/data-validator.js";
 
@@ -40,6 +40,8 @@ router.post(
 
         check("DPI").custom(DPICharactersLimit),
 
+        check('DPI').custom(existsUserDPI_Number),
+
         check("adress", "Adress is required").not().isEmpty(),
 
         check("email", "This is not a valid email").isEmail(),
@@ -57,6 +59,14 @@ router.post(
         check("monthlyIncome", "Monthly income is required").not().isEmpty(),
 
         check("monthlyIncome").custom(miniumMonthyIncome),
+
+        check('type', 'Type of account is required').not().isEmpty(),
+
+        check('type', 'The account type must be SAVINGS, CURRENT, or CREDIT.').isIn(['SAVINGS', 'CURRENT', 'CREDIT']),
+
+        check('alias', 'Alias of the account is required and maximum 50 characters').isLength({ max: 50 }),
+
+        check('amount', 'Amount is required').not().isEmpty(),
 
         validateFields
 

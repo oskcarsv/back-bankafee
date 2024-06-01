@@ -3,7 +3,8 @@ import { check } from 'express-validator';
 import { postAccount, getAccount, getAccountById, putAccount, deleteAccount } from './account.controller.js';
 import { validateFields } from '../middlewares/validate-fields.js';
 import { validateJWT } from '../middlewares/validate-jwt.js';
-import { DPICharactersLimit, existsUserDPI, miniumMonthyIncome, existsAccount } from '../helpers/data-validator.js';
+import { DPICharactersLimit } from '../helpers/data-validator.js';
+import {existsUserDPI, existsAccount} from '../helpers/db-validator.js';
 import { haveRol } from '../middlewares/validate-role.js';
 const router = Router();
 
@@ -15,7 +16,6 @@ router.post('/', [validateJWT,
     check('DPI_Owner', 'DPI of the owner is required').not().isEmpty(),
     check('DPI_Owner').custom(DPICharactersLimit),
     check('DPI_Owner').custom(existsUserDPI),
-    check('amount').custom(miniumMonthyIncome),
     check('alias', 'Alias of the account is required and maximum 50 characters').isLength({ max: 50 }),
     validateFields
 ], postAccount);
