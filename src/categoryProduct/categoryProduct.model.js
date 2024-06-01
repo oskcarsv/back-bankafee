@@ -1,23 +1,22 @@
 import mongoose from "mongoose";
 
 const categoryProductSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "Name is required"]
-    },
-    description: {
-        type: String,
-        required: [true, "Description is required"]
-    },
-    status: {
-        type: Boolean,
-        default: true,  
-    },
-    isDefault: {
-        type: Boolean,
-        default: false
-    }
+  name: {
+    type: String,
+    required: [true, "Name is required"],
+  },
+  description: {
+    type: String,
+    required: [true, "Description is required"],
+  },
+  status: {
+    type: Boolean,
+    default: true,
+  },
+  isDefault: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model("CategoryProduct", categoryProductSchema);
-
