@@ -9,7 +9,7 @@ export const tittleExists = async (tittle) => {
 
 export const serviceExists = async (id) => {
     const serviceExists = await serviceModel.findById(id);
-    if (serviceExists) {
-        throw new Error(`The service '${serviceExists.tittle}' already exists`);
+    if (!serviceExists) {
+        throw new Error(`The service with id '${id}' does not exist`);
     }
-}
+};
