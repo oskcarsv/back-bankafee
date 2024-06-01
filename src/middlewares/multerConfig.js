@@ -1,7 +1,8 @@
 import multer from 'multer';
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+
+    destination: (req, file, cb) => {
         cb(null, './public/uploads/');
     },
     filename: function (req, file, cb) {
@@ -11,8 +12,15 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-    // rechaza un archivo
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/svg') {
+
+    if (
+        file.mimetype === 'image/jpeg' ||
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/svg' ||
+        file.mimetype === 'image/gift'
+    ) {
+
         cb(null, true);
     } else {
         cb(null, false);
