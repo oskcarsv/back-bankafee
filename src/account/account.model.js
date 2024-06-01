@@ -6,6 +6,10 @@ const AccountSchema = Schema({
         enum:[ 'SAVINGS', 'CURRENT', 'CREDIT'],
         required: [true, 'Type of account is required'],
     },
+    noAccount:{
+        type:String,
+        required: [true, 'Number of account is required']
+    },
     DPI_Owner: {
         type: Number,
         required: [true, 'DPI of the owner is required']
