@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ADMINB\",\r\n    \"password\": \"ADMINB\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Vela\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,12 +89,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjIxMTUsImV4cCI6MTcxNzE3MjkxNX0.FKExyrYlBkacVwGWx3Zqd9GJOp8UZHmiWJAg2AtCoJE"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNTY2NDMsImV4cCI6MTcxNzM2NzQ0M30.YjK0gPB5TdRZ88QK15nCW4hw5udDrE2hS80HedE2X4k"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mario\",\r\n    \"username\": \"marito\",\r\n    \"DPI\": 9687542160101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1002\r\n}",
+							"raw": "{\r\n    \"name\": \"Kenneth\",\r\n    \"username\": \"Vela\",\r\n    \"DPI\": 3555783690101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"Kenneth@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1000,\r\n    \"type\":\"CREDIT\",\r\n    \"amount\":150,\r\n    \"alias\":\"Kenneth credit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +168,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNzI5NzgsImV4cCI6MTcxNzE4Mzc3OH0.SPl1kzKg9GhNdCuuFRe0GxE0ahnGw_mfwnk44OtMTdM"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczODI1NTIsImV4cCI6MTcxNzM5MzM1Mn0.LKt2kO7-D0B9sLSsTm62sXrPFNjrUuuGdkGKRs6xjfA"
 							}
 						],
 						"body": {
@@ -241,7 +241,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"userDPI\": 9687542160101,\r\n    \"name\": \"Jorge\"\r\n}",
+							"raw": "{\r\n    //\"userDPI\": 9785412580101,\r\n    \"name\": \"Jorge\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,12 +366,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTczNTcxMzQsImV4cCI6MTcxNzM2NzkzNH0.aRdRtRY7JlG371p5-ePWjUO9WFTXJs1akDwL1O23Vh0"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"DPI_Owner\":\"9785412580101\",\r\n    \"alias\":\"El ToritosssssssssssssssssssssToritos\",\r\n    \"amount\": 100\r\n}",
+							"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"DPI_Owner\":\"9785412580101\",\r\n    \"alias\":\"Hola\",\r\n    \"amount\": 150\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -407,7 +407,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNTY2NDMsImV4cCI6MTcxNzM2NzQ0M30.YjK0gPB5TdRZ88QK15nCW4hw5udDrE2hS80HedE2X4k"
 							}
 						],
 						"body": {
@@ -487,12 +487,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcxOTE4NjIsImV4cCI6MTcxNzIwMjY2Mn0.ae-Fen2Pco0R-IxvkyYa3DNEP3o1g537H01-BQt0yqU"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTcyMTc2OTEsImV4cCI6MTcxNzIyODQ5MX0.yc9cGIw_5XxyP5NEG9UAOqLBAocaBajRx8RbmFzoU2w"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\",\r\n    \"alias\":\"El Primo\"\r\n}",
+							"raw": "{\r\n    \"idAccount\":\"665aa9e2746ec9a5e7e09d39\",\r\n    \"alias\":\"El Primo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -522,7 +522,7 @@
 				{
 					"name": "putAccount Copy",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Authorization",
@@ -531,7 +531,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\",\r\n    \"alias\":\"El Primo\"\r\n}",
+							"raw": "{\r\n    \"idAccount\":\"665a53e7afc05b722f554324\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -553,6 +553,297 @@
 								"v1",
 								"account",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer",
+			"item": [
+				{
+					"name": "PostTransfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNjc1MjUsImV4cCI6MTcxNzM3ODMyNX0.-Z4Uw3qYOqT-S0ap_VAAOGqLTpQqwaJjF7-0Fi1ailY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"noOwnerAccount\":\"08214470308753471\",\r\n    \"noDestinationAccount\": \"88994606798260780\",\r\n    \"DPI_DestinationAccount\": 3555783690101,\r\n    \"amount\": 1000,\r\n    \"description\": \"sdf\",\"canceled\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransfersForAccount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNzkxMjYsImV4cCI6MTcxNzM4OTkyNn0.NYqIqpHQSGmJsDN2tTJFVWepRn3jkz9auRZtvmpUkxY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"noAccount\":\"08214470308753471\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer/transferForAccount",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer",
+								"transferForAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMyTransferForAccount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTczODM0MTksImV4cCI6MTcxNzM5NDIxOX0.SP_BZlLfnFkJyWwmaorJr6tCx8Rhps_T9gMPK4DvPk8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"noAccount\":\"88994606798260780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer/myTransfersForAccount",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer",
+								"myTransfersForAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMyTransferCompleted",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTczODM0MTksImV4cCI6MTcxNzM5NDIxOX0.SP_BZlLfnFkJyWwmaorJr6tCx8Rhps_T9gMPK4DvPk8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"noAccount\":\"88994606798260780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer/myTransfersCompleted",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer",
+								"myTransfersCompleted"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTransfer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczODU5NzAsImV4cCI6MTcxNzM5Njc3MH0.hzPFsn3FjU-yrlYrvSti1VPSn0MtpLoRLwlBrYBG5gk"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMyTransferCanceled",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTczODM0MTksImV4cCI6MTcxNzM5NDIxOX0.SP_BZlLfnFkJyWwmaorJr6tCx8Rhps_T9gMPK4DvPk8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"noAccount\":\"88994606798260780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer/myTransfersCanceled",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer",
+								"myTransfersCanceled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutTransfer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNzkxMjYsImV4cCI6MTcxNzM4OTkyNn0.NYqIqpHQSGmJsDN2tTJFVWepRn3jkz9auRZtvmpUkxY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"description\":\"alsdkfjalsdf\",\r\n    \"idTransfer\":\"665d0f2e9bc2b6d82d5e925e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/transfer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"transfer"
 							]
 						}
 					},
