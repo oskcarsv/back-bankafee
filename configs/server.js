@@ -38,7 +38,7 @@ class Server {
     this.userPath = "/bankafee/v1/user";
     this.accountPath = "/bankafee/v1/account";
     this.transferPath = "/bankafee/v1/transfer";
-    this.depositPath ='/bankafee/v1/deposit';
+    this.depositPath = "/bankafee/v1/deposit";
 
     this.middlewares();
     this.connectDB();

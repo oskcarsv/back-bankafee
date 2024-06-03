@@ -177,7 +177,7 @@ export const existsMyAccount = async (req, res, next) => {
   next();
 };
 
-export const existsDeposit = async (idDeposit='') => {
+export const existsDeposit = async (idDeposit = "") => {
   const deposit = await Deposit.findById(idDeposit);
   if (!deposit) {
     throw new Error(`The deposit ${idDeposit} does not exist`);
