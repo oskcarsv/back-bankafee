@@ -15,7 +15,7 @@ const DepositSchema = Schema({
   },
   status: {
     type: String,
-    enum:["COMPLETED","PROCESSING","CANCELED"]
+    enum: ["COMPLETED", "PROCESSING", "CANCELED"],
   },
 });
 
