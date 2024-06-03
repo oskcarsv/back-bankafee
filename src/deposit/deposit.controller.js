@@ -14,3 +14,14 @@ export const postDeposit = async(req,res)=>{
         msg:"The deposit was made successfully",
         deposit});
 }
+
+export const getDeposits = async(req,res)=>{
+    const deposits = await Desposit.find();
+    res.status(200).json({deposits});
+}
+
+export const getMyDeposits = async(req,res)=>{
+    const {noAccount} = req.body;
+    const deposits = await Desposit.find({noDestinationAccount:noAccount});
+    res.status(200).json({deposits});
+}
