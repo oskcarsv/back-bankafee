@@ -126,3 +126,37 @@ export const existsCategoryProductByName = async (name) => {
     throw new Error(`The name ${name} already exists`);
   }
 };
+
+export const existsAccounts = async (account = '') => {
+  const baseCode = 'GT16BAAFGTQ';
+  const accountSearch = await Account.findOne({ noAccount: `${baseCode}${account}` })
+  if (!accountSearch) {
+    throw new Error(`The account ${account} not exists in the Database verify No. Account`
+    );
+  }
+}
+
+export const validateAmountTransfer = async (req,res,next) => {
+  const baseCode='GT16BAAFGTQ';
+  const {noOwnerAccount, amount}= req.body;
+  const accountSearch = await Account.findOne({
+    noAccount:baseCode+noOwnerAccount
+  })
+  if(accountSearch.amount<amount){
+    return res.status(400).json({
+      msg:'The amount is greater than what the account has'
+    })
+  }
+  next();
+}
+
+export const existsAccountDestination = async (req, res, next) => {
+  const { noDestinationAccount, DPI_DestinationAccount } = req.body;
+  const baseCode = 'GT16BAAFGTQ';
+  const accountDestination = await Account.findOne({ noAccount: baseCode + noDestinationAccount, DPI_Owner: DPI_DestinationAccount });
+
+  if (!accountDestination) {
+    return res.status(400).json({ msg: 'Destination Account not found, verify DPI Destination Account and No. Account destination' })
+  }
+  next();
+}
