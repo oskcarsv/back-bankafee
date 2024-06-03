@@ -137,26 +137,38 @@ export const existsAccounts = async (account = '') => {
   }
 }
 
-export const validateAmountTransfer = async (req,res,next) => {
-  const baseCode='GT16BAAFGTQ';
-  const {noOwnerAccount, amount}= req.body;
+export const validateAmountTransfer = async (req, res, next) => {
+  const baseCode = 'GT16BAAFGTQ';
+  const { noOwnerAccount, amount } = req.body;
   const accountSearch = await Account.findOne({
-    noAccount:baseCode+noOwnerAccount
+    noAccount: baseCode + noOwnerAccount
   })
-  if(accountSearch.amount<amount){
+  if (accountSearch.amount < amount) {
     return res.status(400).json({
-      msg:'The amount is greater than what the account has'
+      msg: 'The amount is greater than what the account has'
     })
   }
   next();
 }
 
-export const existsTransfer= async (idTransfer='') => {
+export const existsTransfer = async (idTransfer = '') => {
   const transfer = await Transfer.findById(idTransfer);
-  if(!transfer){
+  if (!transfer) {
     throw new Error(`The transfer ${idTransfer} does not exist`);
   }
+}
 
+export const existsMyAccount = async (req, res, next) => {
+  const {_id}= req.user;
+  const { noAccount } = req.body;
+  const baseCode = 'GT16BAAFGTQ';
+  const userLog = await User.findById(_id);
+  for (let account of userLog.no_Account) {
+    if(account != baseCode + noAccount){
+      return res.status(400).json({msg:'The account does not exist in the user'})
+    }
+  }
+  next();
 }
 
 export const existsAccountDestination = async (req, res, next) => {

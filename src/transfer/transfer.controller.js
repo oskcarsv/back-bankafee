@@ -47,6 +47,35 @@ export const postTransfer = async (req, res) => {
     return res.status(200).json({ msg: 'Transfer in process' });
 };
 
+export const getAllTransfers=async(req,res)=>{
+    const transfers = await Transfer.find();
+    return res.status(200).json({transfers});
+}
+
+export const getTransfersForAccount=async(req,res)=>{
+    const {noAccount} =req.body;
+    const transfers = await Transfer.find({noOwnerAccount:noAccount});
+    return res.status(200).json({transfers});
+}
+
+export const getMyTransfers=async(req,res)=>{
+    const {noAccount} =req.body;
+    const transfers = await Transfer.find({noOwnerAccount:noAccount});
+    return res.status(200).json({transfers});
+}
+
+export const getTransfersCompleted=async(req,res)=>{
+    const {noAccount} =req.body;
+    const transfers = await Transfer.find({noOwnerAccount:noAccount,status:'COMPLETED'});
+    return res.status(200).json({transfers});
+}
+
+export const getTransfersCanceled=async(req,res)=>{
+    const {noAccount} =req.body;
+    const transfers = await Transfer.find({noOwnerAccount:noAccount,status:'CANCELED'});
+    return res.status(200).json({transfers});
+}
+
 export const putTransfer=async(req,res)=>{
     const {description,idTransfer}= req.body;
     const transfer = await Transfer.findOne({_id:idTransfer,status:'COMPLETED'});
