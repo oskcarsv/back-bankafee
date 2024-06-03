@@ -8,6 +8,7 @@ import Account from "../account/account.model.js";
 import Product from "../products/product.model.js";
 
 import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
+import Transfer from "../transfer/transfer.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -148,6 +149,14 @@ export const validateAmountTransfer = async (req,res,next) => {
     })
   }
   next();
+}
+
+export const existsTransfer= async (idTransfer='') => {
+  const transfer = await Transfer.findById(idTransfer);
+  if(!transfer){
+    throw new Error(`The transfer ${idTransfer} does not exist`);
+  }
+
 }
 
 export const existsAccountDestination = async (req, res, next) => {
