@@ -11,17 +11,21 @@ export const changeAmount = async (noAccount, amount) => {
 }
 
 export const methodDeposit = async (objectDeposit) => {
-    setTimeout(() => (pendingDeposit.map((deposit) => {
-        if (deposit._id == objectDeposit._id) {
-            switch (deposit.status) {
+    setTimeout(
+        () => (pendingDeposit.map((deposit) => {//mapping the pending deposits
+        if (deposit._id == objectDeposit._id) {//checking if the deposit is equal to the object deposit
+            switch (deposit.status) {//checking the status of the deposit
                 case 'PROCESSING':
+                    //if the status is processing, the amount is added to the account and the status is changed to completed
                     changeAmount(deposit.noDestinationAccount, deposit.amount);
                     deposit.status = 'COMPLETED';
                     break;
                 case 'CANCELED':
+                    //if the status is canceled, the status is changed to canceled
                     deposit.status = 'CANCELED';
                     break;
             }
+            //saving the deposit and removing it from the pending deposit array
             deposit.save();
             pendingDeposit.splice(pendingDeposit.indexOf(deposit), 1);
         }
@@ -32,10 +36,11 @@ export const methodDeposit = async (objectDeposit) => {
 export const postDeposit = async (req, res) => {
     const { noDestinationAccount, amount } = req.body;
     const dateTime = new Date();
+    //creating a new deposit with the data received
     const deposit = new Desposit({ noDestinationAccount, amount, dateTime, status: 'PROCESSING' });
-    deposit.save();
-    pendingDeposit.push(deposit);
-    methodDeposit(deposit);
+    deposit.save();//saving the deposit
+    pendingDeposit.push(deposit);//adding the deposit to the pending deposit array
+    methodDeposit(deposit);//calling the method deposit to process the deposit
     res.status(201).json({
         msg: `Deposit created successfully the deposit ID is:${deposit._id}`,
     });
@@ -54,9 +59,11 @@ export const getMyDeposits = async (req, res) => {
 
 export const reverseDeposit = async (req, res) => {
     const { idDeposit } = req.body;
+    //checking if there are pending deposits
     if (pendingDeposit.length == 0) {
         res.status(404).json({ msg: 'Not exists pending deposits' });
     } else {
+        //if exists pending deposits, the deposit is searched and the status is changed to canceled
         pendingDeposit.map((deposit) => {
             if (deposit._id == idDeposit) {
                 deposit.status = 'CANCELED';
