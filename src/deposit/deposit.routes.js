@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDeposits, getMyDeposits, postDeposit } from "./deposit.controller.js";
+import { getDeposits, getMyDeposits, postDeposit, reverseDeposit } from "./deposit.controller.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { haveRol } from "../middlewares/validate-role.js";
 import { existsAccounts, existsMyAccount } from "../helpers/db-validator.js";
@@ -26,5 +26,11 @@ router.get('/myDeposits',[validateJWT,
     existsMyAccount,
     validateFields,
 ],getMyDeposits);
+
+router.delete('/',[validateJWT,
+    haveRol('ADMIN_ROLE'),
+    check('idDeposit','The account is required').not().isEmpty(),
+    validateFields,
+],reverseDeposit);
 
 export default router;

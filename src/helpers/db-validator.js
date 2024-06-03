@@ -9,6 +9,7 @@ import Product from "../products/product.model.js";
 
 import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
 import Transfer from "../transfer/transfer.model.js";
+import Deposit from "../deposit/deposit.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -174,6 +175,13 @@ export const existsMyAccount = async (req, res, next) => {
     }
   }
   next();
+};
+
+export const existsDeposit = async (idDeposit='') => {
+  const deposit = await Deposit.findById(idDeposit);
+  if (!deposit) {
+    throw new Error(`The deposit ${idDeposit} does not exist`);
+  }
 };
 
 export const existsAccountDestination = async (req, res, next) => {
