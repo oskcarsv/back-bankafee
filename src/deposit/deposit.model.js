@@ -14,8 +14,8 @@ const DepositSchema = Schema({
     default: Date.now,
   },
   status: {
-    type: Boolean,
-    default: true,
+    type: String,
+    enum:["COMPLETED","PROCESSING","CANCELED"]
   },
 });
 
