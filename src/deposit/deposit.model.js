@@ -14,7 +14,7 @@ const DepositSchema= Schema({
         default: Date.now
     },
     status:{
-        type:true,
+        type:Boolean,
         default: true
     }
 })
