@@ -8,6 +8,7 @@ import Account from "../account/account.model.js";
 import Product from "../products/product.model.js";
 
 import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
+import Transfer from "../transfer/transfer.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -125,4 +126,68 @@ export const existsCategoryProductByName = async (name) => {
   if (existsCategoryProduct) {
     throw new Error(`The name ${name} already exists`);
   }
+};
+
+export const existsAccounts = async (account = "") => {
+  const baseCode = "GT16BAAFGTQ";
+  const accountSearch = await Account.findOne({
+    noAccount: `${baseCode}${account}`,
+  });
+  if (!accountSearch) {
+    throw new Error(
+      `The account ${account} not exists in the Database verify No. Account`,
+    );
+  }
+};
+
+export const validateAmountTransfer = async (req, res, next) => {
+  const baseCode = "GT16BAAFGTQ";
+  const { noOwnerAccount, amount } = req.body;
+  const accountSearch = await Account.findOne({
+    noAccount: baseCode + noOwnerAccount,
+  });
+  if (accountSearch.amount < amount) {
+    return res.status(400).json({
+      msg: "The amount is greater than what the account has",
+    });
+  }
+  next();
+};
+
+export const existsTransfer = async (idTransfer = "") => {
+  const transfer = await Transfer.findById(idTransfer);
+  if (!transfer) {
+    throw new Error(`The transfer ${idTransfer} does not exist`);
+  }
+};
+
+export const existsMyAccount = async (req, res, next) => {
+  const { _id } = req.user;
+  const { noAccount } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  const userLog = await User.findById(_id);
+  for (const account of userLog.no_Account) {
+    if (account != baseCode + noAccount) {
+      return res
+        .status(400)
+        .json({ msg: "The account does not exist in the user" });
+    }
+  }
+  next();
+};
+
+export const existsAccountDestination = async (req, res, next) => {
+  const { noDestinationAccount, DPI_DestinationAccount } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  const accountDestination = await Account.findOne({
+    noAccount: baseCode + noDestinationAccount,
+    DPI_Owner: DPI_DestinationAccount,
+  });
+
+  if (!accountDestination) {
+    return res.status(400).json({
+      msg: "Destination Account not found, verify DPI Destination Account and No. Account destination",
+    });
+  }
+  next();
 };

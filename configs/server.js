@@ -23,6 +23,7 @@ import userRoutes from "../src/user/user.routes.js";
 import serviceRoutes from "../src/service-model/service-model.routes.js";
 
 import accountRoutes from "../src/account/account.routes.js";
+import transferRoutes from "../src/transfer/transfer.routes.js";
 class Server {
   constructor() {
     this.app = express();
@@ -35,6 +36,7 @@ class Server {
     this.authPath = "/bankafee/v1/auth";
     this.userPath = "/bankafee/v1/user";
     this.accountPath = "/bankafee/v1/account";
+    this.transferPath = "/bankafee/v1/transfer";
 
     this.middlewares();
     this.connectDB();
@@ -151,6 +153,7 @@ class Server {
     this.app.use(this.authPath, authRoutes);
     this.app.use(this.accountPath, accountRoutes);
     this.app.use(this.userPath, userRoutes);
+    this.app.use(this.transferPath, transferRoutes);
 
     this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes);
     this.app.use(this.serviceRoutesPath, serviceRoutes);
