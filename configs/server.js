@@ -58,9 +58,7 @@ class Server {
     const credentialsCreated = await User.findOne({ username: "ADMINB" });
 
     if (!credentialsCreated) {
-
       initialCredentials();
-
     } else {
       console.log("Credentials already created");
     }
