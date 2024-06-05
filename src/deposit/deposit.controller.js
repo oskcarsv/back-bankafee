@@ -1,7 +1,33 @@
 import Desposit from "./deposit.model.js";
 import Account from "../account/account.model.js";
+import User from '../user/user.model.js'
+import History from '../history/history.model.js'
 
 const pendingDeposit = [];
+
+const historyFind = async (OwnerDPI, acountOwner, numberAccountDestination, amount) =>{
+
+  const user = await User.findOne({no_Account: numberAccountDestination});
+
+  const history = new History({
+
+    DPIOwner: OwnerDPI,
+
+    no_Account_Owner: acountOwner,
+
+    DPIDestination: user.DPI,
+
+    no_Account_Destination: numberAccountDestination,
+
+    amount: amount,
+
+    description: "Credit | Created",
+
+  });
+
+  await history.save();
+
+}
 
 export const changeAmount = async (noAccount, amount) => {
   const baseCode = "GT16BAAFGTQ";
@@ -53,6 +79,7 @@ export const postDeposit = async (req, res) => {
   deposit.save(); // saving the deposit
   pendingDeposit.push(deposit); // adding the deposit to the pending deposit array
   methodDeposit(deposit); // calling the method deposit to process the deposit
+  historyFind(req.user.DPI, req.user.no_Account, noDestinationAccount, amount);
   res.status(201).json({
     msg: `Deposit created successfully the deposit ID is:${deposit._id}`,
   });
