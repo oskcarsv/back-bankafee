@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Vela\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"ADMINB\",\r\n    \"password\": \"ADMINB\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -844,6 +844,171 @@
 								"bankafee",
 								"v1",
 								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deposit",
+			"item": [
+				{
+					"name": "getAllDeposits",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczOTk3NjgsImV4cCI6MTcxNzQxMDU2OH0.FIBS1jGhy1Uk-0LTeh2TAewJeL6WTD7UqFmaRlz5Egg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/deposit/allDeposits",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"deposit",
+								"allDeposits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMyDeposits",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTc0MDE0MjIsImV4cCI6MTcxNzQxMjIyMn0.Zsd3UwCH1yWyQSz5xA-lL-glZGecr3MkX3Wpr5f4qYU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noAccount\":\"88994606798260780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/deposit/myDeposits",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"deposit",
+								"myDeposits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postDeposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTc0NDg1MjEsImV4cCI6MTcxNzQ1OTMyMX0.UiLWKOIDbGqMQ0gai9xrhdSUVaxMhse54kUTYG8Q7BQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noDestinationAccount\":\"88994606798260780\",\r\n    \"amount\":300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/deposit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeposit",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTc0NDg1MjEsImV4cCI6MTcxNzQ1OTMyMX0.UiLWKOIDbGqMQ0gai9xrhdSUVaxMhse54kUTYG8Q7BQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idDeposit\":\"665e2066d3512c92625041e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/deposit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"deposit"
 							]
 						}
 					},

@@ -18,6 +18,8 @@ import categoryServiceRoutes from "../src/category-service-model/category-servic
 import categoryProductsRoutes from "../src/categoryProduct/categoryProduct.routes.js";
 import productsRoutes from "../src/products/product.routes.js";
 import serviceRoutes from "../src/service-model/service-model.routes.js";
+import depositRoutes from "../src/deposit/deposit.routes.js";
+import accountRoutes from "../src/account/account.routes.js";
 import transferRoutes from "../src/transfer/transfer.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 
@@ -34,6 +36,7 @@ class Server {
     this.userPath = "/bankafee/v1/user";
     this.accountPath = "/bankafee/v1/account";
     this.transferPath = "/bankafee/v1/transfer";
+    this.depositPath = "/bankafee/v1/deposit";
 
     this.middlewares();
     this.connectDB();
@@ -75,7 +78,7 @@ class Server {
     this.app.use(this.accountPath, accountRoutes);
     this.app.use(this.userPath, userRoutes);
     this.app.use(this.transferPath, transferRoutes);
-
+    this.app.use(this.depositPath, depositRoutes);
     this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes);
     this.app.use(this.serviceRoutesPath, serviceRoutes);
 
