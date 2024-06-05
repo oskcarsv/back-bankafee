@@ -1,6 +1,7 @@
 import User from "../user/user.model.js";
 import Account from "../account/account.model.js";
 import Transfer from "./transfer.model.js";
+import History from '../history/history.model.js'
 // Object that will hold the transfer posts
 const pendingTransfers = {};
 
@@ -80,6 +81,25 @@ export const postTransfer = async (req, res) => {
       8000,
     );
   }
+
+  const history = new History({
+
+    DPIOwner: req.user.DPI,
+
+    no_Account_Owner: noOwnerAccount,
+
+    DPIDestination: DPI_DestinationAccount,
+
+    no_Account_Destination: noDestinationAccount,
+
+    amount: amount,
+
+    description: "Transfer | Created",
+
+  })
+
+  await history.save();
+
   return res.status(200).json({ msg: "Transfer in process" });
 };
 

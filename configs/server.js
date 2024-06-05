@@ -19,7 +19,6 @@ import categoryProductsRoutes from "../src/categoryProduct/categoryProduct.route
 import productsRoutes from "../src/products/product.routes.js";
 import serviceRoutes from "../src/service-model/service-model.routes.js";
 import depositRoutes from "../src/deposit/deposit.routes.js";
-import accountRoutes from "../src/account/account.routes.js";
 import transferRoutes from "../src/transfer/transfer.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 
