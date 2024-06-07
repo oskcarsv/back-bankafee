@@ -44,11 +44,10 @@ router.get(
 );
 
 router.get(
-  "/depositsPendings",
+  "/depositPendings",
   [
     validateJWT,
-    haveRol("ADMIN_ROLE"),
-    validateFields,
+    haveRol("ADMIN_ROLE")
   ],
   getPendingDeposits
 );
