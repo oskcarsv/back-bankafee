@@ -89,14 +89,26 @@ export const getAllTransfers = async (req, res) => {
 
 export const getTransfersForAccount = async (req, res) => {
   const { noAccount } = req.body;
-  const transfers = await Transfer.find({ noOwnerAccount: noAccount });
-  return res.status(200).json({ transfers });
+  const [transfersTo,    transfersReceive] = await Promise.all(
+    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED"}),
+    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED"})
+  );
+  return res.status(200).json({ 
+    transfersTo,
+    transfersReceive
+  });
 };
 
 export const getMyTransfers = async (req, res) => {
   const { noAccount } = req.body;
-  const transfers = await Transfer.find({ noOwnerAccount: noAccount });
-  return res.status(200).json({ transfers });
+  const [transfersTo,    transfersReceive] = await Promise.all([
+    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED"}),
+    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED"})
+  ]);
+  return res.status(200).json({ 
+    transfersTo,
+    transfersReceive
+  });
 };
 
 export const getTransfersCompleted = async (req, res) => {
