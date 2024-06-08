@@ -11,7 +11,7 @@ const DepositSchema = Schema({
   },
   dateTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   status: {
     type: String,

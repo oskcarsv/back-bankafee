@@ -124,10 +124,12 @@ router.delete(
     validateJWT,
     haveRol("ADMIN_ROLE", "USER_ROLE"),
     check("idTransfer", "The idTransfer is required").not().isEmpty(),
-    check("idTransfer", "The idTransfer is not valid").custom(existsTransferPending),
-    verifyNoAccountDeleteTransfer
+    check("idTransfer", "The idTransfer is not valid").custom(
+      existsTransferPending,
+    ),
+    verifyNoAccountDeleteTransfer,
   ],
-  reverseTransfer
+  reverseTransfer,
 );
 
 export default router;
