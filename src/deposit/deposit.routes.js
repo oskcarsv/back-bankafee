@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getDeposits,
   getMyDeposits,
+  getPendingDeposits,
   postDeposit,
   reverseDeposit,
 } from "./deposit.controller.js";
@@ -40,6 +41,12 @@ router.get(
     validateFields,
   ],
   getMyDeposits,
+);
+
+router.get(
+  "/depositPendings",
+  [validateJWT, haveRol("ADMIN_ROLE")],
+  getPendingDeposits,
 );
 
 router.delete(

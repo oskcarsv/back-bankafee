@@ -10,6 +10,7 @@ import Product from "../products/product.model.js";
 import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
 import Transfer from "../transfer/transfer.model.js";
 import Deposit from "../deposit/deposit.model.js";
+import HistoryPendingTransfer from "../deposit/depositPending.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -160,6 +161,30 @@ export const existsTransfer = async (idTransfer = "") => {
   if (!transfer) {
     throw new Error(`The transfer ${idTransfer} does not exist`);
   }
+};
+
+export const existsTransferPending = async (idTransfer = "") => {
+  const transfer = await HistoryPendingTransfer.find({
+    "transfer._id": idTransfer,
+  });
+  if (!transfer) {
+    throw new Error(`The transfer pending ${idTransfer} does not exist`);
+  }
+};
+
+export const verifyNoAccountDeleteTransfer = async (req, res, next) => {
+  const { _id } = req.user;
+  const { noOwnerAccount } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  const userLog = await User.findById(_id);
+  for (const account of userLog.no_Account) {
+    if (account != baseCode + noOwnerAccount) {
+      return res
+        .status(400)
+        .json({ msg: "The account does not exist in the user" });
+    }
+  }
+  next();
 };
 
 export const existsMyAccount = async (req, res, next) => {

@@ -7,6 +7,7 @@ import {
   getTransfersCanceled,
   getTransfersCompleted,
   getAllTransfers,
+  reverseTransfer,
 } from "./transfer.controller.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import {
@@ -14,7 +15,9 @@ import {
   existsAccounts,
   existsMyAccount,
   existsTransfer,
+  existsTransferPending,
   validateAmountTransfer,
+  verifyNoAccountDeleteTransfer,
 } from "../helpers/db-validator.js";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields.js";
@@ -113,6 +116,20 @@ router.put(
     validateFields,
   ],
   putTransfer,
+);
+
+router.delete(
+  "/",
+  [
+    validateJWT,
+    haveRol("ADMIN_ROLE", "USER_ROLE"),
+    check("idTransfer", "The idTransfer is required").not().isEmpty(),
+    check("idTransfer", "The idTransfer is not valid").custom(
+      existsTransferPending,
+    ),
+    verifyNoAccountDeleteTransfer,
+  ],
+  reverseTransfer,
 );
 
 export default router;

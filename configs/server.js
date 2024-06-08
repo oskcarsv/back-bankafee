@@ -12,7 +12,6 @@ import { dbConnection } from "./mongo.js";
 
 import User from "../src/user/user.model.js";
 
-import accountRoutes from "../src/account/account.routes.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import categoryServiceRoutes from "../src/category-service-model/category-service-model.routes.js";
 import categoryProductsRoutes from "../src/categoryProduct/categoryProduct.routes.js";
