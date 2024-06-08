@@ -5,18 +5,20 @@ import cron from 'node-cron'
 
 // This function is used to change the amount of an account when a deposit is made
 //its ejecuted a second, minute, hour, day of month,month, day of week in specific
-cron.schedule('* 0-59 * * * *', async () => {
+cron.schedule('0 0-59 * * * *', async () => {
   const listPending = await HistoryPending.find();
   const date = new Date().getMinutes();
   if (listPending.length >= 0) {
     listPending.map(async (pending) => {
-      if (pending.deposit.dateTime.getMinutes() + 30 > 60) {
-        if (pending.deposit.dateTime.getMinutes() + 30 - 60 == date) {
+      // checking if the time of the pending deposit is greater than the current time
+      if (pending.deposit.dateTime.getMinutes() + 1 > 60) {
+        // if the time of the pending deposit is greater than the current time, the difference is calculated
+        if (pending.deposit.dateTime.getMinutes() + 1 - 60 >= date) {
           await methodDeposit(pending.deposit);
           await HistoryPending.deleteOne(pending._id);
         }
       } else {
-        if (pending.deposit.dateTime.getMinutes() + 30 == date) {
+        if (pending.deposit.dateTime.getMinutes() + 1 >= date) {
           await methodDeposit(pending.deposit);
           await HistoryPending.deleteOne(pending._id);
         }
