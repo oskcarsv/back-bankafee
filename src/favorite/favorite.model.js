@@ -18,6 +18,11 @@ const favoriteSchema = mongoose.Schema({
             },
         },
     ],
+
+    status: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 export default mongoose.model("Favorite", favoriteSchema)
