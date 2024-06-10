@@ -22,7 +22,7 @@ export const getFavorite = async (req = request, res = response) => {
     }
 }
 
-const addFavorite = async (req, res) => {
+export const addFavorite = async (req, res) => {
     try {
         const { noOwnerAccount, favorites } = req.body;
 
@@ -47,7 +47,7 @@ const addFavorite = async (req, res) => {
     }
 };
 
-const deleteFavoriteByIdOwnerAccount = async (req, res) => {
+export const deleteFavoriteByIdOwnerAccount = async (req, res) => {
     try {
         const { noOwnerAccount } = req.params;
         const deletedFavorite = await Favorite.findOneAndDelete({ noOwnerAccount });
@@ -58,7 +58,7 @@ const deleteFavoriteByIdOwnerAccount = async (req, res) => {
     }
 };
 
-const deleteAllFavorites = async (req, res) => {
+export const deleteAllFavorites = async (req, res) => {
     try {
         await Favorite.deleteMany();
         res.status(200).json({ message: "All favorites deleted successfully" });
