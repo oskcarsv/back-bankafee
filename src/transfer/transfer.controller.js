@@ -1,9 +1,9 @@
-import cron from 'node-cron'
+import cron from "node-cron";
 import Account from "../account/account.model.js";
 import HistoryPending from "./transferPending.model.js";
 import Transfer from "./transfer.model.js";
 
-cron.schedule('0 0-59 * * * *', async () => {
+cron.schedule("0 0-59 * * * *", async () => {
   const listPending = await HistoryPending.find();
   const date = new Date().getMinutes();
   if (listPending.length >= 0) {
@@ -11,20 +11,20 @@ cron.schedule('0 0-59 * * * *', async () => {
       // checking if the time of the pending transfer is greater than the current time
       if (pending.transfer.dateTime.getMinutes() + 1 > 60) {
         // if the time of the pending transfer is greater than the current time, the difference is calculated
-        if (pending.transfer.dateTime.getMinutes() + 1  >= date) {
+        if (pending.transfer.dateTime.getMinutes() + 1 >= date) {
           await methodTransferCompleted(pending.transfer);
           await HistoryPending.deleteOne(pending._id);
         }
       } else {
         // if the time of the pending transfer is less than the current time, the difference is calculated
-        if (pending.transfer.dateTime.getMinutes() + 1  >= date) {
+        if (pending.transfer.dateTime.getMinutes() + 1 >= date) {
           await methodTransferCompleted(pending.transfer);
           await HistoryPending.deleteOne(pending._id);
         }
       }
     });
   }
-})
+});
 
 export const changeAmount = async (
   noOwnerAccount,
@@ -65,7 +65,7 @@ export const postTransfer = async (req, res) => {
     noDestinationAccount,
     DPI_DestinationAccount,
     amount,
-    description
+    description,
   } = req.body;
   const dateTime = new Date();
 
@@ -79,7 +79,9 @@ export const postTransfer = async (req, res) => {
     status: "PROCESSING",
   });
   await HistoryPending({ transfer: objectTransfer }).save();
-  return res.status(200).json({ msg: `Transfer in process, the ID transfer is: ${objectTransfer._id}` });
+  return res.status(200).json({
+    msg: `Transfer in process, the ID transfer is: ${objectTransfer._id}`,
+  });
 };
 
 export const getAllTransfers = async (req, res) => {
@@ -89,25 +91,25 @@ export const getAllTransfers = async (req, res) => {
 
 export const getTransfersForAccount = async (req, res) => {
   const { noAccount } = req.body;
-  const [transfersTo,    transfersReceive] = await Promise.all(
-    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED"}),
-    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED"})
+  const [transfersTo, transfersReceive] = await Promise.all(
+    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED" }),
+    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED" }),
   );
-  return res.status(200).json({ 
+  return res.status(200).json({
     transfersTo,
-    transfersReceive
+    transfersReceive,
   });
 };
 
 export const getMyTransfers = async (req, res) => {
   const { noAccount } = req.body;
-  const [transfersTo,    transfersReceive] = await Promise.all([
-    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED"}),
-    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED"})
+  const [transfersTo, transfersReceive] = await Promise.all([
+    Transfer.find({ noOwnerAccount: noAccount, status: "COMPLETED" }),
+    Transfer.find({ noDestinationAccount: noAccount, status: "COMPLETED" }),
   ]);
-  return res.status(200).json({ 
+  return res.status(200).json({
     transfersTo,
-    transfersReceive
+    transfersReceive,
   });
 };
 
@@ -135,7 +137,9 @@ export const putTransfer = async (req, res) => {
     _id: idTransfer,
     status: "COMPLETED",
   });
-  const pendingTransfer = await HistoryPending.findOne({ "transfer._id": idTransfer });
+  const pendingTransfer = await HistoryPending.findOne({
+    "transfer._id": idTransfer,
+  });
   let transferNew;
   if (!transfer && !pendingTransfer) {
     return res.status(400).json({ msg: "The transfer does not exist" });
@@ -183,7 +187,7 @@ export const reverseTransfer = async (req, res) => {
         const transfer = Transfer(pendingTransfer.transfer);
         await transfer.save();
         // saving the deposit in the pending deposit collection
-        await HistoryPending.deleteOne(pendingTransfer._id)
+        await HistoryPending.deleteOne(pendingTransfer._id);
         res.status(200).json({ msg: "Deposit canceled" });
       } else {
         // if the deposit does not exist, the count is increased to check if the deposit exists

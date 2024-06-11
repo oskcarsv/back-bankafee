@@ -164,7 +164,9 @@ export const existsTransfer = async (idTransfer = "") => {
 };
 
 export const existsTransferPending = async (idTransfer = "") => {
-  const transfer = await HistoryPendingTransfer.find({"transfer._id": idTransfer});
+  const transfer = await HistoryPendingTransfer.find({
+    "transfer._id": idTransfer,
+  });
   if (!transfer) {
     throw new Error(`The transfer pending ${idTransfer} does not exist`);
   }
@@ -183,7 +185,7 @@ export const verifyNoAccountDeleteTransfer = async (req, res, next) => {
     }
   }
   next();
-}
+};
 
 export const existsMyAccount = async (req, res, next) => {
   const { _id } = req.user;

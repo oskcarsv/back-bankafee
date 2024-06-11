@@ -45,11 +45,8 @@ router.get(
 
 router.get(
   "/depositPendings",
-  [
-    validateJWT,
-    haveRol("ADMIN_ROLE")
-  ],
-  getPendingDeposits
+  [validateJWT, haveRol("ADMIN_ROLE")],
+  getPendingDeposits,
 );
 
 router.delete(

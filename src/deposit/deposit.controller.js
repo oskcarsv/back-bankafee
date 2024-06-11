@@ -1,11 +1,11 @@
 import Deposit from "./deposit.model.js";
 import Account from "../account/account.model.js";
-import HistoryPending from './depositPending.model.js';
-import cron from 'node-cron'
+import HistoryPending from "./depositPending.model.js";
+import cron from "node-cron";
 
 // This function is used to change the amount of an account when a deposit is made
-//its ejecuted a second, minute, hour, day of month,month, day of week in specific
-cron.schedule('0 0-59 * * * *', async () => {
+// its ejecuted a second, minute, hour, day of month,month, day of week in specific
+cron.schedule("0 0-59 * * * *", async () => {
   const listPending = await HistoryPending.find();
   const date = new Date().getMinutes();
   if (listPending.length >= 0) {
@@ -25,7 +25,7 @@ cron.schedule('0 0-59 * * * *', async () => {
       }
     });
   }
-})
+});
 
 export const changeAmount = async (noAccount, amount) => {
   const baseCode = "GT16BAAFGTQ";
@@ -39,7 +39,7 @@ export const methodDeposit = async (objectDeposit) => {
   await changeAmount(objectDeposit.noDestinationAccount, objectDeposit.amount);
   const deposit = Deposit(objectDeposit);
   await deposit.save();
-  await HistoryPending.deleteOne(objectDeposit._id)
+  await HistoryPending.deleteOne(objectDeposit._id);
 };
 
 export const postDeposit = async (req, res) => {
@@ -48,29 +48,36 @@ export const postDeposit = async (req, res) => {
   const deposit = new Deposit({
     noDestinationAccount,
     amount,
-    status: "PROCESSING"
+    status: "PROCESSING",
   });
-  await HistoryPending({ deposit: deposit }).save();//saving the deposit in the pending deposit collection
+  await HistoryPending({ deposit }).save(); // saving the deposit in the pending deposit collection
   res.status(201).json({
     msg: `Deposit created successfully the deposit ID is:${deposit._id}`,
   });
 };
 
 export const getDeposits = async (req, res) => {
-  const deposits = await Deposit.find({ $or: { status: ['COMPLETED', 'CANCELED'] } });
+  const deposits = await Deposit.find({
+    $or: { status: ["COMPLETED", "CANCELED"] },
+  });
   res.status(200).json({ deposits });
 };
 
 export const getMyDeposits = async (req, res) => {
   const { noAccount } = req.body;
-  const deposits = await Deposit.find({ noDestinationAccount: noAccount, status: "COMPLETED" });
+  const deposits = await Deposit.find({
+    noDestinationAccount: noAccount,
+    status: "COMPLETED",
+  });
   res.status(200).json({ deposits });
 };
 
 export const getPendingDeposits = async (req, res) => {
-  const pendingDeposits = await HistoryPending.find({ "deposit.status": "PROCESSING" });
+  const pendingDeposits = await HistoryPending.find({
+    "deposit.status": "PROCESSING",
+  });
   res.status(200).json({ pendingDeposits });
-}
+};
 
 export const reverseDeposit = async (req, res) => {
   const { idDeposit } = req.body;
@@ -86,11 +93,11 @@ export const reverseDeposit = async (req, res) => {
         pendingDeposit.deposit.status = "CANCELED";
         const deposit = Deposit(pendingDeposit.deposit);
         await deposit.save();
-        await HistoryPending.deleteOne(pendingDeposit._id)
+        await HistoryPending.deleteOne(pendingDeposit._id);
         res.status(200).json({ msg: "Deposit canceled" });
-      }else{
+      } else {
         count++;
-        if(count>= pendingDeposit.length ){
+        if (count >= pendingDeposit.length) {
           res.status(404).json({ msg: "Deposit not found" });
         }
       }
