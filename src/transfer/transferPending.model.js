@@ -1,9 +1,9 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from "mongoose";
 
 const TransferPendingSchema = new Schema({
-    transfer: {
-        type: Object
-    }
+  transfer: {
+    type: Object,
+  },
 });
 
-export default model('TransferPending', TransferPendingSchema)
+export default model("TransferPending", TransferPendingSchema);

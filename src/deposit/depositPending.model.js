@@ -1,9 +1,9 @@
-import {Schema, model} from 'mongoose'
+import { Schema, model } from "mongoose";
 
 const DepositPendingSchema = Schema({
-    deposit:{
-        type:Object,
-    }
-})
+  deposit: {
+    type: Object,
+  },
+});
 
-export default model('DepositPending',DepositPendingSchema);
+export default model("DepositPending", DepositPendingSchema);
