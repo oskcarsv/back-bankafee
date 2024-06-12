@@ -28,10 +28,12 @@ router.post (
     "/",
     
     [
-        validateJWT,
+        // validateJWT,
         check("noOwnerAccount", "The Number of the Owner Account is required").not().isEmpty(),
         alias,
         check("noAccount", "The Number of the Account is required").not().isEmpty(),
     ]
     ,addFavorite
 )
+
+

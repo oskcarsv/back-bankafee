@@ -21,6 +21,7 @@ import depositRoutes from "../src/deposit/deposit.routes.js";
 import accountRoutes from "../src/account/account.routes.js";
 import transferRoutes from "../src/transfer/transfer.routes.js";
 import userRoutes from "../src/user/user.routes.js";
+import favoriteRoutes from "../src/favorite/favorite.routes.js";
 
 class Server {
   constructor() {
@@ -36,6 +37,7 @@ class Server {
     this.accountPath = "/bankafee/v1/account";
     this.transferPath = "/bankafee/v1/transfer";
     this.depositPath = "/bankafee/v1/deposit";
+    this.favoritePath = "/bankafee/v1/favorite";
 
     this.middlewares();
     this.connectDB();
@@ -80,6 +82,7 @@ class Server {
     this.app.use(this.depositPath, depositRoutes);
     this.app.use(this.categoryServiceRoutesPath, categoryServiceRoutes);
     this.app.use(this.serviceRoutesPath, serviceRoutes);
+    this.app.use(this.favoritePath, favoriteRoutes);
 
     this.app.use(this.productsPath, productsRoutes);
     this.app.use(this.categoryProductsPath, categoryProductsRoutes);
