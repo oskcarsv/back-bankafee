@@ -2,6 +2,8 @@ import { Router } from "express";
 
 import { check } from "express-validator";
 
+import { existsAccounts } from "../helpers/db-validator.js";
+
 import { validateFields } from "../middlewares/validate-fields.js";
 
 import {
@@ -9,7 +11,7 @@ import {
     addFavorite,
     deleteFavoriteByIdOwnerAccount,
     deleteAllFavorites
-}from "./favorite.controller.js";
+} from "./favorite.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -19,21 +21,23 @@ const router = Router();
 
 router.get(
     "/",
-    // [validateJWT],
+    // validateJWT,
     getFavorite,
-  );
+);
 
 
-router.post (
+router.post(
     "/",
-    
+
     [
         // validateJWT,
         check("noOwnerAccount", "The Number of the Owner Account is required").not().isEmpty(),
-        alias,
+        check("noOwnerAccount").custom(existsAccounts),
         check("noAccount", "The Number of the Account is required").not().isEmpty(),
+        check("noAccount").custom(existsAccounts),
+        validateFields
     ]
-    ,addFavorite
+    , addFavorite
 )
 
 
