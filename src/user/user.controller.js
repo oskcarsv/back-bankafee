@@ -199,7 +199,7 @@ export const listClientPetition = async (req, res = response) => {
   let { status } = req.body;
 
   if (status == "" || status == undefined) {
-    status = "APPROVED";
+    status = "IN-PROCESS";
   }
 
   const query = { status };
@@ -240,7 +240,7 @@ export const updateUser = async (req, res) => {
     if (rest.password != null) {
       const salt = bcryptjs.genSaltSync();
 
-      user.password = bcryptjs.hashSync(password, salt);
+      user.password = bcryptjs.hashSync(rest.password, salt);
 
       await user.save();
     }
@@ -249,7 +249,7 @@ export const updateUser = async (req, res) => {
       msg: `${req.user.username} you update your profile Successfully`,
     });
   } else {
-    const { _id, no_Account, DPI, password, role, keyword, status, ...rest } =
+    const { _id, no_Account, DPI, role, keyword, password, status, ...rest } =
       req.body;
 
     const userDPI = req.body.userDPI;

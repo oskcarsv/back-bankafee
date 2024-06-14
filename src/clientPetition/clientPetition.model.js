@@ -70,6 +70,19 @@ const ClientPetitionSchema = mongoose.Schema({
 
     },
 
+    typeAccount:{
+        type: String,
+        required: [true, 'Type Account is required']
+    },
+
+    aliasAccount: {
+            
+            type: String,
+            required: [true, 'Alias Account is required']
+    
+    },
+
+
     status: {
 
         type: String,

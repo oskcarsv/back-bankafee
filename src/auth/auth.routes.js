@@ -70,6 +70,10 @@ router.post(
 
         check("monthlyIncome").custom(miniumMonthyIncome),
 
+        check("aliasAccount", "Alias account is required").not().isEmpty(),
+        
+        check("typeAccount", "Type account is required").not().isEmpty(),
+
         validateFields
 
     ], clientPetition

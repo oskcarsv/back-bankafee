@@ -57,7 +57,7 @@ export const login = async (req, res) => {
 
 export const clientPetition = async (req, res) => {
 
-    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome } = req.body;
+    const { name, username, DPI, adress, email, phoneNumber, workPlace, monthlyIncome ,aliasAccount,typeAccount} = req.body;
 
     let notExist = false;
 
@@ -90,6 +90,8 @@ export const clientPetition = async (req, res) => {
         phoneNumber,
         workPlace,
         monthlyIncome,
+        aliasAccount,
+        typeAccount,
         status: 'IN-PROCESS'
     });
 
