@@ -8,6 +8,46 @@ import { createNoAccount } from "../account/account.controller.js";
 
 import Account from "../account/account.model.js";
 
+export const generateRandomWord = (word) =>{
+
+  const specialChars = '!@#$%^&*';
+
+  switch(word){
+    
+    case "password":
+
+      const password = Math.random()
+        .toString(36)
+        .substring(2, 12)
+        .toUpperCase();
+
+      const randomSpecialChar = specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+
+      const randomPassword = password + randomSpecialChar;
+
+      return randomPassword;
+
+      break;
+
+    case "keyword":
+
+      const randomKeyword = Math.random()
+        .toString(36)
+        .substring(2, 12)
+        .toUpperCase();
+
+      return randomKeyword;
+
+      break;
+
+    default:
+
+      break;
+
+  }
+
+}
+
 export const addUser = async (req, res) => {
   const {
     name,
@@ -31,83 +71,26 @@ export const addUser = async (req, res) => {
     searchAccount = await Account.findOne({ noAccount: no_Account });
   }
 
-  const arrayOptions = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-    "!",
-    "@",
-    "$",
-    "#",
-    "%",
-  ];
-
-  const arrayPassword = [];
-
-  const limit = 8;
-
-  for (let i = 0; i <= limit; i++) {
-    const randomIndex = Math.floor(Math.random() * arrayOptions.length);
-
-    const option = arrayOptions[randomIndex];
-
-    arrayPassword.push(option);
-  }
-
-  const passwordUnified = arrayPassword.join("");
-
-  const arrayKeyword = [];
-
-  const limit2 = 10;
-
-  for (let i = 0; i <= limit2; i++) {
-    const randomIndex = Math.floor(Math.random() * arrayOptions.length);
-
-    const option = arrayOptions[randomIndex];
-
-    arrayKeyword.push(option);
-  }
-
-  const keywordUnified = arrayKeyword.join("");
-
   const account = new Account({
     noAccount: no_Account,
     alias,
     type,
     DPI_Owner: DPI,
   });
+
+  const generatePasword = generateRandomWord("password");
+
+  let answer = true;
+
+  let generateKeyword = "";
+
+  do{
+    
+    generateKeyword = generateRandomWord("keyword");
+
+    answer = await  User.findOne({ keyword: generateKeyword });
+
+  }while(answer);
 
   const user = new User({
     name,
@@ -116,11 +99,11 @@ export const addUser = async (req, res) => {
     DPI,
     adress,
     email,
-    password: passwordUnified,
+    password: generatePasword,
     role: "USER_ROLE",
     phoneNumber,
     monthlyIncome,
-    keyword: keywordUnified,
+    keyword: generateKeyword,
     workPlace,
     status: "ACTIVE",
   });
