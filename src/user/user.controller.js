@@ -57,7 +57,7 @@ export const addUser = async (req, res) => {
   switch (!!petition) {
 
     case true:
-
+      
       const no_Account_New = createNoAccount();
 
       const searchAccount_New = await Account.findOne({ noAccount: no_Account_New });
