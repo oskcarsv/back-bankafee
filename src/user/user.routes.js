@@ -12,6 +12,7 @@ import {
   existentUsername_User,
   existentno_Petition,
   existsUserDPI_Number,
+  notExistentNo_Petition
 } from "../helpers/db-validator.js";
 
 import {
@@ -90,7 +91,9 @@ router.post(
     check(
       "alias",
       "Alias of the account is required and maximum 50 characters",
-    ).isLength({ max: 50 }),
+    ).isLength({ max: 50, min: 10 }),
+
+    check("clientNo_Petition").custom(notExistentNo_Petition),
 
     validateFields,
   ],

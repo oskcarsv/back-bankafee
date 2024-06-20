@@ -224,3 +224,13 @@ export const existsAccountDestination = async (req, res, next) => {
   }
   next();
 };
+
+export const notExistentNo_Petition = async (clientNo_Petition = "", next) => {
+  const notExistNo_Petition = await ClientPetition.findOne({ no_Petition: clientNo_Petition });
+
+  if (!notExistNo_Petition && clientNo_Petition != "") {
+    throw new Error(`The Client Petition: ${clientNo_Petition} not Exits`);
+  }
+
+  next();
+};
