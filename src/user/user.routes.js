@@ -25,6 +25,10 @@ import {
 } from "../helpers/data-validator.js";
 
 import {
+  specialMiddleware
+} from "../middlewares/specialMiddleware.js";
+
+import {
   addUser,
   deletePetition,
   deleteUser,
@@ -48,7 +52,7 @@ router.post(
 
     haveRol("ADMIN_ROLE"),
 
-    //check("clientNo_Petition").custom(notExistentNo_Petition),
+    specialMiddleware,
 
     validateFields,
   ],

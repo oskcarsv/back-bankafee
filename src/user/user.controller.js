@@ -8,12 +8,12 @@ import { createNoAccount } from "../account/account.controller.js";
 
 import Account from "../account/account.model.js";
 
-export const generateRandomWord = (word) =>{
+export const generateRandomWord = (word) => {
 
   const specialChars = '!@#$%^&*';
 
-  switch(word){
-    
+  switch (word) {
+
     case "password":
 
       const password = Math.random()
@@ -54,10 +54,8 @@ export const addUser = async (req, res) => {
 
   const petition = await ClientPetition.findOne({ no_Petition: clientNo_Petition });
 
-  console.log('Ayudaaaaa')
-
   switch (!!petition) {
-    
+
     case true:
 
       const no_Account_New = createNoAccount();
@@ -68,8 +66,6 @@ export const addUser = async (req, res) => {
         no_Account_New = createNoAccount();
         searchAccount_New = await Account.findOne({ noAccount: no_Account_New });
       }
-
-      console.log('Ayudaaaaa 3')
 
       const accountNew = new Account({
         noAccount: no_Account_New,
@@ -112,8 +108,14 @@ export const addUser = async (req, res) => {
 
       const saltNew = bcryptjs.genSaltSync();
       userNew.password = bcryptjs.hashSync(userNew.password, saltNew);
-
-      await userNew.save();
+      
+      try {
+        await userNew.save();
+      } catch (err) {
+        return res.status(400).json({
+          msg:'error'
+        });
+      }
 
       await accountNew.save();
 
@@ -125,9 +127,9 @@ export const addUser = async (req, res) => {
       res.status(200).json({
         msg: `${req.user.username} has been created the ${userNew.username} successfully, the User that you created his username is: ${userNew.username} and his password is ${savePasswordNew}`,
       });
-      
+
       break;
-    
+
     case false:
 
       const {
@@ -201,12 +203,12 @@ export const addUser = async (req, res) => {
       res.status(200).json({
         msg: `${req.user.username} has been created the ${user.username} successfully, the User that you created his username is: ${user.username} and his password is ${savePassword}`,
       });
-      
+
       break;
 
   }
 
-  
+
 };
 
 export const deleteUser = async (req, res) => {
