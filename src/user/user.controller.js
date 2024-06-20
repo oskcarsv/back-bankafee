@@ -54,7 +54,9 @@ export const addUser = async (req, res) => {
 
   const petition = await ClientPetition.findOne({ no_Petition: clientNo_Petition });
 
-  switch (petition) {
+  console.log('Ayudaaaaa')
+
+  switch (!!petition) {
     
     case true:
 
@@ -66,6 +68,8 @@ export const addUser = async (req, res) => {
         no_Account_New = createNoAccount();
         searchAccount_New = await Account.findOne({ noAccount: no_Account_New });
       }
+
+      console.log('Ayudaaaaa 3')
 
       const accountNew = new Account({
         noAccount: no_Account_New,
