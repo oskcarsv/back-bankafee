@@ -17,8 +17,8 @@ const router = Router();
 router.post(
   "/",
   [
-    validateJWT,
-    haveRol("ADMIN_ROLE"),
+    // validateJWT,
+    // haveRol("ADMIN_ROLE"),
     check("type", "Type of account is required").not().isEmpty(),
     // The function isIn() is used to check if the value is in the array
     check("type", "The account type must be SAVINGS, CURRENT, or CREDIT.").isIn(
@@ -36,7 +36,9 @@ router.post(
   postAccount,
 );
 
-router.get("/", [validateJWT, haveRol("ADMIN_ROLE")], getAccount);
+router.get("/", 
+  // [validateJWT, haveRol("ADMIN_ROLE")], 
+  getAccount);
 
 router.get(
   "/getById",
