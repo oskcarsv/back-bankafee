@@ -227,19 +227,5 @@ export const existsAccountDestination = async (req, res, next) => {
 
 
 export const existAccountFavorite = async (req, res, next) => {
-  try {
-    const { noOwnerAccount, favorites } = req.body;
 
-    // Buscar si ya existe una cuenta en la base de datos con el número de cuenta proporcionado
-    const existingAccount = await Account.findOne({ noAccount: { $in: favorites.map(favorite => favorite.noAccount) } });
-
-    if (existingAccount) {
-      return next(new Error("The account already exists"));
-    }
-
-    next();
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
 };

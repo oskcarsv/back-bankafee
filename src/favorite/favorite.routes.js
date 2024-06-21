@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { check } from "express-validator";
 
-import { existsAccounts, existAccountFavorite } from "../helpers/db-validator.js";
+import { existsAccounts} from "../helpers/db-validator.js";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
@@ -32,9 +32,8 @@ router.post(
     [
         // validateJWT,
         check("noOwnerAccount", "The Number of the Owner Account is required").not().isEmpty(),
-        // check("noAccount", "The Number of the favorite Account is required").not().isEmpty(),
-        check(["noOwnerAccount"], "error").custom(existAccountFavorite),
-        check(["noAccount"], "error").custom(existAccountFavorite),
+        check(["noOwnerAccount"], "error").custom(existsAccounts),
+        
         validateFields
     ]
     , addFavorite
