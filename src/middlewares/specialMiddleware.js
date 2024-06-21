@@ -17,8 +17,9 @@ import {
 
 export const specialMiddleware = async (req, res, next) => {
     const { clientNo_Petition } = req.body;
+    console.log('hola no estamos',clientNo_Petition);
 
-    if (clientNo_Petition != null || clientNo_Petition != '') {
+    if (clientNo_Petition != null || clientNo_Petition == '') {
         check("name", "Name is required").not().isEmpty(),
 
             check("name").custom(nameCharactersLimit),
@@ -63,7 +64,8 @@ export const specialMiddleware = async (req, res, next) => {
             "Alias of the account is required and maximum 50 characters"
         ).isLength({ max: 50, min: 10 });
     } else {
+        
         check("clientNo_Petition").custom(notExistentNo_Petition);
     }
-    next();
+    next()
 }

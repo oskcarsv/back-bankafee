@@ -52,9 +52,8 @@ router.post(
 
     haveRol("ADMIN_ROLE"),
 
-    specialMiddleware,
-
-    validateFields,
+    specialMiddleware
+  
   ],
   addUser,
 );

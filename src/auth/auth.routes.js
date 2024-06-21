@@ -6,7 +6,7 @@ import { login, clientPetition } from "./auth.controller.js";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
-import { existentUsername_User, existentUsername_ClientPetition, existentEmail_User, existentEmail_ClientPetition } from "../helpers/db-validator.js";
+import { existentUsername_User, existentUsername_ClientPetition, existentEmail_User, existentEmail_ClientPetition, existsUserDPI_Number } from "../helpers/db-validator.js";
 
 import { nameCharactersLimit ,usernameCharactersLimit, DPICharactersLimit, phoneNumberCharactersLimit, workPlaceCharactersLimit, miniumMonthyIncome} from "../helpers/data-validator.js";
 
@@ -47,6 +47,8 @@ router.post(
         check("username").custom(usernameCharactersLimit),
 
         check("DPI", "DPI is required").not().isEmpty(),
+
+        check("DPI").custom(existsUserDPI_Number),
 
         check("DPI").custom(DPICharactersLimit),
 
