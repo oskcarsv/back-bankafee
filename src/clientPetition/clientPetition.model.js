@@ -2,94 +2,69 @@ import { add } from "date-fns";
 import mongoose from "mongoose";
 
 const ClientPetitionSchema = mongoose.Schema({
+  no_Petition: {
+    type: Number,
+    required: [true, "Petition number is required"],
+    unique: true,
+  },
 
-    no_Petition: {
+  name: {
+    type: String,
+    required: [true, "Name is required"],
+  },
 
-        type: Number,
-        required: [true, 'Petition number is required'],
-        unique: true
+  username: {
+    type: String,
+    required: [true, "Username is required"],
+    unique: true,
+  },
 
-    },
+  DPI: {
+    type: Number,
+    required: [true, "DPI is required"],
+    unique: true,
+  },
 
-    name: {
+  adress: {
+    type: String,
+    required: [true, "Adress is required"],
+  },
 
-        type: String,
-        required: [true, 'Name is required']
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+    unique: true,
+  },
 
-    },
+  phoneNumber: {
+    type: String,
+    required: [true, "Phone number is required"],
+  },
 
-    username: {
+  workPlace: {
+    type: String,
+    required: [true, "Work place is required"],
+  },
 
-        type: String,
-        required: [true, 'Username is required'],
-        unique: true
+  monthlyIncome: {
+    type: Number,
+    required: [true, "Monthly income is required"],
+  },
 
-    },
+  typeAccount: {
+    type: String,
+    required: [true, "Type Account is required"],
+  },
 
-    DPI: {
+  aliasAccount: {
+    type: String,
+    required: [true, "Alias Account is required"],
+  },
 
-        type: Number,
-        required: [true, 'DPI is required'],
-        unique: true
-
-    },
-
-    adress: {
-
-        type: String,
-        required: [true, 'Adress is required']
-
-    },
-
-    email: {
-
-        type: String,
-        required: [true, 'Email is required'],
-        unique: true
-
-    },
-
-    phoneNumber: {
-
-        type: String,
-        required: [true, 'Phone number is required'],
-
-    },
-
-    workPlace: {
-
-        type: String,
-        required: [true, 'Work place is required']
-
-    },
-
-    monthlyIncome: {
-
-        type: Number,
-        required: [true, 'Monthly income is required']
-
-    },
-
-    typeAccount:{
-        type: String,
-        required: [true, 'Type Account is required']
-    },
-
-    aliasAccount: {
-            
-            type: String,
-            required: [true, 'Alias Account is required']
-    
-    },
-
-
-    status: {
-
-        type: String,
-        enum: ['IN-PROCESS', 'APPROVED', 'REJECTED'],
-
-    }
-
+  status: {
+    type: String,
+    enum: ["IN-PROCESS", "APPROVED", "REJECTED"],
+  },
 });
 
-export default mongoose.model('ClientPetition', ClientPetitionSchema)
+export default mongoose.model("ClientPetition", ClientPetitionSchema);

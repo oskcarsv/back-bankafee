@@ -8,20 +8,19 @@ import { createNoAccount } from "../account/account.controller.js";
 
 import Account from "../account/account.model.js";
 
-export const generateRandomWord = (word) =>{
+export const generateRandomWord = (word) => {
+  const specialChars = "!@#$%^&*";
 
-  const specialChars = '!@#$%^&*';
-
-  switch(word){
-    
+  switch (word) {
     case "password":
-
       const password = Math.random()
         .toString(36)
         .substring(2, 12)
         .toUpperCase();
 
-      const randomSpecialChar = specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+      const randomSpecialChar = specialChars.charAt(
+        Math.floor(Math.random() * specialChars.length),
+      );
 
       const randomPassword = password + randomSpecialChar;
 
@@ -30,7 +29,6 @@ export const generateRandomWord = (word) =>{
       break;
 
     case "keyword":
-
       const randomKeyword = Math.random()
         .toString(36)
         .substring(2, 12)
@@ -41,30 +39,30 @@ export const generateRandomWord = (word) =>{
       break;
 
     default:
-
       break;
-
   }
-
-}
+};
 
 export const addUser = async (req, res) => {
-
   const { clientNo_Petition } = req.body;
 
-  const petition = await ClientPetition.findOne({ no_Petition: clientNo_Petition });
+  const petition = await ClientPetition.findOne({
+    no_Petition: clientNo_Petition,
+  });
 
   switch (!!petition) {
-    
     case true:
-
       const no_Account_New = createNoAccount();
 
-      const searchAccount_New = await Account.findOne({ noAccount: no_Account_New });
+      const searchAccount_New = await Account.findOne({
+        noAccount: no_Account_New,
+      });
 
       while (searchAccount_New) {
         no_Account_New = createNoAccount();
-        searchAccount_New = await Account.findOne({ noAccount: no_Account_New });
+        searchAccount_New = await Account.findOne({
+          noAccount: no_Account_New,
+        });
       }
 
       const accountNew = new Account({
@@ -81,11 +79,9 @@ export const addUser = async (req, res) => {
       let generateKeywordNew = "";
 
       do {
-
         generateKeywordNew = generateRandomWord("keyword");
 
         answerNew = await User.findOne({ keyword: generateKeywordNew });
-
       } while (answerNew);
 
       const userNew = new User({
@@ -121,11 +117,10 @@ export const addUser = async (req, res) => {
       res.status(200).json({
         msg: `${req.user.username} has been created the ${userNew.username} successfully, the User that you created his username is: ${userNew.username} and his password is ${savePasswordNew}`,
       });
-      
-      break;
-    
-    case false:
 
+      break;
+
+    case false:
       const {
         name,
         username,
@@ -162,11 +157,9 @@ export const addUser = async (req, res) => {
       let generateKeyword = "";
 
       do {
-
         generateKeyword = generateRandomWord("keyword");
 
         answer = await User.findOne({ keyword: generateKeyword });
-
       } while (answer);
 
       const user = new User({
@@ -197,12 +190,9 @@ export const addUser = async (req, res) => {
       res.status(200).json({
         msg: `${req.user.username} has been created the ${user.username} successfully, the User that you created his username is: ${user.username} and his password is ${savePassword}`,
       });
-      
+
       break;
-
   }
-
-  
 };
 
 export const deleteUser = async (req, res) => {

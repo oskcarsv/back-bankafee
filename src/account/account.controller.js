@@ -45,16 +45,18 @@ export const getAccountById = async (req, res) => {
 };
 
 export const putAccount = async (req, res) => {
-  const {
-    alias,
-    noAccount
-  } = req.body;
-  const baseCode= "GT16BAAFGTQ";
-  await Account.findOneAndUpdate({noAccount:`${baseCode}${noAccount}`}, { alias });
-  const account = await Account.findOne({noAccount:`${baseCode}${noAccount}`});
+  const { alias, noAccount } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  await Account.findOneAndUpdate(
+    { noAccount: `${baseCode}${noAccount}` },
+    { alias },
+  );
+  const account = await Account.findOne({
+    noAccount: `${baseCode}${noAccount}`,
+  });
   res.status(200).json({
     msg: "Account has been updated successfully",
-    account
+    account,
   });
 };
 
@@ -64,6 +66,6 @@ export const deleteAccount = async (req, res) => {
   const account = await Account.findById(idAccount);
   res.status(200).json({
     msg: "Account has been deleted successfully",
-    account
+    account,
   });
 };

@@ -12,7 +12,7 @@ import {
   existentUsername_User,
   existentno_Petition,
   existsUserDPI_Number,
-  notExistentNo_Petition
+  notExistentNo_Petition,
 } from "../helpers/db-validator.js";
 
 import {
@@ -24,9 +24,7 @@ import {
   workPlaceCharactersLimit,
 } from "../helpers/data-validator.js";
 
-import {
-  specialMiddleware
-} from "../middlewares/specialMiddleware.js";
+import { specialMiddleware } from "../middlewares/specialMiddleware.js";
 
 import {
   addUser,
@@ -47,14 +45,7 @@ const router = Router();
 router.post(
   "/",
 
-  [
-    validateJWT,
-
-    haveRol("ADMIN_ROLE"),
-
-    specialMiddleware
-  
-  ],
+  [validateJWT, haveRol("ADMIN_ROLE"), specialMiddleware],
   addUser,
 );
 

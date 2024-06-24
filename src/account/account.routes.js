@@ -55,12 +55,12 @@ router.put(
   [
     validateJWT,
     haveRol("ADMIN_ROLE", "USER_ROLE"),
-    check('alias','The alias is required').not().isEmpty(),
+    check("alias", "The alias is required").not().isEmpty(),
     check(
       "alias",
       "Alias of the account is required and maximum 50 characters",
     ).isLength({ max: 50 }),
-    validateFields
+    validateFields,
   ],
   putAccount,
 );
