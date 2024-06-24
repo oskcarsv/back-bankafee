@@ -11,6 +11,7 @@ import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
 import Transfer from "../transfer/transfer.model.js";
 import Deposit from "../deposit/deposit.model.js";
 import HistoryPendingTransfer from "../deposit/depositPending.model.js";
+import PendingTransfer from "../transfer/transferPending.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -148,6 +149,11 @@ export const validateAmountTransfer = async (req, res, next) => {
   const accountSearch = await Account.findOne({
     noAccount: baseCode + noOwnerAccount,
   });
+  if (!accountSearch) {
+    return res.status(400).json({
+      msg: "your account does not exist",
+    });
+  }
   if (accountSearch.amount < amount) {
     return res.status(400).json({
       msg: "The amount is greater than what the account has",
@@ -240,3 +246,25 @@ export const notExistentNo_Petition = async (clientNo_Petition = "") => {
     );
   }
 };
+
+export const validateAmountMaxTransfer = async (req, res, next) => {
+  const { noOwnerAccount,amount } = req.body;
+  const actualDay = new Date();
+  const myPendingTrasfers = await PendingTransfer.find({
+    noOwnerAccount, dateTime: {
+      $gte: actualDay.getDate()
+    }
+  });
+  let total = 0;
+  for (let pendingTransfer of myPendingTrasfers) {
+    total += pendingTransfer.amount;
+  }
+  let totalAmount = total + amount;
+  if (totalAmount > 2000) {
+    return res.status(200).json({
+      msg: `The maximum amount of transfers per day is $2000.00, it has accumulated ${total}, it wants to transfer ${amount}. Its capacity is ${2000 - total}`
+    });
+  }else{
+    next()
+  }
+}

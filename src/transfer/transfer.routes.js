@@ -8,6 +8,7 @@ import {
   getTransfersCompleted,
   getAllTransfers,
   reverseTransfer,
+  getAllPendingTransfer,
 } from "./transfer.controller.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import {
@@ -16,6 +17,7 @@ import {
   existsMyAccount,
   existsTransfer,
   existsTransferPending,
+  validateAmountMaxTransfer,
   validateAmountTransfer,
   verifyNoAccountDeleteTransfer,
 } from "../helpers/db-validator.js";
@@ -30,7 +32,7 @@ router.post(
     validateJWT,
     haveRol("ADMIN_ROLE", "USER_ROLE"),
     check(["noOwnerAccount", "noDestinationAccount"], "error").custom(
-      existsAccounts,
+      existsAccounts
     ),
     validateAmountTransfer,
     check(
@@ -41,6 +43,7 @@ router.post(
       .isEmpty()
       .isLength({ max: 50 }),
     existsAccountDestination,
+    validateAmountMaxTransfer,
     validateFields,
   ],
   postTransfer,
@@ -50,6 +53,15 @@ router.get(
   "/",
   [validateJWT, haveRol("ADMIN_ROLE"), validateFields],
   getAllTransfers,
+);
+
+router.get( 
+  "/pending",
+  [
+    validateJWT,
+    haveRol("ADMIN_ROLE")
+  ],
+  getAllPendingTransfer,
 );
 
 router.get(

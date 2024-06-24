@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4dfebea1-9113-424b-a8cb-f4a357c6500e",
+		"_postman_id": "24d85814-34d3-4eb2-87b6-66f470a0eafd",
 		"name": "Bankafee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32786726"
@@ -846,6 +846,14 @@
 								"transfer"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllPendingTransfer",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
