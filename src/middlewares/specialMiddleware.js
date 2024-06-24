@@ -1,4 +1,4 @@
-import { check } from "express-validator";
+import { body, validationResult } from "express-validator";
 import {
     existentEmail_User,
     existentUsername_User,
@@ -16,56 +16,64 @@ import {
 } from "../helpers/data-validator.js";
 
 export const specialMiddleware = async (req, res, next) => {
+
     const { clientNo_Petition } = req.body;
     console.log('hola no estamos',clientNo_Petition);
 
-    if (clientNo_Petition != null || clientNo_Petition == '') {
-        check("name", "Name is required").not().isEmpty(),
+    let validations = [];
 
-            check("name").custom(nameCharactersLimit),
+    if (clientNo_Petition == '' || clientNo_Petition == undefined) {
 
-            check("username", "Username is required").not().isEmpty(),
+        await body('name', 'Name is required').notEmpty().run(req);
 
-            check("username").custom(existentUsername_User),
+        await body('name').custom(nameCharactersLimit).run(req);
 
-            check("username").custom(usernameCharactersLimit),
+        await body('username', 'Username is required').notEmpty().run(req);
 
-            check("DPI", "DPI is required").not().isEmpty(),
+        await body('username').custom(existentUsername_User).run(req);
 
-            check("DPI").custom(DPICharactersLimit),
+        await body('username').custom(usernameCharactersLimit).run(req);
 
-            check("DPI").custom(existsUserDPI_Number)
+        await body('DPI', 'DPI is required').notEmpty().run(req);
 
-        check("adress", "Adress is required").not().isEmpty(),
+        await body('DPI').custom(DPICharactersLimit).run(req);
 
-            check("email", "This is not a valid email").isEmail()
+        await body('DPI').custom(existsUserDPI_Number).run(req);
 
-        check("email").custom(existentEmail_User)
+        await body('adress', 'Adress is required').notEmpty().run(req);
 
-        check("phoneNumber", "Phone number is required").not().isEmpty()
+        await body('email', 'This is not a valid email').isEmail().run(req);
 
-        check("phoneNumber").custom(phoneNumberCharactersLimit)
+        await body('email').custom(existentEmail_User).run(req);
 
-        check("workPlace", "Work place is required").not().isEmpty()
+        await body('phoneNumber', 'Phone number is required').notEmpty().run(req);
 
-        check("workPlace").custom(workPlaceCharactersLimit)
+        await body('phoneNumber').custom(phoneNumberCharactersLimit).run(req);
 
-        check("monthlyIncome", "Monthly income is required").not().isEmpty(),
+        await body('workPlace', 'Work place is required').notEmpty().run(req);
 
-            check("monthlyIncome").custom(miniumMonthyIncome)
+        await body('workPlace').custom(workPlaceCharactersLimit).run(req);
 
-        check("type", "Type of account is required").not().isEmpty()
+        await body('monthlyIncome', 'Monthly income is required').notEmpty().run(req);
 
-        check("type", "The account type must be SAVINGS, CURRENT, or CREDIT.").isIn(
-            ["SAVINGS", "CURRENT", "CREDIT"],
-        )
-        check(
-            "alias",
-            "Alias of the account is required and maximum 50 characters"
-        ).isLength({ max: 50, min: 10 });
+        await body('monthlyIncome').custom(miniumMonthyIncome).run(req);
+
+        await body('type', 'Type of account is required').notEmpty().run(req);
+
+        await body('type').isIn(['SAVINGS', 'CURRENT', 'CREDIT']).withMessage('The account type must be SAVINGS, CURRENT, or CREDIT.').run(req);
+
+        await body('alias', 'Alias of the account is required and maximum 50 characters').isLength({ max: 50, min: 10 }).run(req);
+
     } else {
         
-        check("clientNo_Petition").custom(notExistentNo_Petition);
+        await body('clientNo_Petition').custom(notExistentNo_Petition).run(req);
+        
     }
+
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+        return res.status(400).json({error: error.array()});
+    }
+
     next()
 }
