@@ -35,23 +35,23 @@ router.post(
   [
     validateJWT,
     haveRol("ADMIN_ROLE", "USER_ROLE"),
-    check("amount").custom(maxTransfer),
-    accountTrasnferLimit,
-    properAccount,
     check(["noOwnerAccount", "noDestinationAccount"], "error").custom(
       existsAccounts
     ),
-    validateAmountTransfer,
+    check("amount").custom(maxTransfer),
     check(
       "description",
       "The description is mandatory and must be a maximum of 50 characters",
     )
-      .not()
-      .isEmpty()
-      .isLength({ max: 50 }),
+    .not()
+    .isEmpty()
+    .isLength({ max: 50 }),
+    validateFields,
+    properAccount,
+    accountTrasnferLimit,
+    validateAmountTransfer,
     existsAccountDestination,
     validateAmountMaxTransfer,
-    validateFields,
   ],
   postTransfer,
 );
