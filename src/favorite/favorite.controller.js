@@ -47,7 +47,7 @@ export const addFavorite = async (req, res) => {
     }
 };
 
-export const deleteFavoriteByIdOwnerAccount = async (req, res) => {
+export const deleteFavorite = async (req, res) => {
     try {
         const { noOwnerAccount } = req.params;
         const deletedFavorite = await Favorite.findOneAndDelete({ noOwnerAccount });
@@ -58,9 +58,9 @@ export const deleteFavoriteByIdOwnerAccount = async (req, res) => {
     }
 };
 
-export const deleteAllFavorites = async (req, res) => {
+export const clearFavorites = async (req, res) => {
     try {
-        await Favorite.deleteMany();
+        await Favorite.clear();
         res.status(200).json({ message: "All favorites deleted successfully" });
     } catch (error) {
         console.error(error);

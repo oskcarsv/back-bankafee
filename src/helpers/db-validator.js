@@ -224,8 +224,3 @@ export const existsAccountDestination = async (req, res, next) => {
   }
   next();
 };
-
-
-export const existAccountFavorite = async (req, res, next) => {
-
-};
