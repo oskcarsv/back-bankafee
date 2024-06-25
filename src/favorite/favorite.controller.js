@@ -50,8 +50,16 @@ export const addFavorite = async (req, res) => {
 export const deleteFavorite = async (req, res) => {
     try {
         const { noOwnerAccount } = req.params;
-        const deletedFavorite = await Favorite.findOneAndDelete({ noOwnerAccount });
-        res.status(200).json({ message: "Favorite deleted successfully", deletedFavorite });
+        const updatedFavorite = await Favorite.findOneAndUpdate(
+            { noOwnerAccount },
+            { $set: { status: false } },
+            { new: true }
+        );
+        if (updatedFavorite) {
+            res.status(200).json({ message: "Favorite deactivated successfully", updatedFavorite });
+        } else {
+            res.status(404).json({ message: "Favorite not found" });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });

@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { check } from "express-validator";
 
-import { existsAccounts } from "../helpers/db-validator.js";
+import { existsAccounts, uniqueAccountInFavorites } from "../helpers/db-validator.js";
 
 import { validateFields } from "../middlewares/validate-fields.js";
 
@@ -28,7 +28,6 @@ router.get(
 
 router.post(
     "/",
-
     [
         // validateJWT,
         check("noOwnerAccount", "The Number of the Owner Account is required").not().isEmpty(),
@@ -36,11 +35,11 @@ router.post(
         check("favorites.*.alias", "The Alias for the Account is required").not().isEmpty(),
         check(["noOwnerAccount"], "error").custom(existsAccounts),
         check(["favorites.*.noAccount"], "error").custom(existsAccounts),
-
+        // check("noOwnerAccount").custom((noOwnerAccount, { req }) => uniqueAccountInFavorites(noOwnerAccount, req.body.favorites)),
         validateFields
-    ]
-    , addFavorite
-)
+    ],
+    addFavorite
+);
 
 router.delete(
     "/clearFavorite/:noOwnerAccount",
@@ -50,6 +49,16 @@ router.delete(
     ]
     , clearFavorite
 );
+
+router.delete(
+    "/deleteFavorite/:noOwnerAccount",
+    [
+        // validateJWT,
+        validateFields
+    ]
+    , deleteFavorite
+);
+
 
 
 export default router;
