@@ -142,6 +142,8 @@ export const existsAccounts = async (account = "") => {
   }
 };
 
+
+
 export const validateAmountTransfer = async (req, res, next) => {
   const baseCode = "GT16BAAFGTQ";
   const { noOwnerAccount, amount } = req.body;

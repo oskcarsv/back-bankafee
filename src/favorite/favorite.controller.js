@@ -58,12 +58,23 @@ export const deleteFavorite = async (req, res) => {
     }
 };
 
-export const clearFavorites = async (req, res) => {
+export const clearFavorite = async (req, res) => {
+    const { noOwnerAccount } = req.params;
+
     try {
-        await Favorite.clear();
-        res.status(200).json({ message: "All favorites deleted successfully" });
+        const favoriteRecord = await Favorite.findOne({ noOwnerAccount });
+
+        if (favoriteRecord) {
+            // If the record exists, clear the favorites array
+            favoriteRecord.favorites = [];
+            await favoriteRecord.save();
+            res.status(200).json({ message: "Favorites cleared successfully." });
+        } else {
+            // If no record exists for the given noOwnerAccount, send a message
+            res.status(404).json({ message: "No favorites added." });
+        }
     } catch (error) {
-        console.error(error);
+        console.error("Error clearing favorites:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 };

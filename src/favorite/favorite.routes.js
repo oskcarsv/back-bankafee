@@ -10,7 +10,7 @@ import {
     getFavorite,
     addFavorite,
     deleteFavorite,
-    clearFavorites
+    clearFavorite
 } from "./favorite.controller.js";
 
 import { validateJWT } from "../middlewares/validate-jwt.js";
@@ -43,9 +43,12 @@ router.post(
 )
 
 router.delete(
-    "/:deleteFavorite",
-    // validateJWT,
-    deleteFavorite
+    "/clearFavorite/:noOwnerAccount",
+    [
+        // validateJWT,
+        validateFields
+    ]
+    , clearFavorite
 );
 
 
