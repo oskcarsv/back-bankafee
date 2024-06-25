@@ -21,9 +21,13 @@ import {
   validateAmountTransfer,
   verifyNoAccountDeleteTransfer,
 } from "../helpers/db-validator.js";
+import {
+  maxTransfer
+} from '../helpers/data-validator.js'
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields.js";
 import { haveRol } from "../middlewares/validate-role.js";
+import { accountTrasnferLimit, properAccount } from "../middlewares/validate-transfer.js";
 const router = Router();
 
 router.post(
@@ -31,6 +35,9 @@ router.post(
   [
     validateJWT,
     haveRol("ADMIN_ROLE", "USER_ROLE"),
+    check("amount").custom(maxTransfer),
+    accountTrasnferLimit,
+    properAccount,
     check(["noOwnerAccount", "noDestinationAccount"], "error").custom(
       existsAccounts
     ),
