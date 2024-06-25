@@ -36,9 +36,7 @@ router.post(
   postAccount,
 );
 
-router.get("/", 
-  [validateJWT, haveRol("ADMIN_ROLE")], 
-  getAccount);
+router.get("/", [validateJWT, haveRol("ADMIN_ROLE")], getAccount);
 
 router.get(
   "/getById",
