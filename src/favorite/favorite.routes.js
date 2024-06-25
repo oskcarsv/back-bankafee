@@ -21,7 +21,7 @@ const router = Router();
 
 router.get(
     "/",
-    // validateJWT,
+    validateJWT,
     getFavorite,
 );
 
@@ -29,13 +29,12 @@ router.get(
 router.post(
     "/",
     [
-        // validateJWT,
+        validateJWT,
         check("noOwnerAccount", "The Number of the Owner Account is required").not().isEmpty(),
         check("favorites.*.noAccount", "The Number of the Account is required").not().isEmpty(),
         check("favorites.*.alias", "The Alias for the Account is required").not().isEmpty(),
         check(["noOwnerAccount"], "error").custom(existsAccounts),
         check(["favorites.*.noAccount"], "error").custom(existsAccounts),
-        // check("noOwnerAccount").custom((noOwnerAccount, { req }) => uniqueAccountInFavorites(noOwnerAccount, req.body.favorites)),
         validateFields
     ],
     addFavorite
@@ -44,7 +43,7 @@ router.post(
 router.delete(
     "/clearFavorite/:noOwnerAccount",
     [
-        // validateJWT,
+        validateJWT,
         validateFields
     ]
     , clearFavorite
@@ -53,12 +52,10 @@ router.delete(
 router.delete(
     "/deleteFavorite/:noOwnerAccount",
     [
-        // validateJWT,
+        validateJWT,
         validateFields
     ]
     , deleteFavorite
 );
-
-
 
 export default router;
