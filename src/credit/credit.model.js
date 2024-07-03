@@ -52,8 +52,7 @@ const CreditSchema = new mongoose.Schema({
 
     startCreditDate: {
 
-        type: Date,
-        default: Date.now
+        type: Date
     },
 
     endCreditDate: {
@@ -63,8 +62,7 @@ const CreditSchema = new mongoose.Schema({
     status: {
 
         type: String,
-        enum: ["PENDING", "APPROVED", "REJECTED"],
-        default: "PENDING"
+        enum: ["IN-PROCESS", "APPROVED", "REJECTED",'PAID'],
 
     }
 

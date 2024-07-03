@@ -13,6 +13,7 @@ import {generateCreditPetition} from "./credit.controller.js";
 import {validationSalary} from "../middlewares/validate-credit.js";
 
 import {maxCredit} from "../helpers/data-validator.js";
+import { existsAccounts } from "../helpers/db-validator.js";
 
 const router = Router();
 
@@ -25,7 +26,11 @@ router.post(
 
         validateJWT,
 
+        haveRol("ADMIN_ROLE", "USER_ROLE"),
+
         check("no_Account", "The No Account is required").not().isEmpty(),
+
+        check('no_Account').custom(existsAccounts),
 
         check("creditAmount", "The Amount is required").not().isEmpty(),
 
@@ -37,9 +42,9 @@ router.post(
 
         haveRol("ADMIN_ROLE", "USER_ROLE"),
 
-        validationSalary,
+        validateFields,
 
-        validateFields
+        validationSalary
 
     ], generateCreditPetition
     
