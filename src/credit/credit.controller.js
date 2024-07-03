@@ -170,6 +170,12 @@ export const getCreditPetitions = async (req, res) => {
 
     let { stateCredit } = req.body;
 
+    if (stateCredit == "" || stateCredit == undefined) {
+
+        stateCredit = "IN-PROCESS";
+
+    }
+
     const query = {status : stateCredit};
 
     const [total, credit] = await Promise.all([
