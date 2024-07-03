@@ -20,7 +20,7 @@ const CreditSchema = new mongoose.Schema({
 
         type: String,
         required: [true, "Number of account is required"],
-        
+
     },
 
     creditAmount: {
@@ -38,6 +38,11 @@ const CreditSchema = new mongoose.Schema({
 
     },
 
+    interestRate:{
+        type: Number,
+        default:0.0
+    },
+
     reazon: {
 
         type: String,
@@ -45,11 +50,19 @@ const CreditSchema = new mongoose.Schema({
 
     },
 
+    startCreditDate: {
+
+        type: Date
+    },
+
+    endCreditDate: {
+        type: Date
+    },
+
     status: {
 
         type: String,
-        enum: ["PENDING", "APPROVED", "REJECTED"],
-        default: "PENDING"
+        enum: ["IN-PROCESS", "APPROVED", "REJECTED",'PAID'],
 
     }
 
