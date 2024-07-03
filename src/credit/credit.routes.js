@@ -8,12 +8,12 @@ import { validateJWT } from "../middlewares/validate-jwt.js";
 
 import { haveRol } from "../middlewares/validate-role.js";
 
-import {generateCreditPetition} from "./credit.controller.js";
+import {generateCreditPetition, getCreditPetitions} from "./credit.controller.js";
 
 import {validationSalary} from "../middlewares/validate-credit.js";
 
 import {maxCredit} from "../helpers/data-validator.js";
-import { existsAccounts } from "../helpers/db-validator.js";
+import { existsAccounts, validateCreditState } from "../helpers/db-validator.js";
 
 const router = Router();
 
@@ -48,6 +48,23 @@ router.post(
 
     ], generateCreditPetition
     
+)
+
+router.get(
+
+    "/",
+    [
+
+        validateJWT,
+
+        haveRol("ADMIN_ROLE", "USER_ROLE"),
+
+        check("stateCredit").custom(validateCreditState),
+
+        validateFields
+
+
+    ], getCreditPetitions
 )
 
 export default router;

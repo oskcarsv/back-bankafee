@@ -268,3 +268,19 @@ export const validateAmountMaxTransfer = async (req, res, next) => {
     next()
   }
 }
+
+export const validateCreditState = async (stateCredit = "") =>{
+
+  if (stateCredit != "" || stateCredit != undefined) {
+
+    const creditState = await Status.findOne({creditStatus: stateCredit});
+
+    if(!creditState){
+
+      throw new Error(`The Status ${stateCredit} not found in the database`);
+
+    }
+
+  }
+
+}

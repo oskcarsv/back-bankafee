@@ -166,16 +166,25 @@ export const generateCreditPetition = async (req, res) => {
 
 export const getCreditPetitions = async (req, res) => {
 
-}
+    const {limit, from} = req.query;
 
-export const getCreditPetitionsApproved = async (req, res) => {
+    let { stateCredit } = req.body;
 
-}
+    const query = {status : stateCredit};
 
-export const getCreditPetitionsInProcess = async (req, res) => {
+    const [total, credit] = await Promise.all([
 
-}
+        Credit.countDocuments(query),
+        Credit.find(query)
+              .skip(Number(from))
+              .limit(Number(limit))
+    ]);
 
-export const getCreditPetitionsPaid = async (req, res) => {
+    res.status(200).json({
+
+        msg: `The Petitions ${total} that have the status ${stateCredit} are:`,
+        credit
+
+    })
 
 }

@@ -13,6 +13,12 @@ const statusSchema = mongoose.Schema({
 
         type: String,
         enum: ['IN-PROCESS', 'APPROVED', 'REJECTED']
+    },
+
+    creditStatus: {
+
+        type: String,
+        enum: ["IN-PROCESS", "APPROVED", "REJECTED",'PAID']
     }
 
 });

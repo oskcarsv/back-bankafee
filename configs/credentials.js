@@ -83,5 +83,28 @@ export const initialCredentials = async () => {
   await APPROVED.save();
   await REJECTED.save();
 
+  // Credit Status
+
+  const IN_PROCESS_Credit = new Status({
+    creditStatus: "IN-PROCESS",
+  });
+
+  const APPROVED_Credit = new Status({
+    creditStatus: "APPROVED",
+  });
+
+  const REJECTED_Credit = new Status({
+    creditStatus: "REJECTED",
+  });
+
+  const PAID_Credit = new Status({
+    creditStatus: "PAID",
+  });
+
+  await IN_PROCESS_Credit.save();
+  await APPROVED_Credit.save();
+  await REJECTED_Credit.save();
+  await PAID_Credit.save();
+
   console.log("Credentials created");
 };
