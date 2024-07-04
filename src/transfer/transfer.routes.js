@@ -8,6 +8,7 @@ import {
   getTransfersCompleted,
   getAllTransfers,
   reverseTransfer,
+  getAllPendingTransfer,
 } from "./transfer.controller.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import {
@@ -16,12 +17,18 @@ import {
   existsMyAccount,
   existsTransfer,
   existsTransferPending,
+  validateAmountMaxTransfer,
   validateAmountTransfer,
   verifyNoAccountDeleteTransfer,
 } from "../helpers/db-validator.js";
+import { maxTransfer } from "../helpers/data-validator.js";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields.js";
 import { haveRol } from "../middlewares/validate-role.js";
+import {
+  accountTrasnferLimit,
+  properAccount,
+} from "../middlewares/validate-transfer.js";
 const router = Router();
 
 router.post(
@@ -32,7 +39,7 @@ router.post(
     check(["noOwnerAccount", "noDestinationAccount"], "error").custom(
       existsAccounts,
     ),
-    validateAmountTransfer,
+    check("amount").custom(maxTransfer),
     check(
       "description",
       "The description is mandatory and must be a maximum of 50 characters",
@@ -40,8 +47,12 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ max: 50 }),
-    existsAccountDestination,
     validateFields,
+    properAccount,
+    accountTrasnferLimit,
+    validateAmountTransfer,
+    existsAccountDestination,
+    validateAmountMaxTransfer,
   ],
   postTransfer,
 );
@@ -50,6 +61,12 @@ router.get(
   "/",
   [validateJWT, haveRol("ADMIN_ROLE"), validateFields],
   getAllTransfers,
+);
+
+router.get(
+  "/pending",
+  [validateJWT, haveRol("ADMIN_ROLE")],
+  getAllPendingTransfer,
 );
 
 router.get(

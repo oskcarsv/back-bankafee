@@ -43,3 +43,15 @@ export const miniumMonthyIncome = async (monthlyIncome = "") => {
     throw new Error("The Monthly Income must be greater than 100");
   }
 };
+
+export const maxTransfer = async (amount = "") => {
+  if (amount > 2000) {
+    throw new Error("The maximum amount to transfer is 2000");
+  }
+};
+
+export const maxCredit = async (creditAmount = 0) => {
+  if (creditAmount > 100000) {
+    throw new Error("The maximum amount to credit is 100000");
+  }
+};

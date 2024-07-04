@@ -21,6 +21,7 @@ import depositRoutes from "../src/deposit/deposit.routes.js";
 import accountRoutes from "../src/account/account.routes.js";
 import transferRoutes from "../src/transfer/transfer.routes.js";
 import userRoutes from "../src/user/user.routes.js";
+import creditRoutes from "../src/credit/credit.routes.js";
 import favoriteRoutes from "../src/favorite/favorite.routes.js";
 
 class Server {
@@ -38,6 +39,8 @@ class Server {
     this.transferPath = "/bankafee/v1/transfer";
     this.depositPath = "/bankafee/v1/deposit";
     this.favoritePath = "/bankafee/v1/favorite";
+
+    this.creditPath = "/bankafee/v1/credit";
 
     this.middlewares();
     this.connectDB();
@@ -86,6 +89,7 @@ class Server {
 
     this.app.use(this.productsPath, productsRoutes);
     this.app.use(this.categoryProductsPath, categoryProductsRoutes);
+    this.app.use(this.creditPath, creditRoutes);
   }
 }
 

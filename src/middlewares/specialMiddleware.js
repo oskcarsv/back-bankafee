@@ -17,7 +17,6 @@ import {
 
 export const specialMiddleware = async (req, res, next) => {
   const { clientNo_Petition } = req.body;
-  console.log("hola no estamos", clientNo_Petition);
 
   const validations = [];
 

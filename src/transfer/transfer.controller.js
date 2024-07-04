@@ -3,7 +3,7 @@ import Account from "../account/account.model.js";
 import HistoryPending from "./transferPending.model.js";
 import Transfer from "./transfer.model.js";
 
-cron.schedule("0 0-59 * * * *", async () => {
+cron.schedule("0 * 15 * * *", async () => {
   const listPending = await HistoryPending.find();
   const date = new Date().getMinutes();
   if (listPending.length >= 0) {
@@ -78,7 +78,7 @@ export const postTransfer = async (req, res) => {
     dateTime,
     status: "PROCESSING",
   });
-  await HistoryPending({ transfer: objectTransfer }).save();
+  await HistoryPending(objectTransfer).save();
   return res.status(200).json({
     msg: `Transfer in process, the ID transfer is: ${objectTransfer._id}`,
   });
@@ -87,6 +87,11 @@ export const postTransfer = async (req, res) => {
 export const getAllTransfers = async (req, res) => {
   const transfers = await Transfer.find();
   return res.status(200).json({ transfers });
+};
+
+export const getAllPendingTransfer = async (req, res) => {
+  const pendingTransfers = await HistoryPending.find();
+  return res.status(200).json({ pendingTransfers });
 };
 
 export const getTransfersForAccount = async (req, res) => {
