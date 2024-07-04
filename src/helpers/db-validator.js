@@ -144,6 +144,30 @@ export const existsAccounts = async (account = "") => {
   }
 };
 
+export const uniqueAccountInFavorites = async (noOwnerAccount, noAccount) => {
+  // Assuming Favorite is already imported or defined above this function
+  const favoriteRecord = await Favorite.findOne({ noOwnerAccount });
+
+  if (!favoriteRecord) {
+    throw new Error(
+      `No favorite record found for owner account: ${noOwnerAccount}`,
+    );
+  }
+
+  const accountExistsInFavorites = favoriteRecord.favorites.some(
+    (favorite) => favorite.noAccount === noAccount,
+  );
+
+  if (accountExistsInFavorites) {
+    throw new Error(
+      `The account number ${noAccount} already exists in favorites.`,
+    );
+  }
+
+  // If no error is thrown, the account number does not exist in favorites and is unique
+  return true;
+};
+
 export const validateAmountTransfer = async (req, res, next) => {
   const baseCode = "GT16BAAFGTQ";
   const { noOwnerAccount, amount } = req.body;
