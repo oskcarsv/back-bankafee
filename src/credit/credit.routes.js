@@ -13,7 +13,7 @@ import {generateCreditPetition, getCreditPetitions} from "./credit.controller.js
 import {validationSalary} from "../middlewares/validate-credit.js";
 
 import {maxCredit} from "../helpers/data-validator.js";
-import { existsAccounts, validateCreditState } from "../helpers/db-validator.js";
+import { existsAccounts, validateCreditState, validateExistsCreditInProcess, validateMyAccountCredit } from "../helpers/db-validator.js";
 
 const router = Router();
 
@@ -32,6 +32,8 @@ router.post(
 
         check('no_Account').custom(existsAccounts),
 
+        check('no_Account').custom(validateExistsCreditInProcess),
+
         check("creditAmount", "The Amount is required").not().isEmpty(),
 
         check("creditAmount").custom(maxCredit),
@@ -44,7 +46,9 @@ router.post(
 
         validateFields,
 
-        validationSalary
+        validationSalary,
+        
+        validateMyAccountCredit
 
     ], generateCreditPetition
     

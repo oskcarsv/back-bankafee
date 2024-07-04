@@ -72,7 +72,7 @@ export const generateCreditPetition = async (req, res) => {
 
             nameOwner: req.user.name,
             DPIOwner: req.user.DPI,
-            no_Account_Owner: no_Account,
+            no_Account_Owner:'GT16BAAFGTQ'+ no_Account,
             creditAmount: creditAmount,
             creditTime: time,
             reazon: reazon,
@@ -97,7 +97,7 @@ export const generateCreditPetition = async (req, res) => {
 
             nameOwner: userOwner.name,
             DPIOwner: userOwner.DPI,
-            no_Account_Owner: no_Account,
+            no_Account_Owner: 'GT16BAAFGTQ'+ no_Account,
             creditAmount: creditAmount,
             creditTime: time,
             reazon: reazon,

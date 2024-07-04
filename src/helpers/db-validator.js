@@ -12,6 +12,7 @@ import Transfer from "../transfer/transfer.model.js";
 import Deposit from "../deposit/deposit.model.js";
 import HistoryPendingTransfer from "../deposit/depositPending.model.js";
 import PendingTransfer from "../transfer/transferPending.model.js";
+import Credit from "../credit/credit.model.js";
 
 export const existentUsername_User = async (username = "") => {
   const existUsername = await User.findOne({ username });
@@ -248,7 +249,7 @@ export const notExistentNo_Petition = async (clientNo_Petition = "") => {
 };
 
 export const validateAmountMaxTransfer = async (req, res, next) => {
-  const { noOwnerAccount,amount } = req.body;
+  const { noOwnerAccount, amount } = req.body;
   const actualDay = new Date();
   const myPendingTrasfers = await PendingTransfer.find({
     noOwnerAccount, dateTime: {
@@ -264,18 +265,18 @@ export const validateAmountMaxTransfer = async (req, res, next) => {
     return res.status(200).json({
       msg: `The maximum amount of transfers per day is $2000.00, it has accumulated ${total}, it wants to transfer ${amount}. Its capacity is ${2000 - total}`
     });
-  }else{
+  } else {
     next()
   }
 }
 
-export const validateCreditState = async (stateCredit = "") =>{
+export const validateCreditState = async (stateCredit = "") => {
 
   if (stateCredit != "" || stateCredit != undefined) {
 
-    const creditState = await Status.findOne({creditStatus: stateCredit});
+    const creditState = await Status.findOne({ creditStatus: stateCredit });
 
-    if(!creditState){
+    if (!creditState) {
 
       throw new Error(`The Status ${stateCredit} not found in the database`);
 
@@ -283,4 +284,30 @@ export const validateCreditState = async (stateCredit = "") =>{
 
   }
 
+}
+
+export const validateExistsCreditInProcess = async (no_Account = '') => {
+  const creditInProcess = await Credit.findOne({
+    no_Account_Owner: `${'GT16BAAFGTQ' + no_Account}`
+    , status: "IN-PROCESS"
+  });
+
+  if (creditInProcess) {
+    throw new Error(`The account ${no_Account} already has a credit in process`);
+  }
+}
+
+export const validateMyAccountCredit = async (req, res, next) => {
+  const { _id } = req.user;
+  const { no_Account } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  const userLog = await User.findById(_id);
+  for (const account of userLog.no_Account) {
+    if (account != baseCode + no_Account) {
+      return res
+        .status(400)
+        .json({ msg: "The account does not exist in the user" });
+    }
+  }
+  next();
 }
