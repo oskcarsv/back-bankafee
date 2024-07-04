@@ -8,140 +8,191 @@ import { createNoAccount } from "../account/account.controller.js";
 
 import Account from "../account/account.model.js";
 
+export const generateRandomWord = (word) => {
+  const specialChars = "!@#$%^&*";
+
+  switch (word) {
+    case "password":
+      const password = Math.random()
+        .toString(36)
+        .substring(2, 12)
+        .toUpperCase();
+
+      const randomSpecialChar = specialChars.charAt(
+        Math.floor(Math.random() * specialChars.length),
+      );
+
+      const randomPassword = password + randomSpecialChar;
+
+      return randomPassword;
+
+      break;
+
+    case "keyword":
+      const randomKeyword = Math.random()
+        .toString(36)
+        .substring(2, 12)
+        .toUpperCase();
+
+      return randomKeyword;
+
+      break;
+
+    default:
+      break;
+  }
+};
+
 export const addUser = async (req, res) => {
-  const {
-    name,
-    username,
-    DPI,
-    adress,
-    email,
-    phoneNumber,
-    workPlace,
-    monthlyIncome,
-    type,
-    alias,
-  } = req.body;
+  const { clientNo_Petition } = req.body;
 
-  const no_Account = createNoAccount();
-
-  const searchAccount = await Account.findOne({ noAccount: no_Account });
-
-  while (searchAccount) {
-    no_Account = createNoAccount();
-    searchAccount = await Account.findOne({ noAccount: no_Account });
-  }
-
-  const arrayOptions = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-    "!",
-    "@",
-    "$",
-    "#",
-    "%",
-  ];
-
-  const arrayPassword = [];
-
-  const limit = 8;
-
-  for (let i = 0; i <= limit; i++) {
-    const randomIndex = Math.floor(Math.random() * arrayOptions.length);
-
-    const option = arrayOptions[randomIndex];
-
-    arrayPassword.push(option);
-  }
-
-  const passwordUnified = arrayPassword.join("");
-
-  const arrayKeyword = [];
-
-  const limit2 = 10;
-
-  for (let i = 0; i <= limit2; i++) {
-    const randomIndex = Math.floor(Math.random() * arrayOptions.length);
-
-    const option = arrayOptions[randomIndex];
-
-    arrayKeyword.push(option);
-  }
-
-  const keywordUnified = arrayKeyword.join("");
-
-  const account = new Account({
-    noAccount: no_Account,
-    alias,
-    type,
-    DPI_Owner: DPI,
+  const petition = await ClientPetition.findOne({
+    no_Petition: clientNo_Petition,
   });
 
-  const user = new User({
-    name,
-    username,
-    no_Account,
-    DPI,
-    adress,
-    email,
-    password: passwordUnified,
-    role: "USER_ROLE",
-    phoneNumber,
-    monthlyIncome,
-    keyword: keywordUnified,
-    workPlace,
-    status: "ACTIVE",
-  });
+  switch (!!petition) {
+    case true:
+      const no_Account_New = createNoAccount();
 
-  const savePassword = user.password;
+      const searchAccount_New = await Account.findOne({
+        noAccount: no_Account_New,
+      });
 
-  const salt = bcryptjs.genSaltSync();
-  user.password = bcryptjs.hashSync(user.password, salt);
+      while (searchAccount_New) {
+        no_Account_New = createNoAccount();
+        searchAccount_New = await Account.findOne({
+          noAccount: no_Account_New,
+        });
+      }
 
-  const updatePetitionStatus = await ClientPetition.findOneAndUpdate(
-    { username: user.username },
-    { status: "APPROVED" },
-  );
+      const accountNew = new Account({
+        noAccount: no_Account_New,
+        alias: petition.aliasAccount,
+        type: petition.typeAccount,
+        DPI_Owner: petition.DPI,
+      });
 
-  await user.save();
+      const generatePaswordNew = generateRandomWord("password");
 
-  await account.save();
+      let answerNew = true;
 
-  res.status(200).json({
-    msg: `${req.user.username} has been created the ${user.username} successfully, the User that you created his username is: ${user.username} and his password is ${savePassword}`,
-  });
+      let generateKeywordNew = "";
+
+      do {
+        generateKeywordNew = generateRandomWord("keyword");
+
+        answerNew = await User.findOne({ keyword: generateKeywordNew });
+      } while (answerNew);
+
+      const userNew = new User({
+        name: petition.name,
+        username: petition.username,
+        no_Account: no_Account_New,
+        DPI: petition.DPI,
+        adress: petition.adress,
+        email: petition.email,
+        password: generatePaswordNew,
+        role: "USER_ROLE",
+        phoneNumber: petition.phoneNumber,
+        monthlyIncome: petition.monthlyIncome,
+        keyword: generateKeywordNew,
+        workPlace: petition.workPlace,
+        status: "ACTIVE",
+      });
+
+      const savePasswordNew = userNew.password;
+
+      const saltNew = bcryptjs.genSaltSync();
+      userNew.password = bcryptjs.hashSync(userNew.password, saltNew);
+
+      await userNew.save();
+
+      await accountNew.save();
+
+      const updatePetitionStatus = await ClientPetition.findOneAndUpdate(
+        { no_Petition: clientNo_Petition },
+        { status: "APPROVED" },
+      );
+
+      res.status(200).json({
+        msg: `${req.user.username} has been created the ${userNew.username} successfully, the User that you created his username is: ${userNew.username} and his password is ${savePasswordNew}`,
+      });
+
+      break;
+
+    case false:
+      const {
+        name,
+        username,
+        DPI,
+        adress,
+        email,
+        phoneNumber,
+        workPlace,
+        monthlyIncome,
+        type,
+        alias,
+      } = req.body;
+
+      const no_Account = createNoAccount();
+
+      const searchAccount = await Account.findOne({ noAccount: no_Account });
+
+      while (searchAccount) {
+        no_Account = createNoAccount();
+        searchAccount = await Account.findOne({ noAccount: no_Account });
+      }
+
+      const account = new Account({
+        noAccount: no_Account,
+        alias,
+        type,
+        DPI_Owner: DPI,
+      });
+
+      const generatePasword = generateRandomWord("password");
+
+      let answer = true;
+
+      let generateKeyword = "";
+
+      do {
+        generateKeyword = generateRandomWord("keyword");
+
+        answer = await User.findOne({ keyword: generateKeyword });
+      } while (answer);
+
+      const user = new User({
+        name,
+        username,
+        no_Account,
+        DPI,
+        adress,
+        email,
+        password: generatePasword,
+        role: "USER_ROLE",
+        phoneNumber,
+        monthlyIncome,
+        keyword: generateKeyword,
+        workPlace,
+        status: "ACTIVE",
+      });
+
+      const savePassword = user.password;
+
+      const salt = bcryptjs.genSaltSync();
+      user.password = bcryptjs.hashSync(user.password, salt);
+
+      await user.save();
+
+      await account.save();
+
+      res.status(200).json({
+        msg: `${req.user.username} has been created the ${user.username} successfully, the User that you created his username is: ${user.username} and his password is ${savePassword}`,
+      });
+
+      break;
+  }
 };
 
 export const deleteUser = async (req, res) => {
@@ -199,7 +250,7 @@ export const listClientPetition = async (req, res = response) => {
   let { status } = req.body;
 
   if (status == "" || status == undefined) {
-    status = "APPROVED";
+    status = "IN-PROCESS";
   }
 
   const query = { status };
@@ -240,7 +291,7 @@ export const updateUser = async (req, res) => {
     if (rest.password != null) {
       const salt = bcryptjs.genSaltSync();
 
-      user.password = bcryptjs.hashSync(password, salt);
+      user.password = bcryptjs.hashSync(rest.password, salt);
 
       await user.save();
     }
@@ -249,7 +300,7 @@ export const updateUser = async (req, res) => {
       msg: `${req.user.username} you update your profile Successfully`,
     });
   } else {
-    const { _id, no_Account, DPI, password, role, keyword, status, ...rest } =
+    const { _id, no_Account, DPI, role, keyword, password, status, ...rest } =
       req.body;
 
     const userDPI = req.body.userDPI;
