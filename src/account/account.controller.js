@@ -45,13 +45,15 @@ export const getAccountById = async (req, res) => {
 };
 
 export const putAccount = async (req, res) => {
-  const {
-    // type,
-    alias,
-    idAccount,
-  } = req.body;
-  await Account.findByIdAndUpdate(idAccount, { alias });
-  const account = await Account.findById(idAccount);
+  const { alias, noAccount } = req.body;
+  const baseCode = "GT16BAAFGTQ";
+  await Account.findOneAndUpdate(
+    { noAccount: `${baseCode}${noAccount}` },
+    { alias },
+  );
+  const account = await Account.findOne({
+    noAccount: `${baseCode}${noAccount}`,
+  });
   res.status(200).json({
     msg: "Account has been updated successfully",
     account,
