@@ -21,7 +21,7 @@ import depositRoutes from "../src/deposit/deposit.routes.js";
 import accountRoutes from "../src/account/account.routes.js";
 import transferRoutes from "../src/transfer/transfer.routes.js";
 import userRoutes from "../src/user/user.routes.js";
-import creditRoutes from "../src/credit/credit.routes.js"; 
+import creditRoutes from "../src/credit/credit.routes.js";
 
 class Server {
   constructor() {

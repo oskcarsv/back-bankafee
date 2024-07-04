@@ -76,7 +76,7 @@ export const postTransfer = async (req, res) => {
     amount,
     description,
     dateTime,
-    status: "PROCESSING"
+    status: "PROCESSING",
   });
   await HistoryPending(objectTransfer).save();
   return res.status(200).json({

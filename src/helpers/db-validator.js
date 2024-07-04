@@ -252,50 +252,47 @@ export const validateAmountMaxTransfer = async (req, res, next) => {
   const { noOwnerAccount, amount } = req.body;
   const actualDay = new Date();
   const myPendingTrasfers = await PendingTransfer.find({
-    noOwnerAccount, dateTime: {
-      $gte: actualDay.getDate()
-    }
+    noOwnerAccount,
+    dateTime: {
+      $gte: actualDay.getDate(),
+    },
   });
   let total = 0;
-  for (let pendingTransfer of myPendingTrasfers) {
+  for (const pendingTransfer of myPendingTrasfers) {
     total += pendingTransfer.amount;
   }
-  let totalAmount = total + amount;
+  const totalAmount = total + amount;
   if (totalAmount > 2000) {
     return res.status(200).json({
-      msg: `The maximum amount of transfers per day is $2000.00, it has accumulated ${total}, it wants to transfer ${amount}. Its capacity is ${2000 - total}`
+      msg: `The maximum amount of transfers per day is $2000.00, it has accumulated ${total}, it wants to transfer ${amount}. Its capacity is ${2000 - total}`,
     });
   } else {
-    next()
+    next();
   }
-}
+};
 
 export const validateCreditState = async (stateCredit = "") => {
-
   if (stateCredit != "" || stateCredit != undefined) {
-
     const creditState = await Status.findOne({ creditStatus: stateCredit });
 
     if (!creditState) {
-
       throw new Error(`The Status ${stateCredit} not found in the database`);
-
     }
-
   }
+};
 
-}
-
-export const validateExistsCreditInProcess = async (no_Account = '') => {
+export const validateExistsCreditInProcess = async (no_Account = "") => {
   const creditInProcess = await Credit.findOne({
-    no_Account_Owner: `${'GT16BAAFGTQ' + no_Account}`
-    , status: "IN-PROCESS"
+    no_Account_Owner: `${"GT16BAAFGTQ" + no_Account}`,
+    status: "IN-PROCESS",
   });
 
   if (creditInProcess) {
-    throw new Error(`The account ${no_Account} already has a credit in process`);
+    throw new Error(
+      `The account ${no_Account} already has a credit in process`,
+    );
   }
-}
+};
 
 export const validateMyAccountCredit = async (req, res, next) => {
   const { _id } = req.user;
@@ -310,4 +307,4 @@ export const validateMyAccountCredit = async (req, res, next) => {
     }
   }
   next();
-}
+};

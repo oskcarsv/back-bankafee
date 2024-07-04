@@ -8,67 +8,69 @@ import { validateJWT } from "../middlewares/validate-jwt.js";
 
 import { haveRol } from "../middlewares/validate-role.js";
 
-import {generateCreditPetition, getCreditPetitions} from "./credit.controller.js";
+import {
+  generateCreditPetition,
+  getCreditPetitions,
+} from "./credit.controller.js";
 
-import {validationSalary} from "../middlewares/validate-credit.js";
+import { validationSalary } from "../middlewares/validate-credit.js";
 
-import {maxCredit} from "../helpers/data-validator.js";
-import { existsAccounts, validateCreditState, validateExistsCreditInProcess, validateMyAccountCredit } from "../helpers/db-validator.js";
+import { maxCredit } from "../helpers/data-validator.js";
+import {
+  existsAccounts,
+  validateCreditState,
+  validateExistsCreditInProcess,
+  validateMyAccountCredit,
+} from "../helpers/db-validator.js";
 
 const router = Router();
 
 router.post(
+  "/",
+  [
+    // Ayudame a testearlo segun yo si funciona pero igual
 
-    "/",
-    [
+    validateJWT,
 
-        //Ayudame a testearlo segun yo si funciona pero igual
+    haveRol("ADMIN_ROLE", "USER_ROLE"),
 
-        validateJWT,
+    check("no_Account", "The No Account is required").not().isEmpty(),
 
-        haveRol("ADMIN_ROLE", "USER_ROLE"),
+    check("no_Account").custom(existsAccounts),
 
-        check("no_Account", "The No Account is required").not().isEmpty(),
+    check("no_Account").custom(validateExistsCreditInProcess),
 
-        check('no_Account').custom(existsAccounts),
+    check("creditAmount", "The Amount is required").not().isEmpty(),
 
-        check('no_Account').custom(validateExistsCreditInProcess),
+    check("creditAmount").custom(maxCredit),
 
-        check("creditAmount", "The Amount is required").not().isEmpty(),
+    check("creditTime", "The Time is required").not().isEmpty(),
 
-        check("creditAmount").custom(maxCredit),
+    check("reazon", "The Reazon is required").not().isEmpty(),
 
-        check("creditTime", "The Time is required").not().isEmpty(),
+    haveRol("ADMIN_ROLE", "USER_ROLE"),
 
-        check("reazon", "The Reazon is required").not().isEmpty(),
+    validateFields,
 
-        haveRol("ADMIN_ROLE", "USER_ROLE"),
+    validationSalary,
 
-        validateFields,
-
-        validationSalary,
-        
-        validateMyAccountCredit
-
-    ], generateCreditPetition
-    
-)
+    validateMyAccountCredit,
+  ],
+  generateCreditPetition,
+);
 
 router.get(
+  "/",
+  [
+    validateJWT,
 
-    "/",
-    [
+    haveRol("ADMIN_ROLE", "USER_ROLE"),
 
-        validateJWT,
+    check("stateCredit").custom(validateCreditState),
 
-        haveRol("ADMIN_ROLE", "USER_ROLE"),
-
-        check("stateCredit").custom(validateCreditState),
-
-        validateFields
-
-
-    ], getCreditPetitions
-)
+    validateFields,
+  ],
+  getCreditPetitions,
+);
 
 export default router;
