@@ -33,6 +33,7 @@ router.post(
     check("name").custom(existsCategoryProductByName),
     check("name", "The name is required").not().isEmpty(),
     check("description", "The description is required").not().isEmpty(),
+    check("img", "The image is required").not().isEmpty(),
     validateFields,
   ],
   categoryProductPost,
