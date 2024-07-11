@@ -7,46 +7,33 @@ import {
 } from "../helpers/service-validators.js";
 
 export const createService = async (req, res) => {
-  upload.single("img")(req, res, async (err) => {
-    if (err) {
-      return res.status(500).json({
-        msg: "Here is an error uploading the image",
-        errors: err.message,
-      });
-    }
-    try {
-      const { tittle, description, company, discount, category } = req.body;
+  try {
+    const { description, enterpise } = req.body;
 
-      const discountCode = Math.random()
-        .toString(36)
-        .substring(2, 12)
-        .toUpperCase();
+    const discountCode = Math.random()
+      .toString(36)
+      .substring(2, 12)
+      .toUpperCase();
 
-      await tittleExists(tittle);
+    // await tittleExists(tittle);
 
-      const newService = new serviceModel({
-        tittle,
-        description,
-        company,
-        discount,
-        category,
-        discountCode,
-        img: req.file.path,
-      });
+    const newService = new serviceModel({
+      ...req.body,
+      discountCode,
+    });
 
-      await newService.save();
+    await newService.save();
 
-      res.status(201).json({
-        msg: "Service created successfully",
-        service: newService,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        msg: "Error creating service",
-        errors: error.message,
-      });
-    }
-  });
+    res.status(201).json({
+      msg: "Service created successfully",
+      service: newService,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: "Error creating service",
+      errors: error.message,
+    });
+  }
 };
 
 export const getServices = async (req, res) => {
