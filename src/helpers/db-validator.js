@@ -336,34 +336,25 @@ export const validateMyAccountCredit = async (req, res, next) => {
   next();
 };
 
-export const statusPetition = async (noPetition = "") =>{
-
+export const statusPetition = async (noPetition = "") => {
   const petition = await AccountPetition.findOne({ noPetition });
 
   if (!petition) {
     throw new Error(`The Petition ${noPetition} not found in the database`);
-  }else{
-
-    switch(petition.status){
-
+  } else {
+    switch (petition.status) {
       case "APPROVED":
-
         throw new Error(`The Petition ${noPetition} is already APPROVED`);
 
         break;
 
       case "REJECTED":
-
         throw new Error(`The Petition ${noPetition} is already REJECTED`);
 
         break;
 
       default:
-
         break;
-
     }
-
   }
-
-}
+};

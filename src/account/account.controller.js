@@ -32,14 +32,13 @@ export const postAccount = async (req, res) => {
 };
 
 export const acceptAccount = async (req, res) => {
+  const { noPetition } = req.body;
 
-  const {noPetition} = req.body;
+  const searchAccountPetition = await AccountPetition.findOne({ noPetition });
 
-  const searchAccountPetition = await AccountPetition.findOne({noPetition});
-  
   const noAccount = createNoAccount();
 
-  const searchAccount = await Account.findOne({noAccount});
+  const searchAccount = await Account.findOne({ noAccount });
 
   while (searchAccount) {
     noAccount = createNoAccount();
@@ -47,16 +46,17 @@ export const acceptAccount = async (req, res) => {
   }
 
   const account = new Account({
-
-    type: searchAccountPetition.type , 
-    DPI_Owner: searchAccountPetition.DPI_Owner ,
-    noAccount, 
-    alias: searchAccountPetition.alias, 
-    amount: searchAccountPetition.amount, 
-  
+    type: searchAccountPetition.type,
+    DPI_Owner: searchAccountPetition.DPI_Owner,
+    noAccount,
+    alias: searchAccountPetition.alias,
+    amount: searchAccountPetition.amount,
   });
 
-  const updateStatus = await AccountPetition.findOneAndUpdate({noPetition}, {status: "APPROVED"});
+  const updateStatus = await AccountPetition.findOneAndUpdate(
+    { noPetition },
+    { status: "APPROVED" },
+  );
 
   account.save();
 
@@ -64,20 +64,20 @@ export const acceptAccount = async (req, res) => {
     msg: "Account has been created successfully",
     account,
   });
-
-}
+};
 
 export const deniedAccountPetition = async (req, res) => {
+  const { noPetition } = req.body;
 
-  const {noPetition} = req.body;
-
-  const updateStatus = await AccountPetition.findOneAndUpdate({noPetition}, {status: "REJECTED"});
+  const updateStatus = await AccountPetition.findOneAndUpdate(
+    { noPetition },
+    { status: "REJECTED" },
+  );
 
   res.status(200).json({
     msg: `Petition with number: ${noPetition} has been rejected`,
   });
-
-}
+};
 
 export const getAccount = async (req, res) => {
   const listAccounts = await Account.find({ status: true });

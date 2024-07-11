@@ -8,12 +8,16 @@ import {
   putAccount,
   deleteAccount,
   acceptAccount,
-  deniedAccountPetition
+  deniedAccountPetition,
 } from "./account.controller.js";
 import { validateFields } from "../middlewares/validate-fields.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { DPICharactersLimit } from "../helpers/data-validator.js";
-import { existsUserDPI, existsAccount, statusPetition } from "../helpers/db-validator.js";
+import {
+  existsUserDPI,
+  existsAccount,
+  statusPetition,
+} from "../helpers/db-validator.js";
 import { haveRol } from "../middlewares/validate-role.js";
 const router = Router();
 
@@ -45,11 +49,12 @@ router.post(
   [
     validateJWT,
     haveRol("ADMIN_ROLE"),
-    check('noPetition', 'The noPetition is required').not().isEmpty(),
-    check('noPetition').custom(statusPetition),
-    validateFields
-  ],acceptAccount
-)
+    check("noPetition", "The noPetition is required").not().isEmpty(),
+    check("noPetition").custom(statusPetition),
+    validateFields,
+  ],
+  acceptAccount,
+);
 
 router.get("/", [validateJWT, haveRol("ADMIN_ROLE")], getAccount);
 
@@ -94,22 +99,19 @@ router.delete(
 );
 
 router.delete(
-
   "/denied",
   [
-
     validateJWT,
 
     haveRol("ADMIN_ROLE"),
 
-    check('noPetition', 'The noPetition is required').not().isEmpty(),
+    check("noPetition", "The noPetition is required").not().isEmpty(),
 
-    check('noPetition').custom(statusPetition),
+    check("noPetition").custom(statusPetition),
 
-    validateFields
-
-  ],deniedAccountPetition
-
-)
+    validateFields,
+  ],
+  deniedAccountPetition,
+);
 
 export default router;
