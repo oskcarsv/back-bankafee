@@ -5,6 +5,9 @@ import ClientPetition from "../clientPetition/clientPetition.model.js";
 import Status from "../status/status.model.js";
 
 import Account from "../account/account.model.js";
+
+import AccountPetition from "../accountPetition/accountPetition.model.js";
+
 import Product from "../products/product.model.js";
 
 import CategoryProduct from "../categoryProduct/categoryProduct.model.js";
@@ -332,3 +335,35 @@ export const validateMyAccountCredit = async (req, res, next) => {
   }
   next();
 };
+
+export const statusPetition = async (noPetition = "") =>{
+
+  const petition = await AccountPetition.findOne({ noPetition });
+
+  if (!petition) {
+    throw new Error(`The Petition ${noPetition} not found in the database`);
+  }else{
+
+    switch(petition.status){
+
+      case "APPROVED":
+
+        throw new Error(`The Petition ${noPetition} is already APPROVED`);
+
+        break;
+
+      case "REJECTED":
+
+        throw new Error(`The Petition ${noPetition} is already REJECTED`);
+
+        break;
+
+      default:
+
+        break;
+
+    }
+
+  }
+
+}
