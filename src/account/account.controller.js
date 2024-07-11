@@ -45,7 +45,7 @@ export const getAccountById = async (req, res) => {
 };
 
 export const getAccountUser = async (req, res) => {
-  const account = await Account.findOne({ DPI_Owner: req.user.DPI });
+  const account = await Account.find({ DPI_Owner: req.user.DPI });
 
   res.status(200).json({
     msg: "Account has been found successfully",
