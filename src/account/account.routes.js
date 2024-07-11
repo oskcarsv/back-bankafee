@@ -4,6 +4,7 @@ import {
   postAccount,
   getAccount,
   getAccountById,
+  getAccountUser,
   putAccount,
   deleteAccount,
 } from "./account.controller.js";
@@ -37,6 +38,8 @@ router.post(
 );
 
 router.get("/", [validateJWT, haveRol("ADMIN_ROLE")], getAccount);
+
+router.get("/user", [validateJWT, haveRol("USER_ROLE")], getAccountUser);
 
 router.get(
   "/getById",
