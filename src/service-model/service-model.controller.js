@@ -10,7 +10,7 @@ export const createService = async (req, res) => {
   upload.single("img")(req, res, async (err) => {
     if (err) {
       return res.status(500).json({
-        msg: "Error uploading image",
+        msg: "Here is an error uploading the image",
         errors: err.message,
       });
     }
