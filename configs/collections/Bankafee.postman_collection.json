@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "24d85814-34d3-4eb2-87b6-66f470a0eafd",
+		"_postman_id": "8fd02ac3-4913-472a-a1fa-49984ec62871",
 		"name": "Bankafee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32786726"
+		"_exporter_id": "32787267"
 	},
 	"item": [
 		{
@@ -24,15 +24,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/auth/login",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/auth/login",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -50,7 +48,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mario\",\r\n    \"username\": \"marito\",\r\n    \"DPI\": 9687542160101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1002\r\n}",
+							"raw": "{\r\n    \"name\": \"Mario\",\r\n    \"username\": \"marito\",\r\n    \"DPI\": 9687542160101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1002,\r\n    \"aliasAccount\": \"Paco\",\r\n    \"typeAccount\":\"CREDIT\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,15 +56,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/auth/clientPetition",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/auth/clientPetition",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -89,12 +85,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNTY2NDMsImV4cCI6MTcxNzM2NzQ0M30.YjK0gPB5TdRZ88QK15nCW4hw5udDrE2hS80HedE2X4k"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4ODkxYmIwNWQxMDFjNjY1YWUyNTgiLCJpYXQiOjE3MjAyMjQ5MjQsImV4cCI6MTcyMDIzNTcyNH0.6Hc4c3zbV_IJx4vEH5qZTdDROJ00EB99t15Pwl3L3Do"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Kenneth\",\r\n    \"username\": \"Vela\",\r\n    \"DPI\": 3555783690101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"Kenneth@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1000,\r\n    \"type\":\"CREDIT\",\r\n    \"amount\":150,\r\n    \"alias\":\"Kenneth credit\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Kenneth\",\r\n    \"username\": \"Vela\",\r\n    \"DPI\": 3555783690101,\r\n    \"adress\": \"Mixco, Guatemala\",\r\n    \"email\": \"Kenneth@gmail.com\",\r\n    \"phoneNumber\": \"+502 49785632\",\r\n    \"workPlace\": \"Fundación Kinal\",\r\n    \"monthlyIncome\": 1000,\r\n    \"type\":\"CREDIT\",\r\n    \"amount\":150,\r\n    \"alias\":\"Kenneth Account Credit 1\"\r\n}\r\n\r\n/*{\r\n    \"clientNo_Petition\": 6347822949890173\r\n}*/",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,15 +98,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/user",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/user",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -168,7 +162,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczODI1NTIsImV4cCI6MTcxNzM5MzM1Mn0.LKt2kO7-D0B9sLSsTm62sXrPFNjrUuuGdkGKRs6xjfA"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA2Nzk5MDQsImV4cCI6MTcyMDY5MDcwNH0.yDTs3XiA3YJESJw6v8XqJOA1XDi-dw4yIawykLzV6gA"
 							}
 						],
 						"body": {
@@ -181,15 +175,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/user/admin",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/user/admin",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -207,19 +199,17 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MmQ2MWE1YjE3MzQ1NWRmODU0MjgiLCJpYXQiOjE3MTcxMzY4NzQsImV4cCI6MTcxNzE0NzY3NH0.H122xJ5i_5Plj8s8ft7pHWCfpAgkVePTRSz0vdWndnQ"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA2Nzk5MDQsImV4cCI6MTcyMDY5MDcwNH0.yDTs3XiA3YJESJw6v8XqJOA1XDi-dw4yIawykLzV6gA"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/user",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/user",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -236,12 +226,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2VkZTdjZmFhODQ1OGRmNzFjYTAiLCJpYXQiOjE3MTcxNjY0MzksImV4cCI6MTcxNzE3NzIzOX0.FNlO7DgngjixqFDIRtYUVJVG5VhgUl2_aNFU4BEoVy4"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njc5ZWY1NDQwMGFhNDIwMjNjZmE3MTIiLCJpYXQiOjE3MTkyNjcxNzgsImV4cCI6MTcxOTI3Nzk3OH0.MswfXp7xT0di30d4E_CcAHNAVC_4nrfFTdwsUEhxty0"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    //\"userDPI\": 9785412580101,\r\n    \"name\": \"Jorge\"\r\n}",
+							"raw": "{\r\n    //\"userDPI\": 9785412580101,\r\n    \"password\": \"12Abril2005!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,12 +272,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MmQ2MWE1YjE3MzQ1NWRmODU0MjgiLCJpYXQiOjE3MTcxMzYwNzAsImV4cCI6MTcxNzE0Njg3MH0.6NSiE4yxVZG9DPgmZrt-VbG5n6GBSOyGnhN0wXQf7Is"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njc0NmNjNzIyMzZlYmFlNTQzYzU2OTkiLCJpYXQiOjE3MTg5MDYyNjksImV4cCI6MTcxODkxNzA2OX0.MFnFQ-OpfROxFrzjBQMFMowC2DQtdIYeFaOe-Gs-eBk"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\": \"APPROVED\"\r\n}",
+							"raw": "{\r\n    //\"status\": \"APPROVED\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,12 +356,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVjYzlmNTQ0NWIwZTBjYzZjZTYwMWMiLCJpYXQiOjE3MTczNTcxMzQsImV4cCI6MTcxNzM2NzkzNH0.aRdRtRY7JlG371p5-ePWjUO9WFTXJs1akDwL1O23Vh0"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njc5ZWI4MDQwMGFhNDIwMjNjZmE2YmEiLCJpYXQiOjE3MTkyNjY4MTQsImV4cCI6MTcxOTI3NzYxNH0.cHeSNJQcgQwaXRSwm80uGqVHFy9Ks5PXQR-s4yohnFI"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\":\"CURRENT\",\r\n    \"DPI_Owner\":\"9785412580101\",\r\n    \"alias\":\"Hola\",\r\n    \"amount\": 150\r\n}",
+							"raw": "{\r\n    \"type\":\"SAVINGS\",\r\n    \"DPI_Owner\":\"3555783690101\",\r\n    \"alias\":\"Keneth Account Saving 1\",\r\n    \"amount\": 7500\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,6 +388,45 @@
 					"response": []
 				},
 				{
+					"name": "Accept Petition",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4ODkxYmIwNWQxMDFjNjY1YWUyNTgiLCJpYXQiOjE3MjA3MzkwNDksImV4cCI6MTcyMDc0OTg0OX0.ltVG37RbkYvkpj1m4KC77PScUG1Zf0rM0BYqrT0aLmo"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noPetition\":844085328720299\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getAccont",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -407,7 +436,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNTY2NDMsImV4cCI6MTcxNzM2NzQ0M30.YjK0gPB5TdRZ88QK15nCW4hw5udDrE2hS80HedE2X4k"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA2NTYzOTgsImV4cCI6MTcyMDY2NzE5OH0.55Ljsz68xYWDMj-7qOovWZ3_j6H1dLyz6mS6euRKf7c"
 							}
 						],
 						"body": {
@@ -420,19 +449,57 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/account",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/account",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
 								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOwnAccount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA2NzI0NzcsImV4cCI6MTcyMDY4MzI3N30.QLwVoGAZBmhqzWlN6OVS-m17nir2dJ6HsRzkz2gkv9U"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-bankafee-phi.vercel.app/bankafee/v1/account/user",
+							"protocol": "https",
+							"host": [
+								"back-bankafee-phi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								"user"
 							]
 						}
 					},
@@ -461,15 +528,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3004/bankafee/v1/account/getById",
-							"protocol": "http",
+							"raw": "https://back-bankafee.vercel.app/bankafee/v1/account/getById",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"back-bankafee",
+								"vercel",
+								"app"
 							],
-							"port": "3004",
 							"path": [
 								"bankafee",
 								"v1",
@@ -557,6 +622,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Deny Petition",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4ODkxYmIwNWQxMDFjNjY1YWUyNTgiLCJpYXQiOjE3MjA3MzkwNDksImV4cCI6MTcyMDc0OTg0OX0.ltVG37RbkYvkpj1m4KC77PScUG1Zf0rM0BYqrT0aLmo"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noPetition\":485786966387247\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/account/denied",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"account",
+								"denied"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -570,12 +674,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhMDk3NGQ3ODIwOTY5YTlhYmZiYmMiLCJpYXQiOjE3MTczNjc1MjUsImV4cCI6MTcxNzM3ODMyNX0.-Z4Uw3qYOqT-S0ap_VAAOGqLTpQqwaJjF7-0Fi1ailY"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njc5ZWUyNTQwMGFhNDIwMjNjZmE2ZjciLCJpYXQiOjE3MTkyNzk4NjcsImV4cCI6MTcxOTI5MDY2N30.NUsuR32_wBfCdmw8G2nSX6PvWqs2dDQdJhphkf82rLU"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \"noOwnerAccount\":\"08214470308753471\",\r\n    \"noDestinationAccount\": \"88994606798260780\",\r\n    \"DPI_DestinationAccount\": 3555783690101,\r\n    \"amount\": 1000,\r\n    \"description\": \"sdf\",\"canceled\":true\r\n}",
+							"raw": "{   \"noOwnerAccount\":\"15214275283125621\",\r\n    \"noDestinationAccount\": \"88972364328208724\",\r\n    \"DPI_DestinationAccount\": 3555783690101,\r\n    \"amount\": 1000,\r\n    \"description\": \"sdf\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -848,14 +952,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "GetAllPendingTransfer",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
 				}
 			]
 		},
@@ -1017,6 +1113,90 @@
 								"bankafee",
 								"v1",
 								"deposit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account Petition",
+			"item": [
+				{
+					"name": "Add Account Petition",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA3MzU4NDEsImV4cCI6MTcyMDc0NjY0MX0.DqZmNBxhlBUWbII9REJNpvwvPAE5KuVRGDGL6FKxnXQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"CREDIT\",\r\n    \"DPI_Owner\":\"7896541231201\",\r\n    \"alias\":\"Revolorio Credit\",\r\n    \"amount\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/accountPetition",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"accountPetition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Petition",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2Njg4OGNkODUyOWU3NmI0ODc5MDBjZDUiLCJpYXQiOjE3MjA3MzU4NDEsImV4cCI6MTcyMDc0NjY0MX0.DqZmNBxhlBUWbII9REJNpvwvPAE5KuVRGDGL6FKxnXQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //\"type\":\"SAVINGS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3004/bankafee/v1/accountPetition",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3004",
+							"path": [
+								"bankafee",
+								"v1",
+								"accountPetition"
 							]
 						}
 					},
