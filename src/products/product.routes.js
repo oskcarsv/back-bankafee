@@ -31,6 +31,15 @@ router.get(
   getProductByName,
 );
 
+router.get(
+  "/searchProduct/:id",
+  [
+    check("id", "The id is not valid").isMongoId(),
+    check("id").custom(existsProductById),
+    validateFields,
+  ],
+)
+
 router.delete(
   "/delete/:id",
   [

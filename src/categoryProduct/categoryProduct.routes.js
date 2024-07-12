@@ -11,6 +11,7 @@ import {
   categoryProductPost,
   categoryProductPut,
   categoryProductDelete,
+  getCategoryProductByName,
 } from "./categoryProduct.controller.js";
 
 const router = Router();
@@ -53,6 +54,11 @@ router.delete(
     validateFields,
   ],
   categoryProductDelete,
+);
+
+router.get(
+  "/searchCategory/:name",
+  getCategoryProductByName,
 );
 
 export default router;

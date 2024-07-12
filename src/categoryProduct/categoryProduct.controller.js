@@ -100,6 +100,33 @@ export const getCategoryProductById = async (req, res) => {
   }
 };
 
+export const getCategoryProductByName = async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const categoryProduct = await CategoryProduct.findOne({ name }).lean();
+
+    if (!categoryProduct) {
+      return res.status(404).json({
+        msg: "Category Product not found",
+      });
+    }
+
+    // Obtener los productos asociados a la categoría
+    const products = await Product.find({ category: categoryProduct._id });
+
+    res.status(200).json({
+      categoryProduct,
+      products,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Error fetching category product",
+      error: error.message,
+    });
+  }
+};
+
 export const categoryProductPut = async (req, res) => {
   const { id } = req.params;
   const { _id, status, ...rest } = req.body;

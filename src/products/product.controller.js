@@ -93,7 +93,6 @@ export const getProductByName = async (req, res) => {
       error: error.message,
     });
   }
-
 };
 
 export const productDelete = async (req, res) => {
