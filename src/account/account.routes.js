@@ -100,13 +100,7 @@ router.delete(
 
 router.delete(
   "/denied",
-  [
-    validateJWT,
-
-    haveRol("ADMIN_ROLE"),
-
-    validateFields,
-  ],
+  [validateJWT, haveRol("ADMIN_ROLE"), validateFields],
   deniedAccountPetition,
 );
 
