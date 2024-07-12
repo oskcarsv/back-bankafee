@@ -56,9 +56,6 @@ router.delete(
   categoryProductDelete,
 );
 
-router.get(
-  "/searchCategory/:name",
-  getCategoryProductByName,
-);
+router.get("/searchCategory/:name", getCategoryProductByName);
 
 export default router;

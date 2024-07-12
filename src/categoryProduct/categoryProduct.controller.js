@@ -42,7 +42,6 @@ export const categoryProductGet = async (req = request, res = response) => {
 
       categoryProducts: categoriesWithProducts,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -50,7 +49,6 @@ export const categoryProductGet = async (req = request, res = response) => {
     });
   }
 };
-
 
 export const categoryProductPost = async (req, res) => {
   const { name, description, img } = req.body;
@@ -69,9 +67,7 @@ export const categoryProductPost = async (req, res) => {
       error: error.message,
     });
   }
-
 };
-
 
 export const getCategoryProductById = async (req, res) => {
   const { id } = req.params;

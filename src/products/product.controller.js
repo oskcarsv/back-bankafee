@@ -36,8 +36,7 @@ export const productPost = async (req, res) => {
     msg: "Publication has been created",
     publication: newProduct,
   });
-
-}
+};
 
 export const productGet = async (req = request, res = response) => {
   const { limit, from } = req.query;
@@ -81,13 +80,14 @@ export const getProductByName = async (req, res) => {
   const { name } = req.params;
 
   try {
-    const product = await Product.find({ name: { $regex: name, $options: 'i' } }).populate({path: 'category', select: 'name'});
+    const product = await Product.find({
+      name: { $regex: name, $options: "i" },
+    }).populate({ path: "category", select: "name" });
 
     res.status(200).json({
       product,
     });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({
       msg: "Error fetching product",
       error: error.message,
