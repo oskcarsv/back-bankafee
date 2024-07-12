@@ -40,13 +40,7 @@ export const postAccountPetition = async (req, res) => {
 export const listAccountPetition = async (req, res = response) => {
   const { limit, from } = req.query;
 
-  let { status } = req.body;
-
-  if (status == "" || status == undefined) {
-    status = "IN-PROCESS";
-  }
-
-  const query = { status };
+  const query = { status: "IN-PROCESS" };
 
   const [total, accountPetition] = await Promise.all([
     AccountPetition.countDocuments(query),
@@ -56,7 +50,7 @@ export const listAccountPetition = async (req, res = response) => {
 
   res.status(200).json({
     total,
-    msg: `${req.user.username} the Petitions that have the status ${status} are:`,
+    msg: `${req.user.username} the Petitions that have the status IN-PROCESS are:`,
     accountPetition,
   });
 };
