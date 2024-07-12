@@ -10,7 +10,7 @@ const createDefaultCategory = async () => {
     const categoryProduct = new CategoryProduct({
       name: "Default",
       description: "Default category",
-      status: true,
+      status: false,
       isDefault: true,
     });
     await categoryProduct.save();
@@ -51,14 +51,10 @@ export const categoryProductGet = async (req = request, res = response) => {
 };
 
 export const categoryProductPost = async (req, res) => {
-  const { name, description } = req.body;
-  const categoryProduct = new CategoryProduct({
-    name,
-    description,
-    status: true,
-  });
+  const { name, description, img } = req.body;
 
   try {
+    const categoryProduct = new CategoryProduct({ name, description, img });
     await categoryProduct.save();
 
     res.status(201).json({
@@ -87,6 +83,33 @@ export const getCategoryProductById = async (req, res) => {
 
     // Obtener los productos asociados a la categoría
     const products = await Product.find({ category: id });
+
+    res.status(200).json({
+      categoryProduct,
+      products,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Error fetching category product",
+      error: error.message,
+    });
+  }
+};
+
+export const getCategoryProductByName = async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const categoryProduct = await CategoryProduct.findOne({ name }).lean();
+
+    if (!categoryProduct) {
+      return res.status(404).json({
+        msg: "Category Product not found",
+      });
+    }
+
+    // Obtener los productos asociados a la categoría
+    const products = await Product.find({ category: categoryProduct._id });
 
     res.status(200).json({
       categoryProduct,
