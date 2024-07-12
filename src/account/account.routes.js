@@ -105,10 +105,6 @@ router.delete(
 
     haveRol("ADMIN_ROLE"),
 
-    check("noPetition", "The noPetition is required").not().isEmpty(),
-
-    check("noPetition").custom(statusPetition),
-
     validateFields,
   ],
   deniedAccountPetition,
